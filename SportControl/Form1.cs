@@ -17,7 +17,6 @@ namespace SportControl
     {
         public RFIDReaderHF340 hf340;
         public BindingList<Person> Racers;
-
         public Form1()
         {
             InitializeComponent();
@@ -62,16 +61,24 @@ namespace SportControl
 
         }
 
-        private bool TagHandler(string epc, string tid, long t)
+        private bool TagHandler(RFIDReaderAPI.Models.Tag_Model tag, DateTime dt, long unux_t)
         {
-            Console.WriteLine("EPC:" + epc + " - TID:" + tid + " Time: " + t.ToString());
-
             if (Racers is null)
             {
                 if (InvokeRequired)
                 {
-                    Racers = new BindingList<Person> { new Person() { EPC = epc, TID = tid, time = t, count = 0 } };
-                    this.Invoke(new Action(() => dataGridView_tag.DataSource = Racers));
+                    Racers = new BindingList<Person> { new Person() {
+                        EPC = tag.EPC, TID = tag.TID, dt = dt, count = 0, unix_t = unux_t,
+                      //  H = dt.Hour,
+                      //  M = dt.Minute,
+                       // S = dt.Second,
+                       // MS = dt.Millisecond
+                       RSSI = tag.RSSI,
+                       minRSSI = tag.RSSI
+                    } };
+                    this.Invoke(new Action(() => {
+                        dataGridView_tag.DataSource = Racers;
+                    }));
 
                 }
             }
@@ -80,11 +87,35 @@ namespace SportControl
                 if (InvokeRequired)
                     this.Invoke(new Action(() => {
     
-                        var person = Racers.SingleOrDefault(p => p.TID == tid);
+                        var person = Racers.SingleOrDefault(p => p.EPC == tag.EPC);
                         if (person is null)
-                            Racers.Add(new Person() { EPC = epc, TID = tid, time = t, count = 0 });
+                        {
+                            Racers.Add(new Person()
+                            {
+                                EPC = tag.EPC,
+                                TID = tag.TID,
+                                dt = dt,
+                                count = 0,
+                                unix_t = unux_t,
+                                // H = dt.Hour,
+                                // M = dt.Minute,
+                                //S = dt.Second,
+                                //MS = dt.Millisecond
+                                RSSI = tag.RSSI,
+                                minRSSI = tag.RSSI
+                            });
+
+                        }
                         else
                         {
+                            person.RSSI = tag.RSSI;
+                            person.minRSSI = person.minRSSI > tag.RSSI ? tag.RSSI : person.minRSSI;
+                           
+                            if (person.maxRSSI < tag.RSSI)
+                            {
+                                person.maxRSSI = tag.RSSI;
+                                person.unix_t = unux_t;
+                            }
                             person.count += 1;
                             dataGridView_tag.Update();
                             dataGridView_tag.Refresh();
@@ -142,6 +173,30 @@ namespace SportControl
             hf340.Read_EPCTID();
         }
 
+        private void button_ClearGreed_Click(object sender, EventArgs e)
+        {
+            Racers.Clear();
+        }
+
+        private void button_calcDt_Click(object sender, EventArgs e)
+        {
+
+            List<long> costs = new List<long>();
+
+            //Iterate through each row in the grid
+            foreach (DataGridViewRow row in dataGridView_tag.Rows)
+            {
+                if (null != row && null != row.Cells["unix_t"].Value && (row.Cells["EPC"].Value as string) != "")
+                {
+                    costs.Add((long)row.Cells["unix_t"].Value);
+                }
+            }
+
+            long min_t = costs.Min();
+            long max_t = costs.Max();
+            label_dt.Text = (max_t - min_t).ToString();
+
+        }
     }
 
     public class RFIDReaderHF340 : RFIDReaderAPI.Interface.IAsynchronousMessage
@@ -151,20 +206,22 @@ namespace SportControl
         Int32 antNUM = 0;
         private eAntennaNo antNo;
         private eReadType readType = eReadType.Inventory;
-        Func<string, string, long, bool> TagHandler;
+        Func<RFIDReaderAPI.Models.Tag_Model, DateTime, long, bool> TagHandler;
 
-        public RFIDReaderHF340(Func<string, string, long, bool> TagHandler)
+        public RFIDReaderHF340(Func<RFIDReaderAPI.Models.Tag_Model, DateTime, long, bool> TagHandler)
         {
             this.TagHandler = TagHandler;
         }
 
         public Boolean Connect(string ip, Int32 antNUM, eAntennaNo antNo)
         {
+            //ip = "COM4:115200";
             this.ip = ip;
             this.antNo = antNo;
             this.antNUM = antNUM;
 
             isConnected = RFIDReader.CreateTcpConn(ip, this);
+           // isConnected = RFIDReader.CreateSerialConn(ip, this);
             if (isConnected && !RFIDReader.CheckConnect(ip))
             {
                 RFIDReader.CloseConn(ip);
@@ -190,7 +247,7 @@ namespace SportControl
             RFIDReader._RFIDConfig.Stop(ip);
             RFIDReaderAPI.RFIDReader.DIC_CONNECT[ip].ClearTagData();
 
-            int st = RFIDReader._Tag6C.GetEPC_TID(ip, antNo, readType);
+            int st = RFIDReader._Tag6C.GetEPC(ip, antNo, readType);
 
             if (st != 0) {
                 Console.WriteLine("Read_EPCTID: ERROR " + st.ToString()); 
@@ -203,8 +260,8 @@ namespace SportControl
         public void OutPutTags(RFIDReaderAPI.Models.Tag_Model tag)
         {
             long milliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-            TagHandler(tag.EPC, tag.TID, milliseconds);
-           // Console.WriteLine("EPC:" + tag.EPC + " - TID:" + tag.TID + " Time: " + milliseconds.ToString());
+            TagHandler(tag, DateTime.Now, DateTimeOffset.Now.ToUnixTimeMilliseconds());
+           Console.WriteLine(" - TID:" + tag.TID + " rssi:" + tag.RSSI.ToString() + " Time: " + milliseconds.ToString());
         }
         public void WriteDebugMsg(string msg)
         {

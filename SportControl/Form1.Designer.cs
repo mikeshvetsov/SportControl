@@ -41,18 +41,21 @@ namespace SportControl
             this.checkBox_ant2 = new System.Windows.Forms.CheckBox();
             this.checkBox_ant1 = new System.Windows.Forms.CheckBox();
             this.button_Read = new System.Windows.Forms.Button();
+            this.dataGridView_tag = new System.Windows.Forms.DataGridView();
+            this.button_ClearGreed = new System.Windows.Forms.Button();
+            this.label_dt = new System.Windows.Forms.Label();
+            this.button_calcDt = new System.Windows.Forms.Button();
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.form1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.personBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.personBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridView_tag = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
             this.groupBox_ant.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_tag)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.personBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_tag)).BeginInit();
             this.SuspendLayout();
             // 
             // maskedTextBox_reader_ip
@@ -61,7 +64,7 @@ namespace SportControl
             this.maskedTextBox_reader_ip.Name = "maskedTextBox_reader_ip";
             this.maskedTextBox_reader_ip.Size = new System.Drawing.Size(88, 20);
             this.maskedTextBox_reader_ip.TabIndex = 0;
-            this.maskedTextBox_reader_ip.Text = "192.168.0.116";
+            this.maskedTextBox_reader_ip.Text = "192.168.1.116";
             this.maskedTextBox_reader_ip.TextChanged += new System.EventHandler(this.text_ip_TextChanged);
             this.maskedTextBox_reader_ip.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.text_ip_KeyPress);
             // 
@@ -177,9 +180,49 @@ namespace SportControl
             this.button_Read.Name = "button_Read";
             this.button_Read.Size = new System.Drawing.Size(86, 23);
             this.button_Read.TabIndex = 7;
-            this.button_Read.Text = "Чиать";
+            this.button_Read.Text = "Читать";
             this.button_Read.UseVisualStyleBackColor = true;
             this.button_Read.Click += new System.EventHandler(this.button_Read_Click);
+            // 
+            // dataGridView_tag
+            // 
+            this.dataGridView_tag.AllowUserToAddRows = false;
+            this.dataGridView_tag.AllowUserToDeleteRows = false;
+            this.dataGridView_tag.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_tag.Location = new System.Drawing.Point(15, 77);
+            this.dataGridView_tag.Name = "dataGridView_tag";
+            this.dataGridView_tag.ReadOnly = true;
+            this.dataGridView_tag.Size = new System.Drawing.Size(807, 365);
+            this.dataGridView_tag.TabIndex = 8;
+            // 
+            // button_ClearGreed
+            // 
+            this.button_ClearGreed.Location = new System.Drawing.Point(346, 47);
+            this.button_ClearGreed.Name = "button_ClearGreed";
+            this.button_ClearGreed.Size = new System.Drawing.Size(85, 23);
+            this.button_ClearGreed.TabIndex = 9;
+            this.button_ClearGreed.Text = "Очистить";
+            this.button_ClearGreed.UseVisualStyleBackColor = true;
+            this.button_ClearGreed.Click += new System.EventHandler(this.button_ClearGreed_Click);
+            // 
+            // label_dt
+            // 
+            this.label_dt.AutoSize = true;
+            this.label_dt.Location = new System.Drawing.Point(705, 46);
+            this.label_dt.Name = "label_dt";
+            this.label_dt.Size = new System.Drawing.Size(52, 13);
+            this.label_dt.TabIndex = 10;
+            this.label_dt.Text = "дельта Т";
+            // 
+            // button_calcDt
+            // 
+            this.button_calcDt.Location = new System.Drawing.Point(704, 20);
+            this.button_calcDt.Name = "button_calcDt";
+            this.button_calcDt.Size = new System.Drawing.Size(75, 23);
+            this.button_calcDt.TabIndex = 11;
+            this.button_calcDt.Text = "Разница";
+            this.button_calcDt.UseVisualStyleBackColor = true;
+            this.button_calcDt.Click += new System.EventHandler(this.button_calcDt_Click);
             // 
             // form1BindingSource
             // 
@@ -197,22 +240,14 @@ namespace SportControl
             // 
             this.personBindingSource1.DataSource = typeof(SportControl.Person);
             // 
-            // dataGridView_tag
-            // 
-            this.dataGridView_tag.AllowUserToAddRows = false;
-            this.dataGridView_tag.AllowUserToDeleteRows = false;
-            this.dataGridView_tag.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_tag.Location = new System.Drawing.Point(15, 77);
-            this.dataGridView_tag.Name = "dataGridView_tag";
-            this.dataGridView_tag.ReadOnly = true;
-            this.dataGridView_tag.Size = new System.Drawing.Size(683, 365);
-            this.dataGridView_tag.TabIndex = 8;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 454);
+            this.ClientSize = new System.Drawing.Size(834, 454);
+            this.Controls.Add(this.button_calcDt);
+            this.Controls.Add(this.label_dt);
+            this.Controls.Add(this.button_ClearGreed);
             this.Controls.Add(this.dataGridView_tag);
             this.Controls.Add(this.button_Read);
             this.Controls.Add(this.groupBox_ant);
@@ -226,11 +261,11 @@ namespace SportControl
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).EndInit();
             this.groupBox_ant.ResumeLayout(false);
             this.groupBox_ant.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_tag)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.personBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_tag)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,6 +289,9 @@ namespace SportControl
         private System.Windows.Forms.BindingSource personBindingSource;
         private System.Windows.Forms.BindingSource personBindingSource1;
         private System.Windows.Forms.DataGridView dataGridView_tag;
+        private System.Windows.Forms.Button button_ClearGreed;
+        private System.Windows.Forms.Label label_dt;
+        private System.Windows.Forms.Button button_calcDt;
     }
 }
 
