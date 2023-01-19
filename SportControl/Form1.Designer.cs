@@ -45,17 +45,19 @@ namespace SportControl
             this.button_ClearGreed = new System.Windows.Forms.Button();
             this.label_dt = new System.Windows.Forms.Label();
             this.button_calcDt = new System.Windows.Forms.Button();
-            this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.form1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.personBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.personBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.button_TimeFormOpen = new System.Windows.Forms.Button();
+            this.button_StartRace = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label_TimeStart = new System.Windows.Forms.Label();
+            this.label_TimeRace = new System.Windows.Forms.Label();
+            this.button_StopRace = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_tag)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personBindingSource1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // maskedTextBox_reader_ip
@@ -192,7 +194,7 @@ namespace SportControl
             this.dataGridView_tag.Location = new System.Drawing.Point(15, 77);
             this.dataGridView_tag.Name = "dataGridView_tag";
             this.dataGridView_tag.ReadOnly = true;
-            this.dataGridView_tag.Size = new System.Drawing.Size(807, 365);
+            this.dataGridView_tag.Size = new System.Drawing.Size(807, 619);
             this.dataGridView_tag.TabIndex = 8;
             // 
             // button_ClearGreed
@@ -224,27 +226,99 @@ namespace SportControl
             this.button_calcDt.UseVisualStyleBackColor = true;
             this.button_calcDt.Click += new System.EventHandler(this.button_calcDt_Click);
             // 
-            // form1BindingSource
+            // button_TimeFormOpen
             // 
-            this.form1BindingSource.DataSource = typeof(SportControl.Form1);
+            this.button_TimeFormOpen.Location = new System.Drawing.Point(831, 126);
+            this.button_TimeFormOpen.Name = "button_TimeFormOpen";
+            this.button_TimeFormOpen.Size = new System.Drawing.Size(75, 23);
+            this.button_TimeFormOpen.TabIndex = 12;
+            this.button_TimeFormOpen.Text = "Экран";
+            this.button_TimeFormOpen.UseVisualStyleBackColor = true;
+            this.button_TimeFormOpen.Click += new System.EventHandler(this.button1_Click);
             // 
-            // form1BindingSource1
+            // button_StartRace
             // 
-            this.form1BindingSource1.DataSource = typeof(SportControl.Form1);
+            this.button_StartRace.Location = new System.Drawing.Point(6, 19);
+            this.button_StartRace.Name = "button_StartRace";
+            this.button_StartRace.Size = new System.Drawing.Size(80, 23);
+            this.button_StartRace.TabIndex = 13;
+            this.button_StartRace.Text = "Старт";
+            this.button_StartRace.UseVisualStyleBackColor = true;
+            this.button_StartRace.Click += new System.EventHandler(this.button_StartRace_Click);
             // 
-            // personBindingSource
+            // timer1
             // 
-            this.personBindingSource.DataSource = typeof(SportControl.Person);
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // personBindingSource1
+            // label_TimeStart
             // 
-            this.personBindingSource1.DataSource = typeof(SportControl.Person);
+            this.label_TimeStart.AutoSize = true;
+            this.label_TimeStart.Location = new System.Drawing.Point(92, 56);
+            this.label_TimeStart.Name = "label_TimeStart";
+            this.label_TimeStart.Size = new System.Drawing.Size(31, 13);
+            this.label_TimeStart.TabIndex = 14;
+            this.label_TimeStart.Text = "0000";
+            this.label_TimeStart.Click += new System.EventHandler(this.label_TimeStart_Click);
+            // 
+            // label_TimeRace
+            // 
+            this.label_TimeRace.AutoSize = true;
+            this.label_TimeRace.Location = new System.Drawing.Point(92, 75);
+            this.label_TimeRace.Name = "label_TimeRace";
+            this.label_TimeRace.Size = new System.Drawing.Size(31, 13);
+            this.label_TimeRace.TabIndex = 15;
+            this.label_TimeRace.Text = "0000";
+            // 
+            // button_StopRace
+            // 
+            this.button_StopRace.Location = new System.Drawing.Point(95, 19);
+            this.button_StopRace.Name = "button_StopRace";
+            this.button_StopRace.Size = new System.Drawing.Size(75, 23);
+            this.button_StopRace.TabIndex = 16;
+            this.button_StopRace.Text = "Стоп";
+            this.button_StopRace.UseVisualStyleBackColor = true;
+            this.button_StopRace.Click += new System.EventHandler(this.button_StopRace_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.button_StartRace);
+            this.groupBox1.Controls.Add(this.label_TimeRace);
+            this.groupBox1.Controls.Add(this.button_StopRace);
+            this.groupBox1.Controls.Add(this.label_TimeStart);
+            this.groupBox1.Location = new System.Drawing.Point(831, 20);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(178, 100);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Гонка";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Время старта:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 75);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(75, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Время гонки:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 454);
+            this.ClientSize = new System.Drawing.Size(1017, 708);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.button_TimeFormOpen);
             this.Controls.Add(this.button_calcDt);
             this.Controls.Add(this.label_dt);
             this.Controls.Add(this.button_ClearGreed);
@@ -262,10 +336,8 @@ namespace SportControl
             this.groupBox_ant.ResumeLayout(false);
             this.groupBox_ant.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_tag)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personBindingSource1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,14 +356,19 @@ namespace SportControl
         private System.Windows.Forms.CheckBox checkBox_ant2;
         private System.Windows.Forms.CheckBox checkBox_ant1;
         private System.Windows.Forms.Button button_Read;
-        private System.Windows.Forms.BindingSource form1BindingSource;
-        private System.Windows.Forms.BindingSource form1BindingSource1;
-        private System.Windows.Forms.BindingSource personBindingSource;
-        private System.Windows.Forms.BindingSource personBindingSource1;
         private System.Windows.Forms.DataGridView dataGridView_tag;
         private System.Windows.Forms.Button button_ClearGreed;
         private System.Windows.Forms.Label label_dt;
         private System.Windows.Forms.Button button_calcDt;
+        private System.Windows.Forms.Button button_TimeFormOpen;
+        private System.Windows.Forms.Button button_StartRace;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label_TimeStart;
+        private System.Windows.Forms.Label label_TimeRace;
+        private System.Windows.Forms.Button button_StopRace;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 

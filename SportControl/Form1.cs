@@ -17,12 +17,25 @@ namespace SportControl
     {
         public RFIDReaderHF340 hf340;
         public BindingList<Person> Racers;
+        Form2 FormTimeRacing = new Form2();
+
+        TimeRecord timeStartRace;
+
         public Form1()
         {
             InitializeComponent();
             hf340 = new RFIDReaderHF340(TagHandler: TagHandler);
         }
 
+        private TimeRecord getDateTimeNow()
+        {
+            TimeRecord tr = new TimeRecord();
+
+            tr.dt = DateTime.Now;
+            tr.str_dt = string.Format("{0:d2}:{1:d2}:{2:d2}.{3}", tr.dt.Hour, tr.dt.Minute, tr.dt.Second, tr.dt.Millisecond);
+
+            return tr;
+        }
 
         private void text_ip_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -87,7 +100,7 @@ namespace SportControl
                 if (InvokeRequired)
                     this.Invoke(new Action(() => {
     
-                        var person = Racers.SingleOrDefault(p => p.EPC == tag.EPC);
+                        var person = Racers.SingleOrDefault(p => p.TID == tag.TID);
                         if (person is null)
                         {
                             Racers.Add(new Person()
@@ -197,6 +210,38 @@ namespace SportControl
             label_dt.Text = (max_t - min_t).ToString();
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormTimeRacing.Show();
+        }
+
+        private void button_StartRace_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+            timeStartRace = getDateTimeNow();
+            label_TimeStart.Text = timeStartRace.str_dt;
+            FormTimeRacing.label_TimeStart.Text = label_TimeStart.Text;
+        }
+
+        private void button_StopRace_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            TimeRecord tNow = getDateTimeNow();
+            TimeSpan deltaTime = tNow.dt - timeStartRace.dt;
+
+            label_TimeRace.Text = string.Format("{0:d2}:{1:d2}:{2:d2}.{3}", deltaTime.Hours, deltaTime.Minutes, deltaTime.Seconds, deltaTime.Milliseconds);
+            FormTimeRacing.label_TimeRace.Text = label_TimeRace.Text;
+        }
+
+        private void label_TimeStart_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class RFIDReaderHF340 : RFIDReaderAPI.Interface.IAsynchronousMessage
@@ -247,7 +292,7 @@ namespace SportControl
             RFIDReader._RFIDConfig.Stop(ip);
             RFIDReaderAPI.RFIDReader.DIC_CONNECT[ip].ClearTagData();
 
-            int st = RFIDReader._Tag6C.GetEPC(ip, antNo, readType);
+            int st = RFIDReader._Tag6C.GetEPC_TID(ip, antNo, readType);
 
             if (st != 0) {
                 Console.WriteLine("Read_EPCTID: ERROR " + st.ToString()); 
@@ -261,7 +306,7 @@ namespace SportControl
         {
             long milliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             TagHandler(tag, DateTime.Now, DateTimeOffset.Now.ToUnixTimeMilliseconds());
-           Console.WriteLine(" - TID:" + tag.TID + " rssi:" + tag.RSSI.ToString() + " Time: " + milliseconds.ToString());
+           //Console.WriteLine(" - TID:" + tag.TID + " rssi:" + tag.RSSI.ToString() + " Time: " + milliseconds.ToString());
         }
         public void WriteDebugMsg(string msg)
         {
