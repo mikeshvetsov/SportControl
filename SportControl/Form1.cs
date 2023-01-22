@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace SportControl
     public partial class Form1 : Form
     {
         public RFIDReaderHF340 hf340;
-        public BindingList<Person> Racers;
+        public List<Person> Racers;
         Form2 FormTimeRacing = new Form2();
 
         TimeRecord timeStartRace;
@@ -74,69 +75,102 @@ namespace SportControl
 
         }
 
-        private bool TagHandler(RFIDReaderAPI.Models.Tag_Model tag, DateTime dt, long unux_t)
+        class DataGridViewRowPerson: DataGridViewRow
         {
+
+            public Person Racer;
+
+            public DataGridViewRowPerson(DataGridView dataGridView, TagDT tagdt)
+            {
+                this.CreateCells(dataGridView, new object[] { tagdt.tag.TID, tagdt.tag.EPC, 0 });
+                Racer = new Person(tagdt);
+            }
+        }
+
+        delegate bool AddTag(TagDT tagdt);
+        Dictionary<String, DataGridViewRowPerson> dic_Rows = new Dictionary<string, DataGridViewRowPerson>();
+        private bool TagHandler(TagDT tagdt)
+        {
+
+            var sw = new Stopwatch();
+            sw.Start();
+            if (this.dataGridView_tag.InvokeRequired)
+            {
+                this.dataGridView_tag.BeginInvoke(new AddTag(TagHandler), tagdt);
+                return false;
+            }
+
+            /*
+            if (Racers is null)
+            {
+                Racers = new List<Person> { new Person(tagdt) };
+            }
+            else
+            {
+                var person = Racers.SingleOrDefault(p => p.TID == tagdt.tag.TID);
+                if (person is null)
+                    Racers.Add(new Person(tagdt));
+                else
+                    person.MailTag(tagdt);
+            }
+            */
+
+
+
+            string key = tagdt.tag.EPC + "|" + tagdt.tag.TID;
+            DataGridViewRowPerson dgvr = null;
+            lock (dic_Rows)
+            {
+
+                if (dic_Rows.ContainsKey(key))
+                {
+                    dgvr = dic_Rows[key];
+                    Int64 newStr = Convert.ToInt64(dgvr.Cells["Count"].Value) + 1;
+                    dgvr.Cells["Count"].Value = newStr;
+                }
+                else
+                {
+                    dgvr = new DataGridViewRowPerson(dataGridView_tag, tagdt);
+                    dic_Rows.Add(key, dgvr);
+                    dataGridView_tag.Rows.Add(dgvr);
+                }
+
+            }
+
+            sw.Stop();
+            Console.WriteLine(sw.Elapsed);
+
+            /*
             if (Racers is null)
             {
                 if (InvokeRequired)
                 {
-                    Racers = new BindingList<Person> { new Person() {
-                        EPC = tag.EPC, TID = tag.TID, dt = dt, count = 0, unix_t = unux_t,
-                      //  H = dt.Hour,
-                      //  M = dt.Minute,
-                       // S = dt.Second,
-                       // MS = dt.Millisecond
-                       RSSI = tag.RSSI,
-                       minRSSI = tag.RSSI
-                    } };
+                    Racers = new List<Person> {new Person(tagdt)};
                     this.Invoke(new Action(() => {
-                        dataGridView_tag.DataSource = Racers;
+                        //dataGridView_tag.DataSource = Racers;
                     }));
-
                 }
             }
             else
             {
                 if (InvokeRequired)
                     this.Invoke(new Action(() => {
-    
-                        var person = Racers.SingleOrDefault(p => p.TID == tag.TID);
+                        var person = Racers.SingleOrDefault(p => p.TID == tagdt.tag.TID);
                         if (person is null)
-                        {
-                            Racers.Add(new Person()
-                            {
-                                EPC = tag.EPC,
-                                TID = tag.TID,
-                                dt = dt,
-                                count = 0,
-                                unix_t = unux_t,
-                                // H = dt.Hour,
-                                // M = dt.Minute,
-                                //S = dt.Second,
-                                //MS = dt.Millisecond
-                                RSSI = tag.RSSI,
-                                minRSSI = tag.RSSI
-                            });
-
-                        }
+                            Racers.Add(new Person(tagdt));
                         else
-                        {
-                            person.RSSI = tag.RSSI;
-                            person.minRSSI = person.minRSSI > tag.RSSI ? tag.RSSI : person.minRSSI;
-                           
-                            if (person.maxRSSI < tag.RSSI)
-                            {
-                                person.maxRSSI = tag.RSSI;
-                                person.unix_t = unux_t;
-                            }
-                            person.count += 1;
-                            dataGridView_tag.Update();
-                            dataGridView_tag.Refresh();
-                        }
-
+                            person.MailTag(tagdt);
                     })) ;
             }
 
+            if (Racers.Count == 1)
+                if (InvokeRequired)
+                    this.Invoke(new Action(() => { 
+                        //dataGridView_tag.DataSource = Racers; 
+                    
+                    }));
+
+            */
             return true;
         }
         private void button_connect_Click(object sender, EventArgs e)
@@ -179,16 +213,18 @@ namespace SportControl
         {
             hf340.Disconnect();
             label_connection_status.Text = "Отключен";
+            timer_ListUpdate.Stop();
         }
 
         private void button_Read_Click(object sender, EventArgs e)
         {
             hf340.Read_EPCTID();
+            timer_ListUpdate.Start();
         }
 
         private void button_ClearGreed_Click(object sender, EventArgs e)
         {
-            Racers.Clear();
+           
         }
 
         private void button_calcDt_Click(object sender, EventArgs e)
@@ -236,117 +272,22 @@ namespace SportControl
 
             label_TimeRace.Text = string.Format("{0:d2}:{1:d2}:{2:d2}.{3}", deltaTime.Hours, deltaTime.Minutes, deltaTime.Seconds, deltaTime.Milliseconds);
             FormTimeRacing.label_TimeRace.Text = label_TimeRace.Text;
+
+            label_unixTimeNow.Text = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
         }
 
-        private void label_TimeStart_Click(object sender, EventArgs e)
+        private void timer_ListUpdate_Tick(object sender, EventArgs e)
         {
 
-        }
-    }
-
-    public class RFIDReaderHF340 : RFIDReaderAPI.Interface.IAsynchronousMessage
-    {
-        public string ip;
-        public Boolean isConnected = false;
-        Int32 antNUM = 0;
-        private eAntennaNo antNo;
-        private eReadType readType = eReadType.Inventory;
-        Func<RFIDReaderAPI.Models.Tag_Model, DateTime, long, bool> TagHandler;
-
-        public RFIDReaderHF340(Func<RFIDReaderAPI.Models.Tag_Model, DateTime, long, bool> TagHandler)
-        {
-            this.TagHandler = TagHandler;
-        }
-
-        public Boolean Connect(string ip, Int32 antNUM, eAntennaNo antNo)
-        {
-            //ip = "COM4:115200";
-            this.ip = ip;
-            this.antNo = antNo;
-            this.antNUM = antNUM;
-
-            isConnected = RFIDReader.CreateTcpConn(ip, this);
-           // isConnected = RFIDReader.CreateSerialConn(ip, this);
-            if (isConnected && !RFIDReader.CheckConnect(ip))
-            {
-                RFIDReader.CloseConn(ip);
-                isConnected = false;
-            }
-
-            return isConnected;
-        }
-
-        public void Disconnect()
-        {
-            RFIDReader._Tag6C.Stop(ip);
-            RFIDReader.CloseConn(ip);
-            isConnected = false;
-        }
-
-        public void Read_EPCTID()
-        {
-
-            if (!isConnected)
+            if (Racers == null || Racers.Count == 0)
                 return;
 
-            RFIDReader._RFIDConfig.Stop(ip);
-            RFIDReaderAPI.RFIDReader.DIC_CONNECT[ip].ClearTagData();
+            foreach (var item in Racers.ToArray())
+                if (item.old) Racers.Remove(item);
 
-            int st = RFIDReader._Tag6C.GetEPC_TID(ip, antNo, readType);
-
-            if (st != 0) {
-                Console.WriteLine("Read_EPCTID: ERROR " + st.ToString()); 
-                return; 
-            }
+            
         }
 
-        #region interface implement
-        // Tag CallBack
-        public void OutPutTags(RFIDReaderAPI.Models.Tag_Model tag)
-        {
-            long milliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-            TagHandler(tag, DateTime.Now, DateTimeOffset.Now.ToUnixTimeMilliseconds());
-           //Console.WriteLine(" - TID:" + tag.TID + " rssi:" + tag.RSSI.ToString() + " Time: " + milliseconds.ToString());
-        }
-        public void WriteDebugMsg(string msg)
-        {
-           // Console.WriteLine("WriteDebugMsg: " + msg);
-        }
-        public void WriteLog(string msg)
-        {
-            Console.WriteLine("WriteLog!");
-        }
-        public void PortConneting(string connID)
-        {
-            Console.WriteLine("PortConneting!");
-        }
-        public void PortClosing(string connID)
-        {
-            Console.WriteLine("PortClosing!");
-        }
-        public void OutPutTagsOver()
-        {
-            Console.WriteLine("OutPutTagsOver!");
-        }
-        public void GPIControlMsg(RFIDReaderAPI.Models.GPI_Model gpiModel)
-        {
-            Console.WriteLine("GPIControlMsg!");
-        }
-
-        public void PortConnecting(string connID)
-        {
-            Console.WriteLine("PortConnecting!");
-            throw new NotImplementedException();
-        }
-
-        public void EventUpload(RFIDReaderAPI.Models.CallBackEnum type, object param)
-        {
-            Console.WriteLine("EventUpload!");
-            throw new NotImplementedException();
-        }
-        #endregion
-
-        ~RFIDReaderHF340() { }
     }
 
 }

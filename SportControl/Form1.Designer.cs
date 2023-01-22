@@ -52,8 +52,13 @@ namespace SportControl
             this.label_TimeRace = new System.Windows.Forms.Label();
             this.button_StopRace = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_unixTimeNow = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.timer_ListUpdate = new System.Windows.Forms.Timer(this.components);
+            this.TID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_tag)).BeginInit();
@@ -191,10 +196,15 @@ namespace SportControl
             this.dataGridView_tag.AllowUserToAddRows = false;
             this.dataGridView_tag.AllowUserToDeleteRows = false;
             this.dataGridView_tag.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_tag.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TID,
+            this.EPC,
+            this.Count});
             this.dataGridView_tag.Location = new System.Drawing.Point(15, 77);
             this.dataGridView_tag.Name = "dataGridView_tag";
             this.dataGridView_tag.ReadOnly = true;
-            this.dataGridView_tag.Size = new System.Drawing.Size(807, 619);
+            this.dataGridView_tag.RowHeadersWidth = 102;
+            this.dataGridView_tag.Size = new System.Drawing.Size(807, 371);
             this.dataGridView_tag.TabIndex = 8;
             // 
             // button_ClearGreed
@@ -228,7 +238,7 @@ namespace SportControl
             // 
             // button_TimeFormOpen
             // 
-            this.button_TimeFormOpen.Location = new System.Drawing.Point(831, 126);
+            this.button_TimeFormOpen.Location = new System.Drawing.Point(831, 182);
             this.button_TimeFormOpen.Name = "button_TimeFormOpen";
             this.button_TimeFormOpen.Size = new System.Drawing.Size(75, 23);
             this.button_TimeFormOpen.TabIndex = 12;
@@ -258,7 +268,6 @@ namespace SportControl
             this.label_TimeStart.Size = new System.Drawing.Size(31, 13);
             this.label_TimeStart.TabIndex = 14;
             this.label_TimeStart.Text = "0000";
-            this.label_TimeStart.Click += new System.EventHandler(this.label_TimeStart_Click);
             // 
             // label_TimeRace
             // 
@@ -281,6 +290,7 @@ namespace SportControl
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label_unixTimeNow);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.button_StartRace);
@@ -289,19 +299,21 @@ namespace SportControl
             this.groupBox1.Controls.Add(this.label_TimeStart);
             this.groupBox1.Location = new System.Drawing.Point(831, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(178, 100);
+            this.groupBox1.Size = new System.Drawing.Size(178, 133);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Гонка";
             // 
-            // label1
+            // label_unixTimeNow
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 56);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "Время старта:";
+            this.label_unixTimeNow.AutoSize = true;
+            this.label_unixTimeNow.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_unixTimeNow.Location = new System.Drawing.Point(3, 104);
+            this.label_unixTimeNow.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label_unixTimeNow.Name = "label_unixTimeNow";
+            this.label_unixTimeNow.Size = new System.Drawing.Size(70, 26);
+            this.label_unixTimeNow.TabIndex = 19;
+            this.label_unixTimeNow.Text = "label3";
             // 
             // label2
             // 
@@ -312,11 +324,43 @@ namespace SportControl
             this.label2.TabIndex = 18;
             this.label2.Text = "Время гонки:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Время старта:";
+            // 
+            // timer_ListUpdate
+            // 
+            this.timer_ListUpdate.Interval = 1000;
+            this.timer_ListUpdate.Tick += new System.EventHandler(this.timer_ListUpdate_Tick);
+            // 
+            // TID
+            // 
+            this.TID.HeaderText = "TID";
+            this.TID.Name = "TID";
+            this.TID.ReadOnly = true;
+            // 
+            // EPC
+            // 
+            this.EPC.HeaderText = "EPC";
+            this.EPC.Name = "EPC";
+            this.EPC.ReadOnly = true;
+            // 
+            // Count
+            // 
+            this.Count.HeaderText = "Count";
+            this.Count.Name = "Count";
+            this.Count.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 708);
+            this.ClientSize = new System.Drawing.Size(1013, 460);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_TimeFormOpen);
             this.Controls.Add(this.button_calcDt);
@@ -369,6 +413,11 @@ namespace SportControl
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_unixTimeNow;
+        private System.Windows.Forms.Timer timer_ListUpdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EPC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Count;
     }
 }
 
