@@ -22,7 +22,7 @@ namespace SportControl
         Form2 FormTimeRacing = new Form2();
         Dictionary<String, DataGridViewRowPerson> dic_Rows = new Dictionary<string, DataGridViewRowPerson>();
         TimeRecord timeStartRace;
-       // System.Timers.Timer timer_1s = new System.Timers.Timer(1000);
+        bool OnStart = false;
 
         public Form1()
         {
@@ -95,9 +95,7 @@ namespace SportControl
                 if (dic_Rows.ContainsKey(key))
                 {
                     dgvr = dic_Rows[key];
-                    Int64 newStr = Convert.ToInt64(dgvr.Cells["Count"].Value) + 1;
-                    dgvr.Cells["Count"].Value = newStr;
-                    dgvr.Racer.MailTag(tagdt);
+                    dgvr.UpdateTag(tagdt);
                 }
                 else
                 {
@@ -112,14 +110,13 @@ namespace SportControl
 
         private void Timer1SHandler(object sender, EventArgs e)
         {
-            DateTime dt = DateTime.Now;
-            label_t1s.Text = string.Format("{0:d2}:{1:d2}:{2:d2}", dt.Hour, dt.Minute, dt.Second);
-
+            if (OnStart)
+                return;
             lock (dic_Rows)
             {
                 List<string> removals = new List<string>();
                 foreach (var i in dic_Rows)
-                    if (i.Value.Racer.old)
+                    if (!i.Value.active)
                         removals.Add(i.Key);
                 foreach (string key in removals)
                 {
@@ -231,18 +228,10 @@ namespace SportControl
             label_unixTimeNow.Text = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
         }
 
-        private void timer_ListUpdate_Tick(object sender, EventArgs e)
+        private void button_OnStart_Click(object sender, EventArgs e)
         {
-
-            if (Racers == null || Racers.Count == 0)
-                return;
-
-            foreach (var item in Racers.ToArray())
-                if (item.old) Racers.Remove(item);
-
-            
+            OnStart = true;
         }
-
     }
 
 }
