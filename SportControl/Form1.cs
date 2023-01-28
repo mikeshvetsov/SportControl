@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace SportControl
@@ -19,13 +20,15 @@ namespace SportControl
         public RFIDReaderHF340 hf340;
         public List<Person> Racers;
         Form2 FormTimeRacing = new Form2();
-
+        Dictionary<String, DataGridViewRowPerson> dic_Rows = new Dictionary<string, DataGridViewRowPerson>();
         TimeRecord timeStartRace;
+       // System.Timers.Timer timer_1s = new System.Timers.Timer(1000);
 
         public Form1()
         {
             InitializeComponent();
             hf340 = new RFIDReaderHF340(TagHandler: TagHandler);
+           
         }
 
         private TimeRecord getDateTimeNow()
@@ -75,58 +78,26 @@ namespace SportControl
 
         }
 
-        class DataGridViewRowPerson: DataGridViewRow
-        {
-
-            public Person Racer;
-
-            public DataGridViewRowPerson(DataGridView dataGridView, TagDT tagdt)
-            {
-                this.CreateCells(dataGridView, new object[] { tagdt.tag.TID, tagdt.tag.EPC, 0 });
-                Racer = new Person(tagdt);
-            }
-        }
-
         delegate bool AddTag(TagDT tagdt);
-        Dictionary<String, DataGridViewRowPerson> dic_Rows = new Dictionary<string, DataGridViewRowPerson>();
         private bool TagHandler(TagDT tagdt)
         {
 
-            var sw = new Stopwatch();
-            sw.Start();
             if (this.dataGridView_tag.InvokeRequired)
             {
                 this.dataGridView_tag.BeginInvoke(new AddTag(TagHandler), tagdt);
                 return false;
             }
 
-            /*
-            if (Racers is null)
-            {
-                Racers = new List<Person> { new Person(tagdt) };
-            }
-            else
-            {
-                var person = Racers.SingleOrDefault(p => p.TID == tagdt.tag.TID);
-                if (person is null)
-                    Racers.Add(new Person(tagdt));
-                else
-                    person.MailTag(tagdt);
-            }
-            */
-
-
-
             string key = tagdt.tag.EPC + "|" + tagdt.tag.TID;
             DataGridViewRowPerson dgvr = null;
             lock (dic_Rows)
             {
-
                 if (dic_Rows.ContainsKey(key))
                 {
                     dgvr = dic_Rows[key];
                     Int64 newStr = Convert.ToInt64(dgvr.Cells["Count"].Value) + 1;
                     dgvr.Cells["Count"].Value = newStr;
+                    dgvr.Racer.MailTag(tagdt);
                 }
                 else
                 {
@@ -134,44 +105,28 @@ namespace SportControl
                     dic_Rows.Add(key, dgvr);
                     dataGridView_tag.Rows.Add(dgvr);
                 }
-
             }
 
-            sw.Stop();
-            Console.WriteLine(sw.Elapsed);
+            return true;
+        }
 
-            /*
-            if (Racers is null)
+        private void Timer1SHandler(object sender, EventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            label_t1s.Text = string.Format("{0:d2}:{1:d2}:{2:d2}", dt.Hour, dt.Minute, dt.Second);
+
+            lock (dic_Rows)
             {
-                if (InvokeRequired)
+                List<string> removals = new List<string>();
+                foreach (var i in dic_Rows)
+                    if (i.Value.Racer.old)
+                        removals.Add(i.Key);
+                foreach (string key in removals)
                 {
-                    Racers = new List<Person> {new Person(tagdt)};
-                    this.Invoke(new Action(() => {
-                        //dataGridView_tag.DataSource = Racers;
-                    }));
+                    dataGridView_tag.Rows.Remove(dic_Rows[key]);
+                    dic_Rows.Remove(key);
                 }
             }
-            else
-            {
-                if (InvokeRequired)
-                    this.Invoke(new Action(() => {
-                        var person = Racers.SingleOrDefault(p => p.TID == tagdt.tag.TID);
-                        if (person is null)
-                            Racers.Add(new Person(tagdt));
-                        else
-                            person.MailTag(tagdt);
-                    })) ;
-            }
-
-            if (Racers.Count == 1)
-                if (InvokeRequired)
-                    this.Invoke(new Action(() => { 
-                        //dataGridView_tag.DataSource = Racers; 
-                    
-                    }));
-
-            */
-            return true;
         }
         private void button_connect_Click(object sender, EventArgs e)
         {
@@ -213,13 +168,13 @@ namespace SportControl
         {
             hf340.Disconnect();
             label_connection_status.Text = "Отключен";
-            timer_ListUpdate.Stop();
+            timer_1s.Stop();
         }
 
         private void button_Read_Click(object sender, EventArgs e)
         {
             hf340.Read_EPCTID();
-            timer_ListUpdate.Start();
+            timer_1s.Start();
         }
 
         private void button_ClearGreed_Click(object sender, EventArgs e)
@@ -254,7 +209,7 @@ namespace SportControl
 
         private void button_StartRace_Click(object sender, EventArgs e)
         {
-            timer1.Start();
+            //timer1.Start();
             timeStartRace = getDateTimeNow();
             label_TimeStart.Text = timeStartRace.str_dt;
             FormTimeRacing.label_TimeStart.Text = label_TimeStart.Text;
@@ -262,7 +217,7 @@ namespace SportControl
 
         private void button_StopRace_Click(object sender, EventArgs e)
         {
-            timer1.Stop();
+           // timer1.Stop();
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -42,12 +42,14 @@ namespace SportControl
             this.checkBox_ant1 = new System.Windows.Forms.CheckBox();
             this.button_Read = new System.Windows.Forms.Button();
             this.dataGridView_tag = new System.Windows.Forms.DataGridView();
+            this.TID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_ClearGreed = new System.Windows.Forms.Button();
             this.label_dt = new System.Windows.Forms.Label();
             this.button_calcDt = new System.Windows.Forms.Button();
             this.button_TimeFormOpen = new System.Windows.Forms.Button();
             this.button_StartRace = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label_TimeStart = new System.Windows.Forms.Label();
             this.label_TimeRace = new System.Windows.Forms.Label();
             this.button_StopRace = new System.Windows.Forms.Button();
@@ -55,10 +57,8 @@ namespace SportControl
             this.label_unixTimeNow = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.timer_ListUpdate = new System.Windows.Forms.Timer(this.components);
-            this.TID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label_t1s = new System.Windows.Forms.Label();
+            this.timer_1s = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_tag)).BeginInit();
@@ -207,6 +207,24 @@ namespace SportControl
             this.dataGridView_tag.Size = new System.Drawing.Size(807, 371);
             this.dataGridView_tag.TabIndex = 8;
             // 
+            // TID
+            // 
+            this.TID.HeaderText = "TID";
+            this.TID.Name = "TID";
+            this.TID.ReadOnly = true;
+            // 
+            // EPC
+            // 
+            this.EPC.HeaderText = "EPC";
+            this.EPC.Name = "EPC";
+            this.EPC.ReadOnly = true;
+            // 
+            // Count
+            // 
+            this.Count.HeaderText = "Count";
+            this.Count.Name = "Count";
+            this.Count.ReadOnly = true;
+            // 
             // button_ClearGreed
             // 
             this.button_ClearGreed.Location = new System.Drawing.Point(346, 47);
@@ -255,10 +273,6 @@ namespace SportControl
             this.button_StartRace.Text = "Старт";
             this.button_StartRace.UseVisualStyleBackColor = true;
             this.button_StartRace.Click += new System.EventHandler(this.button_StartRace_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // label_TimeStart
             // 
@@ -333,34 +347,26 @@ namespace SportControl
             this.label1.TabIndex = 17;
             this.label1.Text = "Время старта:";
             // 
-            // timer_ListUpdate
+            // label_t1s
             // 
-            this.timer_ListUpdate.Interval = 1000;
-            this.timer_ListUpdate.Tick += new System.EventHandler(this.timer_ListUpdate_Tick);
+            this.label_t1s.AutoSize = true;
+            this.label_t1s.Location = new System.Drawing.Point(854, 270);
+            this.label_t1s.Name = "label_t1s";
+            this.label_t1s.Size = new System.Drawing.Size(49, 13);
+            this.label_t1s.TabIndex = 18;
+            this.label_t1s.Text = "label_t1s";
             // 
-            // TID
+            // timer_1s
             // 
-            this.TID.HeaderText = "TID";
-            this.TID.Name = "TID";
-            this.TID.ReadOnly = true;
-            // 
-            // EPC
-            // 
-            this.EPC.HeaderText = "EPC";
-            this.EPC.Name = "EPC";
-            this.EPC.ReadOnly = true;
-            // 
-            // Count
-            // 
-            this.Count.HeaderText = "Count";
-            this.Count.Name = "Count";
-            this.Count.ReadOnly = true;
+            this.timer_1s.Interval = 1000;
+            this.timer_1s.Tick += new System.EventHandler(this.Timer1SHandler);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1013, 460);
+            this.Controls.Add(this.label_t1s);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_TimeFormOpen);
             this.Controls.Add(this.button_calcDt);
@@ -406,7 +412,6 @@ namespace SportControl
         private System.Windows.Forms.Button button_calcDt;
         private System.Windows.Forms.Button button_TimeFormOpen;
         private System.Windows.Forms.Button button_StartRace;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label_TimeStart;
         private System.Windows.Forms.Label label_TimeRace;
         private System.Windows.Forms.Button button_StopRace;
@@ -414,10 +419,11 @@ namespace SportControl
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_unixTimeNow;
-        private System.Windows.Forms.Timer timer_ListUpdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn TID;
         private System.Windows.Forms.DataGridViewTextBoxColumn EPC;
         private System.Windows.Forms.DataGridViewTextBoxColumn Count;
+        private System.Windows.Forms.Label label_t1s;
+        private System.Windows.Forms.Timer timer_1s;
     }
 }
 
