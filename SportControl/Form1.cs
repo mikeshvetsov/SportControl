@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -234,6 +235,24 @@ namespace SportControl
                     dataGridView_Racers.Rows.Add(dgvr);
                 }
             }
+        }
+
+        private void dataGridView_Racers_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int i = 0;
+            DataGridViewRow dgvr = null;
+            DataGridViewRowRacer dgvr_Racers = dic_Rows_Racers.Single(x => x.Value.Index == e.RowIndex).Value;
+
+            dataGridView_RacerData.Rows.Clear();
+
+            foreach(var x in dgvr_Racers.ListCycles)
+            {
+                i++;
+                dgvr = new DataGridViewRow();
+                dgvr.CreateCells(dataGridView_RacerData, new object[] { i, x });
+                dataGridView_RacerData.Rows.Add(dgvr);
+            }
+            
         }
     }
 

@@ -62,11 +62,15 @@ namespace SportControl
             this.TimePoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DT_MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView_RacerData = new System.Windows.Forms.DataGridView();
+            this.CycleNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CycleDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Racers)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Tags)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RacerData)).BeginInit();
             this.SuspendLayout();
             // 
             // maskedTextBox_reader_ip
@@ -213,6 +217,7 @@ namespace SportControl
             this.dataGridView_Racers.RowHeadersWidth = 25;
             this.dataGridView_Racers.Size = new System.Drawing.Size(714, 371);
             this.dataGridView_Racers.TabIndex = 8;
+            this.dataGridView_Racers.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Racers_RowEnter);
             // 
             // button_TimeFormOpen
             // 
@@ -390,11 +395,39 @@ namespace SportControl
             this.DT_MAX_RSSI.Name = "DT_MAX_RSSI";
             this.DT_MAX_RSSI.ReadOnly = true;
             // 
+            // dataGridView_RacerData
+            // 
+            this.dataGridView_RacerData.AllowUserToAddRows = false;
+            this.dataGridView_RacerData.AllowUserToDeleteRows = false;
+            this.dataGridView_RacerData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_RacerData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CycleNum,
+            this.CycleDT});
+            this.dataGridView_RacerData.Location = new System.Drawing.Point(15, 483);
+            this.dataGridView_RacerData.Name = "dataGridView_RacerData";
+            this.dataGridView_RacerData.ReadOnly = true;
+            this.dataGridView_RacerData.RowHeadersWidth = 25;
+            this.dataGridView_RacerData.Size = new System.Drawing.Size(481, 249);
+            this.dataGridView_RacerData.TabIndex = 20;
+            // 
+            // CycleNum
+            // 
+            this.CycleNum.HeaderText = "Номер";
+            this.CycleNum.Name = "CycleNum";
+            this.CycleNum.ReadOnly = true;
+            // 
+            // CycleDT
+            // 
+            this.CycleDT.HeaderText = "Время";
+            this.CycleDT.Name = "CycleDT";
+            this.CycleDT.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 881);
+            this.Controls.Add(this.dataGridView_RacerData);
             this.Controls.Add(this.dataGridView_Tags);
             this.Controls.Add(this.button_OnStart);
             this.Controls.Add(this.groupBox1);
@@ -416,6 +449,7 @@ namespace SportControl
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Tags)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RacerData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -455,6 +489,9 @@ namespace SportControl
         private System.Windows.Forms.DataGridViewTextBoxColumn TimePoint;
         private System.Windows.Forms.DataGridViewTextBoxColumn MAX_RSSI;
         private System.Windows.Forms.DataGridViewTextBoxColumn DT_MAX_RSSI;
+        private System.Windows.Forms.DataGridView dataGridView_RacerData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CycleNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CycleDT;
     }
 }
 
