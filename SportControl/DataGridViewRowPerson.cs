@@ -1,60 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
+﻿using System.Timers;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace SportControl
 {
-    class DataGridViewRowPerson : DataGridViewRow
+    class DataGridViewRowRacer : DataGridViewRowTag
     {
-        const double INTERVAL_OLD = 2000;
         string DisplayedTime;
-        public Person Racer;
-        System.Timers.Timer timer;
-        public Boolean active;
-        public DataGridViewRowPerson(DataGridView dataGridView, TagDT tagdt)
+        public int Count;
+
+        public DataGridViewRowRacer(DataGridView dataGridView, TagDT tagdt, Color ColorActive) : base(dataGridView, tagdt, ColorActive)
         {
-            Racer = new Person(tagdt);
-            DisplayedTime = Racer.StrDT;
-            this.CreateCells(dataGridView, new object[] { Racer.TID, Racer.EPC, Racer.Count, Racer.StrDT});
-            timer = new System.Timers.Timer(INTERVAL_OLD);
-            timer.Elapsed += SetOld;
-            timer.Start();
-            active = true;
+            Count = 0;
+            DisplayedTime = MaxRSSI_StrDT;
+            this.CreateCells(dataGridView, new object[] {
+                tagdt.tag.TID,
+                tagdt.tag.EPC,
+                Count,
+                MaxRSSI_StrDT,
+                MaxRSSI,
+                MaxRSSI_StrDT
+            });
         }
 
-        private void SetOld(object sender, ElapsedEventArgs e)
+        public override void SetOld(object sender, ElapsedEventArgs e)
         {
-            active = false;
-            Racer.AddCount();
-            DisplayedTime = Racer.StrDT;
-            timer.Stop();
-            UpdateView();
-        }
-       
-        public void UpdateTag(TagDT tagdt)
-        {
-            Racer.MailTag(tagdt);
-
-            active = true;
-            timer.Stop();
-            timer.Start();
-
-            UpdateView();
+            Count += 1;
+            DisplayedTime = MaxRSSI_StrDT;
+            MaxRSSI = 0;
+            base.SetOld(sender, e);
         }
 
-        private void UpdateView()
+        public override void UpdateView()
         {
-            this.Cells["Count"].Value = Racer.Count;
+            this.Cells["Count"].Value = Count;
             this.Cells["TimePoint"].Value = DisplayedTime;
-            if (active)
-                this.DefaultCellStyle.BackColor = Color.LightGreen;
-            else
-                this.DefaultCellStyle.BackColor = Color.White;
+            this.Cells["MAX_RSSI"].Value = MaxRSSI;
+            this.Cells["DT_MAX_RSSI"].Value = MaxRSSI_StrDT;
+            base.UpdateView();
         }
     }
 }
