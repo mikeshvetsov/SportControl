@@ -15,47 +15,31 @@ namespace SportControl
         public byte MaxRSSI;
         DateTime MaxRSSI_DT;
         public string MaxRSSI_StrDT;
-        Color ColorActive;
-
-        public DataGridViewRowTag(DataGridView dataGridView, TagDT tagdt, Color ColorActive)
+        
+        public DataGridViewRowTag(DataGridView dataGridView, TagDT tagdt)
         {
             this.tagdt = tagdt;
             MaxRSSI = tagdt.tag.RSSI;
             updateMaxRSSI_DT(tagdt.dt);
-
-            this.ColorActive = ColorActive;
-            this.CreateCells(dataGridView, new object[] { tagdt.tag.TID, tagdt.tag.EPC });
             timer = new System.Timers.Timer(INTERVAL_OLD);
             timer.Elapsed += SetOld;
             timer.Start();
             active = true;
-
-
         }
 
         public virtual void SetOld(object sender, ElapsedEventArgs e)
         {
             active = false;
             timer.Stop();
-            UpdateView();
         }
        
-        public virtual void UpdateTag(TagDT tagdt)
+        internal void UpdateTag(TagDT tagdt)
         {
             active = true;
             this.tagdt = tagdt;
             UpdateMaxRSSI();
             timer.Stop();
             timer.Start();
-            UpdateView();
-        }
-
-        public virtual void UpdateView()
-        {
-            if (active)
-                this.DefaultCellStyle.BackColor = ColorActive;
-            else
-                this.DefaultCellStyle.BackColor = Color.White;
         }
 
         void UpdateMaxRSSI()

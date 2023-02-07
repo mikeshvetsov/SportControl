@@ -8,10 +8,12 @@ namespace SportControl
     class DataGridViewRowRacer : DataGridViewRowTag
     {
         string DisplayedTime;
-
+        public bool Racing = false;
+        Color ColorActive;
         public List<string> ListCycles = new List <string>();
-        public DataGridViewRowRacer(DataGridView dataGridView, TagDT tagdt, Color ColorActive) : base(dataGridView, tagdt, ColorActive)
+        public DataGridViewRowRacer(DataGridView dataGridView, TagDT tagdt, Color ColorActive) : base(dataGridView, tagdt)
         {
+            this.ColorActive = ColorActive;
             DisplayedTime = MaxRSSI_StrDT;
             this.CreateCells(dataGridView, new object[] {
                 tagdt.tag.TID,
@@ -30,15 +32,25 @@ namespace SportControl
 
             MaxRSSI = 0;
             base.SetOld(sender, e);
+            UpdateView();
         }
 
-        public override void UpdateView()
+        public void UpdateInfo(TagDT tagdt)
+        {
+            UpdateTag(tagdt);
+            UpdateView();
+        }
+        public void UpdateView()
         {
             this.Cells["Count"].Value = ListCycles.Count;
             this.Cells["TimePoint"].Value = DisplayedTime;
             this.Cells["MAX_RSSI"].Value = MaxRSSI;
             this.Cells["DT_MAX_RSSI"].Value = MaxRSSI_StrDT;
-            base.UpdateView();
+
+            if (active)
+                this.DefaultCellStyle.BackColor = ColorActive;
+            else
+                this.DefaultCellStyle.BackColor = Color.White;
         }
     }
 }

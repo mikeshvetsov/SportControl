@@ -16,7 +16,6 @@ namespace SportControl
         public RFIDReaderHF340 hf340;
         Form2 FormTimeRacing = new Form2();
         Dictionary<String, DataGridViewRowRacer> dic_Rows_Racers = new Dictionary<string, DataGridViewRowRacer>();
-        Dictionary<String, DataGridViewRowTag> dic_Rows_Tags = new Dictionary<string, DataGridViewRowTag>();
         TimeRecord timeStartRace;
         bool OnStart = false;
 
@@ -38,55 +37,42 @@ namespace SportControl
             }
 
             string key = tagdt.tag.EPC + "|" + tagdt.tag.TID;
-            DataGridViewRowTag dgvr = null;
+            DataGridViewRowRacer dgvr = null;
 
-            lock (dic_Rows_Tags)
+            lock (dic_Rows_Racers)
             {
-                if (dic_Rows_Tags.ContainsKey(key))
+                if (dic_Rows_Racers.ContainsKey(key))
                 {
-                    dgvr = dic_Rows_Tags[key];
-                    dgvr.UpdateTag(tagdt);
+                    dgvr = dic_Rows_Racers[key];
+                    dgvr.UpdateInfo(tagdt);
                 }
                 else
                 {
-                    Color activeColor = TAG_NORMAL_ACTIVE_COLOR;
-                    if (OnStart && !dic_Rows_Racers.ContainsKey(key))
-                    {
-                        activeColor = TAG_ALARM_ACTIVE_COLOR;
-                    }
+                    Color activeColor = OnStart ? TAG_ALARM_ACTIVE_COLOR : TAG_NORMAL_ACTIVE_COLOR;
+                    
+                    dgvr = new DataGridViewRowRacer(dataGridView_Racers, tagdt, activeColor);
+                    dic_Rows_Racers.Add(key, dgvr);
+                    dataGridView_Racers.Rows.Add(dgvr);
 
-                    dgvr = new DataGridViewRowTag(dataGridView_Tags, tagdt, activeColor);
-                    dic_Rows_Tags.Add(key, dgvr);
-                    dataGridView_Tags.Rows.Add(dgvr);
                 }
             }
 
-            DataGridViewRowRacer dgvrRacer = null;
-            if (OnStart)
-                lock (dic_Rows_Racers)
-                {
-                    if (dic_Rows_Racers.ContainsKey(key))
-                    {
-                        dgvrRacer = dic_Rows_Racers[key];
-                        dgvrRacer.UpdateTag(tagdt);
-                    }
-                }
 
             return true;
         }
 
         private void Timer1SHandler(object sender, EventArgs e)
         {
-            lock (dic_Rows_Tags)
+            lock (dic_Rows_Racers)
             {
                 List<string> removals = new List<string>();
-                foreach (var i in dic_Rows_Tags)
-                    if (!i.Value.active)
+                foreach (var i in dic_Rows_Racers)
+                    if (!i.Value.Racing&&!i.Value.active)
                         removals.Add(i.Key);
                 foreach (string key in removals)
                 {
-                    dataGridView_Tags.Rows.Remove(dic_Rows_Tags[key]);
-                    dic_Rows_Tags.Remove(key);
+                    dataGridView_Racers.Rows.Remove(dic_Rows_Racers[key]);
+                    dic_Rows_Racers.Remove(key);
                 }
             }
         }
@@ -223,16 +209,13 @@ namespace SportControl
 
         private void button_OnStart_Click(object sender, EventArgs e)
         {
-            DataGridViewRowRacer dgvr = null;
             OnStart = true;
 
-            lock (dic_Rows_Tags)
+            lock (dic_Rows_Racers)
             {
-                foreach(var i in dic_Rows_Tags)
+                foreach(var i in dic_Rows_Racers)
                 {
-                    dgvr = new DataGridViewRowRacer(dataGridView_Tags, i.Value.tagdt, TAG_NORMAL_ACTIVE_COLOR);
-                    dic_Rows_Racers.Add(i.Key, dgvr);
-                    dataGridView_Racers.Rows.Add(dgvr);
+                    i.Value.Racing = true;
                 }
             }
         }

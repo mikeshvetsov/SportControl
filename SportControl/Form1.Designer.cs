@@ -42,6 +42,12 @@ namespace SportControl
             this.checkBox_ant1 = new System.Windows.Forms.CheckBox();
             this.button_Read = new System.Windows.Forms.Button();
             this.dataGridView_Racers = new System.Windows.Forms.DataGridView();
+            this.TID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimePoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DT_MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_TimeFormOpen = new System.Windows.Forms.Button();
             this.button_StartRace = new System.Windows.Forms.Button();
             this.label_TimeStart = new System.Windows.Forms.Label();
@@ -53,15 +59,6 @@ namespace SportControl
             this.label1 = new System.Windows.Forms.Label();
             this.timer_1s = new System.Windows.Forms.Timer(this.components);
             this.button_OnStart = new System.Windows.Forms.Button();
-            this.dataGridView_Tags = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimePoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DT_MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_RacerData = new System.Windows.Forms.DataGridView();
             this.CycleNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CycleDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,7 +66,6 @@ namespace SportControl
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Racers)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Tags)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RacerData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -219,6 +215,45 @@ namespace SportControl
             this.dataGridView_Racers.TabIndex = 8;
             this.dataGridView_Racers.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Racers_RowEnter);
             // 
+            // TID
+            // 
+            this.TID.HeaderText = "TID";
+            this.TID.Name = "TID";
+            this.TID.ReadOnly = true;
+            this.TID.Width = 150;
+            // 
+            // EPC
+            // 
+            this.EPC.HeaderText = "EPC";
+            this.EPC.Name = "EPC";
+            this.EPC.ReadOnly = true;
+            this.EPC.Width = 150;
+            // 
+            // Count
+            // 
+            this.Count.HeaderText = "Count";
+            this.Count.Name = "Count";
+            this.Count.ReadOnly = true;
+            this.Count.Width = 50;
+            // 
+            // TimePoint
+            // 
+            this.TimePoint.HeaderText = "Время круга";
+            this.TimePoint.Name = "TimePoint";
+            this.TimePoint.ReadOnly = true;
+            // 
+            // MAX_RSSI
+            // 
+            this.MAX_RSSI.HeaderText = "MAX_RSSI";
+            this.MAX_RSSI.Name = "MAX_RSSI";
+            this.MAX_RSSI.ReadOnly = true;
+            // 
+            // DT_MAX_RSSI
+            // 
+            this.DT_MAX_RSSI.HeaderText = "DT_MAX_RSSI";
+            this.DT_MAX_RSSI.Name = "DT_MAX_RSSI";
+            this.DT_MAX_RSSI.ReadOnly = true;
+            // 
             // button_TimeFormOpen
             // 
             this.button_TimeFormOpen.Location = new System.Drawing.Point(976, 20);
@@ -327,74 +362,6 @@ namespace SportControl
             this.button_OnStart.UseVisualStyleBackColor = true;
             this.button_OnStart.Click += new System.EventHandler(this.button_OnStart_Click);
             // 
-            // dataGridView_Tags
-            // 
-            this.dataGridView_Tags.AllowUserToAddRows = false;
-            this.dataGridView_Tags.AllowUserToDeleteRows = false;
-            this.dataGridView_Tags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Tags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
-            this.dataGridView_Tags.Location = new System.Drawing.Point(759, 77);
-            this.dataGridView_Tags.Name = "dataGridView_Tags";
-            this.dataGridView_Tags.ReadOnly = true;
-            this.dataGridView_Tags.RowHeadersWidth = 25;
-            this.dataGridView_Tags.Size = new System.Drawing.Size(481, 371);
-            this.dataGridView_Tags.TabIndex = 19;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "TID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 170;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "EPC";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 150;
-            // 
-            // TID
-            // 
-            this.TID.HeaderText = "TID";
-            this.TID.Name = "TID";
-            this.TID.ReadOnly = true;
-            this.TID.Width = 150;
-            // 
-            // EPC
-            // 
-            this.EPC.HeaderText = "EPC";
-            this.EPC.Name = "EPC";
-            this.EPC.ReadOnly = true;
-            this.EPC.Width = 150;
-            // 
-            // Count
-            // 
-            this.Count.HeaderText = "Count";
-            this.Count.Name = "Count";
-            this.Count.ReadOnly = true;
-            this.Count.Width = 50;
-            // 
-            // TimePoint
-            // 
-            this.TimePoint.HeaderText = "Время круга";
-            this.TimePoint.Name = "TimePoint";
-            this.TimePoint.ReadOnly = true;
-            // 
-            // MAX_RSSI
-            // 
-            this.MAX_RSSI.HeaderText = "MAX_RSSI";
-            this.MAX_RSSI.Name = "MAX_RSSI";
-            this.MAX_RSSI.ReadOnly = true;
-            // 
-            // DT_MAX_RSSI
-            // 
-            this.DT_MAX_RSSI.HeaderText = "DT_MAX_RSSI";
-            this.DT_MAX_RSSI.Name = "DT_MAX_RSSI";
-            this.DT_MAX_RSSI.ReadOnly = true;
-            // 
             // dataGridView_RacerData
             // 
             this.dataGridView_RacerData.AllowUserToAddRows = false;
@@ -403,11 +370,11 @@ namespace SportControl
             this.dataGridView_RacerData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CycleNum,
             this.CycleDT});
-            this.dataGridView_RacerData.Location = new System.Drawing.Point(15, 483);
+            this.dataGridView_RacerData.Location = new System.Drawing.Point(735, 76);
             this.dataGridView_RacerData.Name = "dataGridView_RacerData";
             this.dataGridView_RacerData.ReadOnly = true;
             this.dataGridView_RacerData.RowHeadersWidth = 25;
-            this.dataGridView_RacerData.Size = new System.Drawing.Size(481, 249);
+            this.dataGridView_RacerData.Size = new System.Drawing.Size(286, 372);
             this.dataGridView_RacerData.TabIndex = 20;
             // 
             // CycleNum
@@ -428,7 +395,6 @@ namespace SportControl
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 881);
             this.Controls.Add(this.dataGridView_RacerData);
-            this.Controls.Add(this.dataGridView_Tags);
             this.Controls.Add(this.button_OnStart);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_TimeFormOpen);
@@ -448,7 +414,6 @@ namespace SportControl
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Racers)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Tags)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RacerData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -480,9 +445,6 @@ namespace SportControl
         private System.Windows.Forms.Label label_unixTimeNow;
         private System.Windows.Forms.Timer timer_1s;
         private System.Windows.Forms.Button button_OnStart;
-        private System.Windows.Forms.DataGridView dataGridView_Tags;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn TID;
         private System.Windows.Forms.DataGridViewTextBoxColumn EPC;
         private System.Windows.Forms.DataGridViewTextBoxColumn Count;
