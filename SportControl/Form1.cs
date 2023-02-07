@@ -234,10 +234,10 @@ namespace SportControl
 
             foreach(var x in dgvr_Racers.ListCycles)
             {
-                i++;
                 dgvr = new DataGridViewRow();
-                dgvr.CreateCells(dataGridView_RacerData, new object[] { i, x });
+                dgvr.CreateCells(dataGridView_RacerData, new object[] { i, x.StrDeltaDT, x.StrDT });
                 dataGridView_RacerData.Rows.Add(dgvr);
+                i++;
             }
             
         }
