@@ -165,6 +165,10 @@ namespace SportControl
             hf340.Disconnect();
             label_connection_status.Text = "Отключен";
             timer_1s.Stop();
+
+            foreach(var i in dic_Rows_Racers)
+                i.Value.Deactivate();
+            
         }
 
         private void button_Read_Click(object sender, EventArgs e)

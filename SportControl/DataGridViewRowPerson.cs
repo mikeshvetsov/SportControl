@@ -35,11 +35,18 @@ namespace SportControl
             UpdateView();
         }
 
+        public void Deactivate()
+        {
+            active = false;
+            timer.Stop();
+            UpdateView();
+        }
         public void UpdateInfo(TagDT tagdt)
         {
             UpdateTag(tagdt);
             UpdateView();
         }
+
         public void UpdateView()
         {
             this.Cells["Count"].Value = ListCycles.Count;
