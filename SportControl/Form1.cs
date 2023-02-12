@@ -16,6 +16,7 @@ namespace SportControl
         public RFIDReaderHF340 hf340;
         Form2 FormTimeRacing = new Form2();
         Dictionary<String, DataGridViewRowRacer> dic_Rows_Racers = new Dictionary<string, DataGridViewRowRacer>();
+       // List<String> ListFinished = new List<string>();
         TimeRecord timeStartRace;
         bool OnStart = false;
 
@@ -189,18 +190,19 @@ namespace SportControl
 
         private void button_StartRace_Click(object sender, EventArgs e)
         {
-            //timer1.Start();
+            timer_race.Start();
             timeStartRace = getDateTimeNow();
             label_TimeStart.Text = timeStartRace.str_dt;
             FormTimeRacing.label_TimeStart.Text = label_TimeStart.Text;
+
         }
 
         private void button_StopRace_Click(object sender, EventArgs e)
         {
-           // timer1.Stop();
+            timer_race.Stop();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer_race_Tick(object sender, EventArgs e)
         {
             TimeRecord tNow = getDateTimeNow();
             TimeSpan deltaTime = tNow.dt - timeStartRace.dt;
@@ -208,7 +210,6 @@ namespace SportControl
             label_TimeRace.Text = string.Format("{0:d2}:{1:d2}:{2:d2}.{3}", deltaTime.Hours, deltaTime.Minutes, deltaTime.Seconds, deltaTime.Milliseconds);
             FormTimeRacing.label_TimeRace.Text = label_TimeRace.Text;
 
-            label_unixTimeNow.Text = DateTimeOffset.Now.ToUnixTimeMilliseconds().ToString();
         }
 
         private void button_OnStart_Click(object sender, EventArgs e)
@@ -240,6 +241,72 @@ namespace SportControl
                 i++;
             }
             
+        }
+
+        private void button_Save_Click(object sender, EventArgs e)
+        {
+            List<String> lines = new List<string>();
+            lines.Add("Общая таблица:");
+            lines.Add("ID\tEPC\tЦиклов\t\tВремя последнего круга\t\tВремя последней записи");
+            foreach (DataGridViewRow row in dataGridView_Racers.Rows)
+            {
+                lines.Add(string.Format("{0}\t{1}\t{2}\t\t{3}\t\t{4}",
+                    row.Cells[0].Value.ToString(),
+                    row.Cells[1].Value.ToString(),
+                    row.Cells[2].Value.ToString(),
+                    row.Cells[3].Value.ToString(),
+                    row.Cells[4].Value.ToString())
+                );
+            }
+
+            System.IO.File.WriteAllLines(@"C:\temp\Race.txt", lines);
+
+            lines.Clear();
+            lines.Add("\r\n Круги по каждому участнику: \r\n");
+            foreach (DataGridViewRow row in dataGridView_Racers.Rows)
+            {
+                lines.Add(string.Format("{0}\t{1}\t{2}\t\t{3}\t\t{4}",
+                    row.Cells[0].Value.ToString(),
+                    row.Cells[1].Value.ToString(),
+                    row.Cells[2].Value.ToString(),
+                    row.Cells[3].Value.ToString(),
+                    row.Cells[4].Value.ToString())
+                );
+
+                string key = row.Cells[1].Value + "|" + row.Cells[0].Value;
+                if (dic_Rows_Racers.ContainsKey(key))
+                {
+                    int j = 0;
+                    foreach (var i in dic_Rows_Racers[key].ListCycles)
+                    {
+                        lines.Add(string.Format("{0}\t{1}\t{2}", j++, i.StrDeltaDT, i.StrDT));
+                    }
+                }
+
+                lines.Add("--------------------------------------------------------");
+            }
+
+            System.IO.File.AppendAllLines(@"C:\temp\Race.txt", lines);
+
+        }
+
+        private void button_Finished_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dataGridView_Racers.CurrentCell.RowIndex;
+            string epc = dataGridView_Racers.Rows[rowIndex].Cells["EPC"].Value.ToString();
+            string tid = dataGridView_Racers.Rows[rowIndex].Cells["TID"].Value.ToString();
+            string key = epc + "|" + tid;
+
+            lock (dic_Rows_Racers)
+            {
+                if (dic_Rows_Racers.ContainsKey(key))
+                {
+                    DataGridViewRowRacer finishedRacer = dic_Rows_Racers[key];
+                    finishedRacer.Finished = true;
+                    finishedRacer.UpdateView();
+                }
+
+            }
         }
     }
 

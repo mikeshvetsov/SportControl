@@ -36,6 +36,7 @@ namespace SportControl
     {
         string DisplayedTime;
         public bool Racing = false;
+        public bool Finished = false;
         Color ColorActive;
         public List<CycleTime> ListCycles = new List <CycleTime>();
 
@@ -58,7 +59,7 @@ namespace SportControl
         {
             DisplayedTime = MaxRSSI_StrDT;
 
-            if (Racing)
+            if (Racing&&!Finished)
                 ListCycles.Add(new CycleTime(
                     MaxRSSI_DT,
                     ListCycles.Count > 0 ? MaxRSSI_DT - ListCycles[ListCycles.Count - 1].DT : TimeSpan.Zero
@@ -77,7 +78,8 @@ namespace SportControl
         }
         public void UpdateInfo(TagDT tagdt)
         {
-            UpdateTag(tagdt);
+            if(!Finished)
+                UpdateTag(tagdt);
             UpdateView();
         }
 
@@ -93,7 +95,9 @@ namespace SportControl
             this.Cells["MAX_RSSI"].Value = MaxRSSI;
             this.Cells["DT_MAX_RSSI"].Value = MaxRSSI_StrDT;
 
-            if (active)
+            if (Finished)
+                this.DefaultCellStyle.BackColor = Color.LightGray;
+            else if (active)
                 this.DefaultCellStyle.BackColor = ColorActive;
             else
                 this.DefaultCellStyle.BackColor = Color.White;
