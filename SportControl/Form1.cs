@@ -195,11 +195,24 @@ namespace SportControl
             label_TimeStart.Text = timeStartRace.str_dt;
             FormTimeRacing.label_TimeStart.Text = label_TimeStart.Text;
 
+            lock (dic_Rows_Racers)
+            {
+                foreach (var i in dic_Rows_Racers)
+                    i.Value.Started = true;
+            }
+
         }
 
         private void button_StopRace_Click(object sender, EventArgs e)
         {
             timer_race.Stop();
+
+            lock (dic_Rows_Racers)
+            {
+                foreach (var i in dic_Rows_Racers)
+                    i.Value.TimeOut = true;
+            }
+
         }
 
         private void timer_race_Tick(object sender, EventArgs e)
@@ -221,6 +234,7 @@ namespace SportControl
                 foreach(var i in dic_Rows_Racers)
                 {
                     i.Value.Racing = true;
+                    i.Value.ColorActive = TAG_NORMAL_ACTIVE_COLOR;
                 }
             }
         }

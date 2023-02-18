@@ -265,7 +265,7 @@ namespace SportControl
             // 
             // button_TimeFormOpen
             // 
-            this.button_TimeFormOpen.Location = new System.Drawing.Point(843, 12);
+            this.button_TimeFormOpen.Location = new System.Drawing.Point(1010, 9);
             this.button_TimeFormOpen.Name = "button_TimeFormOpen";
             this.button_TimeFormOpen.Size = new System.Drawing.Size(75, 23);
             this.button_TimeFormOpen.TabIndex = 12;
@@ -275,7 +275,7 @@ namespace SportControl
             // 
             // button_StartRace
             // 
-            this.button_StartRace.Location = new System.Drawing.Point(924, 12);
+            this.button_StartRace.Location = new System.Drawing.Point(838, 9);
             this.button_StartRace.Name = "button_StartRace";
             this.button_StartRace.Size = new System.Drawing.Size(80, 23);
             this.button_StartRace.TabIndex = 13;
@@ -303,7 +303,7 @@ namespace SportControl
             // 
             // button_StopRace
             // 
-            this.button_StopRace.Location = new System.Drawing.Point(1010, 12);
+            this.button_StopRace.Location = new System.Drawing.Point(924, 9);
             this.button_StopRace.Name = "button_StopRace";
             this.button_StopRace.Size = new System.Drawing.Size(75, 23);
             this.button_StopRace.TabIndex = 16;

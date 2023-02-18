@@ -36,8 +36,11 @@ namespace SportControl
     {
         string DisplayedTime;
         public bool Racing = false;
+        public bool Started = false;
         public bool Finished = false;
-        Color ColorActive;
+        public bool TimeOut = false;
+
+        public Color ColorActive;
         public List<CycleTime> ListCycles = new List <CycleTime>();
 
         public DataGridViewRowRacer(DataGridView dataGridView, TagDT tagdt, Color ColorActive) : base(dataGridView, tagdt)
@@ -59,7 +62,7 @@ namespace SportControl
         {
             DisplayedTime = MaxRSSI_StrDT;
 
-            if (Racing&&!Finished)
+            if (Racing&&Started&&!Finished&&!TimeOut)
                 ListCycles.Add(new CycleTime(
                     MaxRSSI_DT,
                     ListCycles.Count > 0 ? MaxRSSI_DT - ListCycles[ListCycles.Count - 1].DT : TimeSpan.Zero
