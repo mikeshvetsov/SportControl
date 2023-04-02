@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Management;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -320,6 +321,20 @@ namespace SportControl
                     finishedRacer.UpdateView();
                 }
 
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            string cpuInfo = string.Empty;
+            ManagementClass mc = new ManagementClass("win32_processor");
+            ManagementObjectCollection moc = mc.GetInstances();
+
+            foreach (ManagementObject mo in moc)
+            {
+                cpuInfo = mo.Properties["processorID"].Value.ToString();
+                Console.WriteLine("cpuInfo: " + cpuInfo);
+                break;
             }
         }
     }

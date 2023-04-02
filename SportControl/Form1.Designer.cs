@@ -429,6 +429,7 @@ namespace SportControl
             this.Controls.Add(this.maskedTextBox_reader_ip);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).EndInit();
             this.groupBox_ant.ResumeLayout(false);
             this.groupBox_ant.PerformLayout();
