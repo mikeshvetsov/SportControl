@@ -261,31 +261,32 @@ namespace SportControl
         private void button_Save_Click(object sender, EventArgs e)
         {
             List<String> lines = new List<string>();
+            string format = "{0}\t{1}\t{2}\t{3}\t\t{4}";
             lines.Add("Общая таблица:");
-            lines.Add("ID\tEPC\tЦиклов\t\tВремя последнего круга\t\tВремя последней записи");
+
+            lines.Add(string.Format(format, "Номер   ", "Циклов", "Время последнего круга", "        Финиш        ", "ID"));
             foreach (DataGridViewRow row in dataGridView_Racers.Rows)
             {
-                lines.Add(string.Format("{0}\t{1}\t{2}\t\t{3}\t\t{4}",
-                    row.Cells[0].Value.ToString(),
-                    row.Cells[1].Value.ToString(),
-                    row.Cells[2].Value.ToString(),
-                    row.Cells[3].Value.ToString(),
-                    row.Cells[4].Value.ToString())
+                lines.Add(string.Format(format,
+                    row.Cells[1].Value.ToString().PadLeft(8),
+                    row.Cells[2].Value.ToString().PadLeft(4),
+                    row.Cells[3].Value.ToString().PadLeft(22),
+                    row.Cells[4].Value.ToString().PadLeft(16),
+                    row.Cells[0].Value.ToString())
                 );
             }
 
             System.IO.File.WriteAllLines(@"C:\temp\Race.txt", lines);
 
             lines.Clear();
-            lines.Add("\r\n Круги по каждому участнику: \r\n");
+            lines.Add("Круги по каждому участнику:");
             foreach (DataGridViewRow row in dataGridView_Racers.Rows)
             {
-                lines.Add(string.Format("{0}\t{1}\t{2}\t\t{3}\t\t{4}",
-                    row.Cells[0].Value.ToString(),
+                lines.Add(string.Format("{0}\t{1}\t{2}\t\t{3}",
                     row.Cells[1].Value.ToString(),
                     row.Cells[2].Value.ToString(),
                     row.Cells[3].Value.ToString(),
-                    row.Cells[4].Value.ToString())
+                    row.Cells[0].Value.ToString())
                 );
 
                 string key = row.Cells[1].Value + "|" + row.Cells[0].Value;
@@ -294,7 +295,7 @@ namespace SportControl
                     int j = 0;
                     foreach (var i in dic_Rows_Racers[key].ListCycles)
                     {
-                        lines.Add(string.Format("{0}\t{1}\t{2}", j++, i.StrDeltaDT, i.StrDT));
+                        lines.Add(string.Format("{0}\t{1}", j++, i.StrDeltaDT.PadLeft(13)));
                     }
                 }
 
