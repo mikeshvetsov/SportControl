@@ -264,15 +264,15 @@ namespace SportControl
             string format = "{0}\t{1}\t{2}\t{3}\t\t{4}";
             lines.Add("Общая таблица:");
 
-            lines.Add(string.Format(format, "Номер   ", "Циклов", "Время последнего круга", "        Финиш        ", "ID"));
+            lines.Add(string.Format(format, "Номер   ", "Циклов", "Время лучшего круга", "        Финиш        ", "ID"));
             foreach (DataGridViewRow row in dataGridView_Racers.Rows)
             {
                 lines.Add(string.Format(format,
-                    row.Cells[1].Value.ToString().PadLeft(8),
-                    row.Cells[2].Value.ToString().PadLeft(4),
-                    row.Cells[3].Value.ToString().PadLeft(22),
-                    row.Cells[4].Value.ToString().PadLeft(16),
-                    row.Cells[0].Value.ToString())
+                    row.Cells["EPC"].Value.ToString().PadLeft(8),
+                    row.Cells["Count"].Value.ToString().PadLeft(4),
+                    row.Cells["BestCycleTime"].Value.ToString().PadLeft(22),
+                    row.Cells["TimePoint"].Value.ToString().PadLeft(16),
+                    row.Cells["TID"].Value.ToString())
                 );
             }
 
@@ -282,11 +282,12 @@ namespace SportControl
             lines.Add("Круги по каждому участнику:");
             foreach (DataGridViewRow row in dataGridView_Racers.Rows)
             {
-                lines.Add(string.Format("{0}\t{1}\t{2}\t\t{3}",
-                    row.Cells[1].Value.ToString(),
-                    row.Cells[2].Value.ToString(),
-                    row.Cells[3].Value.ToString(),
-                    row.Cells[0].Value.ToString())
+                lines.Add(string.Format("№{0}\tКругов: {1}\t Лучшее время: {2} Лучший круг: {3}\t\tID: {4}",
+                    row.Cells["EPC"].Value.ToString(),
+                    row.Cells["Count"].Value.ToString(),
+                    row.Cells["BestCycleTime"].Value.ToString(),
+                    row.Cells["BestCycle"].Value.ToString(),
+                    row.Cells["TID"].Value.ToString())
                 );
 
                 string key = row.Cells[1].Value + "|" + row.Cells[0].Value;
@@ -295,7 +296,7 @@ namespace SportControl
                     int j = 0;
                     foreach (var i in dic_Rows_Racers[key].ListCycles)
                     {
-                        lines.Add(string.Format("{0}\t{1}", j++, i.StrDeltaDT.PadLeft(13)));
+                        lines.Add(string.Format("{0}\t{1}", j++, i.StrDeltaDT.PadRight(13)));
                     }
                 }
 
@@ -337,6 +338,11 @@ namespace SportControl
                 Console.WriteLine("cpuInfo: " + cpuInfo);
                 break;
             }
+        }
+
+        private void dataGridView_Racers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 

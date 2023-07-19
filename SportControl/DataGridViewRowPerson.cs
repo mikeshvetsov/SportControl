@@ -39,7 +39,7 @@ namespace SportControl
         public bool Started = false;
         public bool Finished = false;
         public bool TimeOut = false;
-
+        public int BestCycle = 0;
         public Color ColorActive;
         public List<CycleTime> ListCycles = new List <CycleTime>();
 
@@ -47,26 +47,50 @@ namespace SportControl
         {
             this.ColorActive = ColorActive;
             DisplayedTime = MaxRSSI_StrDT;
+            //TODO: нужно уйти от создания ячеек по индексу. Те перестановка столбцов в таблице
+            // требует перестановки данных тут. Ниже нерабочая попытка это сделать
             this.CreateCells(dataGridView, new object[] {
-                tagdt.tag.TID,
-                tagdt.tag.EPC,
-                ListCycles.Count,
-                0,
-                MaxRSSI_StrDT,
-                MaxRSSI,
-                MaxRSSI_StrDT
-            });
+                 tagdt.tag.TID,
+                 tagdt.tag.EPC,
+                 ListCycles.Count,
+                 0,
+                 MaxRSSI_StrDT,
+                 0,
+                 0,
+                 MaxRSSI,
+                 MaxRSSI_StrDT
+             });
+            
+            /*this.CreateCells(dataGridView);
+            this.Cells["TID"].Value = tagdt.tag.TID;
+            this.Cells["EPC"].Value = tagdt.tag.EPC;
+            this.Cells["Count"].Value = ListCycles.Count;
+            this.Cells["CycleTime"].Value = 0;
+            this.Cells["TimePoint"].Value = MaxRSSI_StrDT;
+            this.Cells["BestCycle"].Value = 0;
+            this.Cells["BestCycleTime"].Value = 0;
+            this.Cells["MaxRSSI"].Value = MaxRSSI;
+            this.Cells["MaxRSSI_StrDT"].Value = MaxRSSI_StrDT;
+            */
         }
 
         public override void SetOld(object sender, ElapsedEventArgs e)
         {
             DisplayedTime = MaxRSSI_StrDT;
 
-            if (Racing&&Started&&!Finished&&!TimeOut)
+            if (Racing && Started && !Finished && !TimeOut)
+            {
                 ListCycles.Add(new CycleTime(
                     MaxRSSI_DT,
                     ListCycles.Count > 0 ? MaxRSSI_DT - ListCycles[ListCycles.Count - 1].DT : TimeSpan.Zero
-                )); ;
+                ));
+
+                if (ListCycles.Count == 2)
+                    BestCycle = 1;
+
+                if (ListCycles.Count > 1 && ListCycles[ListCycles.Count - 1].DeltaDT < ListCycles[BestCycle].DeltaDT)
+                    BestCycle = ListCycles.Count - 1;
+            }
 
             MaxRSSI = 0;
             base.SetOld(sender, e);
@@ -94,7 +118,10 @@ namespace SportControl
                 // отображаем данные последнего круга
                 this.Cells["TimePoint"].Value = ListCycles[ListCycles.Count - 1].StrDT;
                 this.Cells["CycleTime"].Value = ListCycles[ListCycles.Count - 1].StrDeltaDT;
+                this.Cells["BestCycle"].Value = BestCycle.ToString();
+                this.Cells["BestCycleTime"].Value = ListCycles[BestCycle].StrDeltaDT;
             }
+
             this.Cells["MAX_RSSI"].Value = MaxRSSI;
             this.Cells["DT_MAX_RSSI"].Value = MaxRSSI_StrDT;
 
@@ -105,5 +132,7 @@ namespace SportControl
             else
                 this.DefaultCellStyle.BackColor = Color.White;
         }
+
+
     }
 }

@@ -42,13 +42,6 @@ namespace SportControl
             this.checkBox_ant1 = new System.Windows.Forms.CheckBox();
             this.button_Read = new System.Windows.Forms.Button();
             this.dataGridView_Racers = new System.Windows.Forms.DataGridView();
-            this.TID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimePoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DT_MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_TimeFormOpen = new System.Windows.Forms.Button();
             this.button_StartRace = new System.Windows.Forms.Button();
             this.label_TimeStart = new System.Windows.Forms.Label();
@@ -65,6 +58,15 @@ namespace SportControl
             this.timer_race = new System.Windows.Forms.Timer(this.components);
             this.button_Save = new System.Windows.Forms.Button();
             this.button_Finished = new System.Windows.Forms.Button();
+            this.TID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimePoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BestCycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BestCycle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DT_MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Racers)).BeginInit();
@@ -208,6 +210,8 @@ namespace SportControl
             this.Count,
             this.CycleTime,
             this.TimePoint,
+            this.BestCycleTime,
+            this.BestCycle,
             this.MAX_RSSI,
             this.DT_MAX_RSSI});
             this.dataGridView_Racers.Location = new System.Drawing.Point(11, 76);
@@ -216,52 +220,8 @@ namespace SportControl
             this.dataGridView_Racers.RowHeadersWidth = 25;
             this.dataGridView_Racers.Size = new System.Drawing.Size(784, 425);
             this.dataGridView_Racers.TabIndex = 8;
+            this.dataGridView_Racers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Racers_CellContentClick);
             this.dataGridView_Racers.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Racers_RowEnter);
-            // 
-            // TID
-            // 
-            this.TID.HeaderText = "TID";
-            this.TID.Name = "TID";
-            this.TID.ReadOnly = true;
-            this.TID.Width = 150;
-            // 
-            // EPC
-            // 
-            this.EPC.HeaderText = "EPC";
-            this.EPC.Name = "EPC";
-            this.EPC.ReadOnly = true;
-            this.EPC.Width = 150;
-            // 
-            // Count
-            // 
-            this.Count.HeaderText = "Count";
-            this.Count.Name = "Count";
-            this.Count.ReadOnly = true;
-            this.Count.Width = 50;
-            // 
-            // CycleTime
-            // 
-            this.CycleTime.HeaderText = "Время круга";
-            this.CycleTime.Name = "CycleTime";
-            this.CycleTime.ReadOnly = true;
-            // 
-            // TimePoint
-            // 
-            this.TimePoint.HeaderText = "Время";
-            this.TimePoint.Name = "TimePoint";
-            this.TimePoint.ReadOnly = true;
-            // 
-            // MAX_RSSI
-            // 
-            this.MAX_RSSI.HeaderText = "MAX_RSSI";
-            this.MAX_RSSI.Name = "MAX_RSSI";
-            this.MAX_RSSI.ReadOnly = true;
-            // 
-            // DT_MAX_RSSI
-            // 
-            this.DT_MAX_RSSI.HeaderText = "DT_MAX_RSSI";
-            this.DT_MAX_RSSI.Name = "DT_MAX_RSSI";
-            this.DT_MAX_RSSI.ReadOnly = true;
             // 
             // button_TimeFormOpen
             // 
@@ -403,6 +363,66 @@ namespace SportControl
             this.button_Finished.UseVisualStyleBackColor = true;
             this.button_Finished.Click += new System.EventHandler(this.button_Finished_Click);
             // 
+            // TID
+            // 
+            this.TID.HeaderText = "TID";
+            this.TID.Name = "TID";
+            this.TID.ReadOnly = true;
+            this.TID.Width = 150;
+            // 
+            // EPC
+            // 
+            this.EPC.HeaderText = "Номер (EPC)";
+            this.EPC.Name = "EPC";
+            this.EPC.ReadOnly = true;
+            this.EPC.Width = 150;
+            // 
+            // Count
+            // 
+            this.Count.HeaderText = "Круг";
+            this.Count.Name = "Count";
+            this.Count.ReadOnly = true;
+            this.Count.Width = 50;
+            // 
+            // CycleTime
+            // 
+            this.CycleTime.HeaderText = "Время круга";
+            this.CycleTime.Name = "CycleTime";
+            this.CycleTime.ReadOnly = true;
+            // 
+            // TimePoint
+            // 
+            this.TimePoint.HeaderText = "Время";
+            this.TimePoint.Name = "TimePoint";
+            this.TimePoint.ReadOnly = true;
+            // 
+            // BestCycleTime
+            // 
+            this.BestCycleTime.HeaderText = "Лучшее время";
+            this.BestCycleTime.Name = "BestCycleTime";
+            this.BestCycleTime.ReadOnly = true;
+            // 
+            // BestCycle
+            // 
+            this.BestCycle.HeaderText = "Лучший круг";
+            this.BestCycle.Name = "BestCycle";
+            this.BestCycle.ReadOnly = true;
+            this.BestCycle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // MAX_RSSI
+            // 
+            this.MAX_RSSI.HeaderText = "MAX_RSSI";
+            this.MAX_RSSI.Name = "MAX_RSSI";
+            this.MAX_RSSI.ReadOnly = true;
+            this.MAX_RSSI.Visible = false;
+            // 
+            // DT_MAX_RSSI
+            // 
+            this.DT_MAX_RSSI.HeaderText = "DT_MAX_RSSI";
+            this.DT_MAX_RSSI.Name = "DT_MAX_RSSI";
+            this.DT_MAX_RSSI.ReadOnly = true;
+            this.DT_MAX_RSSI.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -464,19 +484,21 @@ namespace SportControl
         private System.Windows.Forms.Timer timer_1s;
         private System.Windows.Forms.Button button_OnStart;
         private System.Windows.Forms.DataGridView dataGridView_RacerData;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EPC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Count;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CycleTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TimePoint;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MAX_RSSI;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DT_MAX_RSSI;
         private System.Windows.Forms.DataGridViewTextBoxColumn CycleNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn CycleDeltaDT;
         private System.Windows.Forms.DataGridViewTextBoxColumn CycleDT;
         private System.Windows.Forms.Timer timer_race;
         private System.Windows.Forms.Button button_Save;
         private System.Windows.Forms.Button button_Finished;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EPC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Count;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CycleTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimePoint;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BestCycleTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BestCycle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MAX_RSSI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DT_MAX_RSSI;
     }
 }
 
