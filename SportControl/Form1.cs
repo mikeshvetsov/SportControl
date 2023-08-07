@@ -46,6 +46,11 @@ namespace SportControl
                 if (dic_Rows_Racers.ContainsKey(key))
                 {
                     dgvr = dic_Rows_Racers[key];
+                    if (dgvr.Started && !dgvr.active)
+                    {
+                        textBox_Log.Text = textBox_Log.Text.Insert(0, string.Format("{0} - {1}\r\n", tagdt.tag.EPC,
+                            string.Format("{0:d2}:{1:d2}:{2:d2}:{3}", tagdt.dt.Hour, tagdt.dt.Minute, tagdt.dt.Second, tagdt.dt.Millisecond)));
+                    }
                     dgvr.UpdateInfo(tagdt);
                 }
                 else
