@@ -430,7 +430,7 @@ namespace SportControl
             this.textBox_Log.Multiline = true;
             this.textBox_Log.Name = "textBox_Log";
             this.textBox_Log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_Log.Size = new System.Drawing.Size(276, 692);
+            this.textBox_Log.Size = new System.Drawing.Size(363, 692);
             this.textBox_Log.TabIndex = 23;
             // 
             // Form1
