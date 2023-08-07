@@ -34,6 +34,7 @@ namespace SportControl
     }
     class DataGridViewRowRacer : DataGridViewRowTag
     {
+        string Name;
         string DisplayedTime;
         public bool Racing = false;
         public bool Started = false;
@@ -42,9 +43,11 @@ namespace SportControl
         public int BestCycle = 0;
         public Color ColorActive;
         public List<CycleTime> ListCycles = new List <CycleTime>();
+        Func<string, bool> Log = null;
 
-        public DataGridViewRowRacer(DataGridView dataGridView, TagDT tagdt, Color ColorActive) : base(dataGridView, tagdt)
+        public DataGridViewRowRacer(DataGridView dataGridView, TagDT tagdt, Color ColorActive, Func<string, bool> LogHandler) : base(dataGridView, tagdt)
         {
+            this.Name = tagdt.tag.EPC;
             this.ColorActive = ColorActive;
             DisplayedTime = MaxRSSI_StrDT;
             //TODO: нужно уйти от создания ячеек по индексу. Те перестановка столбцов в таблице
@@ -60,7 +63,9 @@ namespace SportControl
                  MaxRSSI,
                  MaxRSSI_StrDT
              });
-            
+
+            Log = LogHandler;
+
             /*this.CreateCells(dataGridView);
             this.Cells["TID"].Value = tagdt.tag.TID;
             this.Cells["EPC"].Value = tagdt.tag.EPC;
@@ -80,16 +85,15 @@ namespace SportControl
 
             if (Racing && Started && !Finished && !TimeOut)
             {
-                ListCycles.Add(new CycleTime(
-                    MaxRSSI_DT,
-                    ListCycles.Count > 0 ? MaxRSSI_DT - ListCycles[ListCycles.Count - 1].DT : TimeSpan.Zero
-                ));
+                ListCycles.Add(new CycleTime( MaxRSSI_DT, ListCycles.Count > 0 ? MaxRSSI_DT - ListCycles[ListCycles.Count - 1].DT : TimeSpan.Zero));
 
                 if (ListCycles.Count == 2)
                     BestCycle = 1;
 
                 if (ListCycles.Count > 1 && ListCycles[ListCycles.Count - 1].DeltaDT < ListCycles[BestCycle].DeltaDT)
                     BestCycle = ListCycles.Count - 1;
+
+                Log(string.Format("{0} [{1}]: {2}", this.Name, ListCycles.Count - 1, DisplayedTime));                  
             }
 
             MaxRSSI = 0;

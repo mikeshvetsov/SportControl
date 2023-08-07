@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Management;
 using System.Text.RegularExpressions;
@@ -46,18 +47,13 @@ namespace SportControl
                 if (dic_Rows_Racers.ContainsKey(key))
                 {
                     dgvr = dic_Rows_Racers[key];
-                    if (dgvr.Started && !dgvr.active)
-                    {
-                        textBox_Log.Text = textBox_Log.Text.Insert(0, string.Format("{0} - {1}\r\n", tagdt.tag.EPC,
-                            string.Format("{0:d2}:{1:d2}:{2:d2}:{3}", tagdt.dt.Hour, tagdt.dt.Minute, tagdt.dt.Second, tagdt.dt.Millisecond)));
-                    }
                     dgvr.UpdateInfo(tagdt);
                 }
                 else
                 {
                     Color activeColor = OnStart ? TAG_ALARM_ACTIVE_COLOR : TAG_NORMAL_ACTIVE_COLOR;
                     
-                    dgvr = new DataGridViewRowRacer(dataGridView_Racers, tagdt, activeColor);
+                    dgvr = new DataGridViewRowRacer(dataGridView_Racers, tagdt, activeColor, LogText);
                     dic_Rows_Racers.Add(key, dgvr);
                     dataGridView_Racers.Rows.Add(dgvr);
 
@@ -308,7 +304,8 @@ namespace SportControl
                 lines.Add("--------------------------------------------------------");
             }
 
-            System.IO.File.AppendAllLines(@"C:\temp\Race.txt", lines);
+            File.AppendAllLines(@"C:\temp\Race.txt", lines);
+            File.WriteAllText(@"C:\temp\RaceLog.txt", textBox_Log.Text);
 
         }
 
@@ -348,6 +345,19 @@ namespace SportControl
         private void dataGridView_Racers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        delegate bool AddLog(string msg);
+        public bool LogText(string msg)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new AddLog(LogText), msg);
+                return false;
+            }
+            textBox_Log.Text = textBox_Log.Text.Insert(0, string.Format("{0}\r\n", msg));
+
+            return true;
         }
     }
 
