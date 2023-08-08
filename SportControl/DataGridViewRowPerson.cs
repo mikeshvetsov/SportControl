@@ -129,6 +129,7 @@ namespace SportControl
             this.Cells["MAX_RSSI"].Value = MaxRSSI;
             this.Cells["DT_MAX_RSSI"].Value = MaxRSSI_StrDT;
 
+            this.Cells["Racing"].Value = Racing;
             if (Finished)
                 this.DefaultCellStyle.BackColor = Color.LightGray;
             else if (active)

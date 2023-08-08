@@ -20,7 +20,10 @@ namespace SportControl
         Dictionary<String, DataGridViewRowRacer> dic_Rows_Racers = new Dictionary<string, DataGridViewRowRacer>();
        // List<String> ListFinished = new List<string>();
         TimeRecord timeStartRace;
-        bool OnStart = false;
+
+        // Этот флаг устанавливается при нажатии кнопки "На страрт". Флаг нужен только для того, чтобы определить активные
+        // цвета для участников и не участников. Когда флаг установлен, все левые метки в поле зрения антены помечаются красным. 
+        bool OnStart = false; 
 
         public Form1()
         {
@@ -237,6 +240,7 @@ namespace SportControl
                 {
                     i.Value.Racing = true;
                     i.Value.ColorActive = TAG_NORMAL_ACTIVE_COLOR;
+                   // i.Value.UpdateView();
                 }
             }
         }
