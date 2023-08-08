@@ -42,6 +42,16 @@ namespace SportControl
             this.checkBox_ant1 = new System.Windows.Forms.CheckBox();
             this.button_Read = new System.Windows.Forms.Button();
             this.dataGridView_Racers = new System.Windows.Forms.DataGridView();
+            this.TID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimePoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BestCycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BestCycle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DT_MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Racing = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_TimeFormOpen = new System.Windows.Forms.Button();
             this.button_StartRace = new System.Windows.Forms.Button();
             this.label_TimeStart = new System.Windows.Forms.Label();
@@ -59,16 +69,6 @@ namespace SportControl
             this.button_Save = new System.Windows.Forms.Button();
             this.button_Finished = new System.Windows.Forms.Button();
             this.textBox_Log = new System.Windows.Forms.TextBox();
-            this.TID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimePoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BestCycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BestCycle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DT_MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Racing = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Racers)).BeginInit();
@@ -77,7 +77,7 @@ namespace SportControl
             // 
             // maskedTextBox_reader_ip
             // 
-            this.maskedTextBox_reader_ip.Location = new System.Drawing.Point(6, 774);
+            this.maskedTextBox_reader_ip.Location = new System.Drawing.Point(6, 745);
             this.maskedTextBox_reader_ip.Name = "maskedTextBox_reader_ip";
             this.maskedTextBox_reader_ip.Size = new System.Drawing.Size(88, 20);
             this.maskedTextBox_reader_ip.TabIndex = 0;
@@ -87,7 +87,7 @@ namespace SportControl
             // 
             // button_connect
             // 
-            this.button_connect.Location = new System.Drawing.Point(161, 774);
+            this.button_connect.Location = new System.Drawing.Point(161, 745);
             this.button_connect.Name = "button_connect";
             this.button_connect.Size = new System.Drawing.Size(85, 23);
             this.button_connect.TabIndex = 1;
@@ -97,7 +97,7 @@ namespace SportControl
             // 
             // numericUpDown_reader_port
             // 
-            this.numericUpDown_reader_port.Location = new System.Drawing.Point(100, 774);
+            this.numericUpDown_reader_port.Location = new System.Drawing.Point(100, 745);
             this.numericUpDown_reader_port.Maximum = new decimal(new int[] {
             65000,
             0,
@@ -115,7 +115,7 @@ namespace SportControl
             // label_connection_status
             // 
             this.label_connection_status.AutoSize = true;
-            this.label_connection_status.Location = new System.Drawing.Point(12, 47);
+            this.label_connection_status.Location = new System.Drawing.Point(12, 3);
             this.label_connection_status.Name = "label_connection_status";
             this.label_connection_status.Size = new System.Drawing.Size(57, 13);
             this.label_connection_status.TabIndex = 4;
@@ -123,7 +123,7 @@ namespace SportControl
             // 
             // button_disconnect
             // 
-            this.button_disconnect.Location = new System.Drawing.Point(340, 774);
+            this.button_disconnect.Location = new System.Drawing.Point(340, 745);
             this.button_disconnect.Name = "button_disconnect";
             this.button_disconnect.Size = new System.Drawing.Size(85, 23);
             this.button_disconnect.TabIndex = 5;
@@ -137,7 +137,7 @@ namespace SportControl
             this.groupBox_ant.Controls.Add(this.checkBox_ant3);
             this.groupBox_ant.Controls.Add(this.checkBox_ant2);
             this.groupBox_ant.Controls.Add(this.checkBox_ant1);
-            this.groupBox_ant.Location = new System.Drawing.Point(437, 774);
+            this.groupBox_ant.Location = new System.Drawing.Point(6, 774);
             this.groupBox_ant.Name = "groupBox_ant";
             this.groupBox_ant.Size = new System.Drawing.Size(228, 48);
             this.groupBox_ant.TabIndex = 6;
@@ -192,7 +192,7 @@ namespace SportControl
             // 
             // button_Read
             // 
-            this.button_Read.Location = new System.Drawing.Point(250, 774);
+            this.button_Read.Location = new System.Drawing.Point(250, 745);
             this.button_Read.Margin = new System.Windows.Forms.Padding(1);
             this.button_Read.Name = "button_Read";
             this.button_Read.Size = new System.Drawing.Size(86, 23);
@@ -217,7 +217,7 @@ namespace SportControl
             this.MAX_RSSI,
             this.DT_MAX_RSSI,
             this.Racing});
-            this.dataGridView_Racers.Location = new System.Drawing.Point(11, 76);
+            this.dataGridView_Racers.Location = new System.Drawing.Point(11, 27);
             this.dataGridView_Racers.Name = "dataGridView_Racers";
             this.dataGridView_Racers.ReadOnly = true;
             this.dataGridView_Racers.RowHeadersWidth = 25;
@@ -225,155 +225,6 @@ namespace SportControl
             this.dataGridView_Racers.TabIndex = 8;
             this.dataGridView_Racers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Racers_CellContentClick);
             this.dataGridView_Racers.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Racers_RowEnter);
-            // 
-            // button_TimeFormOpen
-            // 
-            this.button_TimeFormOpen.Location = new System.Drawing.Point(1250, 9);
-            this.button_TimeFormOpen.Name = "button_TimeFormOpen";
-            this.button_TimeFormOpen.Size = new System.Drawing.Size(75, 23);
-            this.button_TimeFormOpen.TabIndex = 12;
-            this.button_TimeFormOpen.Text = "Экран";
-            this.button_TimeFormOpen.UseVisualStyleBackColor = true;
-            this.button_TimeFormOpen.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button_StartRace
-            // 
-            this.button_StartRace.Location = new System.Drawing.Point(634, 9);
-            this.button_StartRace.Name = "button_StartRace";
-            this.button_StartRace.Size = new System.Drawing.Size(80, 23);
-            this.button_StartRace.TabIndex = 13;
-            this.button_StartRace.Text = "Старт Гонка";
-            this.button_StartRace.UseVisualStyleBackColor = true;
-            this.button_StartRace.Click += new System.EventHandler(this.button_StartRace_Click);
-            // 
-            // label_TimeStart
-            // 
-            this.label_TimeStart.AutoSize = true;
-            this.label_TimeStart.Location = new System.Drawing.Point(717, 47);
-            this.label_TimeStart.Name = "label_TimeStart";
-            this.label_TimeStart.Size = new System.Drawing.Size(31, 13);
-            this.label_TimeStart.TabIndex = 14;
-            this.label_TimeStart.Text = "0000";
-            // 
-            // label_TimeRace
-            // 
-            this.label_TimeRace.AutoSize = true;
-            this.label_TimeRace.Location = new System.Drawing.Point(960, 47);
-            this.label_TimeRace.Name = "label_TimeRace";
-            this.label_TimeRace.Size = new System.Drawing.Size(31, 13);
-            this.label_TimeRace.TabIndex = 15;
-            this.label_TimeRace.Text = "0000";
-            // 
-            // button_StopRace
-            // 
-            this.button_StopRace.Location = new System.Drawing.Point(720, 9);
-            this.button_StopRace.Name = "button_StopRace";
-            this.button_StopRace.Size = new System.Drawing.Size(75, 23);
-            this.button_StopRace.TabIndex = 16;
-            this.button_StopRace.Text = "Стоп Гонка";
-            this.button_StopRace.UseVisualStyleBackColor = true;
-            this.button_StopRace.Click += new System.EventHandler(this.button_StopRace_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(877, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 13);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Время гонки:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(634, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "Время старта:";
-            // 
-            // timer_1s
-            // 
-            this.timer_1s.Interval = 1000;
-            this.timer_1s.Tick += new System.EventHandler(this.Timer1SHandler);
-            // 
-            // button_OnStart
-            // 
-            this.button_OnStart.Location = new System.Drawing.Point(11, 9);
-            this.button_OnStart.Name = "button_OnStart";
-            this.button_OnStart.Size = new System.Drawing.Size(149, 23);
-            this.button_OnStart.TabIndex = 18;
-            this.button_OnStart.Text = "Участников На Старт!";
-            this.button_OnStart.UseVisualStyleBackColor = true;
-            this.button_OnStart.Click += new System.EventHandler(this.button_OnStart_Click);
-            // 
-            // dataGridView_RacerData
-            // 
-            this.dataGridView_RacerData.AllowUserToAddRows = false;
-            this.dataGridView_RacerData.AllowUserToDeleteRows = false;
-            this.dataGridView_RacerData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_RacerData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CycleNum,
-            this.CycleDeltaDT,
-            this.CycleDT});
-            this.dataGridView_RacerData.Location = new System.Drawing.Point(851, 75);
-            this.dataGridView_RacerData.Name = "dataGridView_RacerData";
-            this.dataGridView_RacerData.ReadOnly = true;
-            this.dataGridView_RacerData.RowHeadersWidth = 25;
-            this.dataGridView_RacerData.Size = new System.Drawing.Size(284, 693);
-            this.dataGridView_RacerData.TabIndex = 20;
-            // 
-            // CycleNum
-            // 
-            this.CycleNum.HeaderText = "Номер";
-            this.CycleNum.Name = "CycleNum";
-            this.CycleNum.ReadOnly = true;
-            this.CycleNum.Width = 50;
-            // 
-            // CycleDeltaDT
-            // 
-            this.CycleDeltaDT.HeaderText = "Время цикла";
-            this.CycleDeltaDT.Name = "CycleDeltaDT";
-            this.CycleDeltaDT.ReadOnly = true;
-            // 
-            // CycleDT
-            // 
-            this.CycleDT.HeaderText = "Время";
-            this.CycleDT.Name = "CycleDT";
-            this.CycleDT.ReadOnly = true;
-            // 
-            // timer_race
-            // 
-            this.timer_race.Tick += new System.EventHandler(this.timer_race_Tick);
-            // 
-            // button_Save
-            // 
-            this.button_Save.Location = new System.Drawing.Point(1109, 9);
-            this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(75, 23);
-            this.button_Save.TabIndex = 21;
-            this.button_Save.Text = "Сохранить";
-            this.button_Save.UseVisualStyleBackColor = true;
-            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
-            // 
-            // button_Finished
-            // 
-            this.button_Finished.Location = new System.Drawing.Point(208, 9);
-            this.button_Finished.Name = "button_Finished";
-            this.button_Finished.Size = new System.Drawing.Size(108, 23);
-            this.button_Finished.TabIndex = 22;
-            this.button_Finished.Text = "Финишировал";
-            this.button_Finished.UseVisualStyleBackColor = true;
-            this.button_Finished.Click += new System.EventHandler(this.button_Finished_Click);
-            // 
-            // textBox_Log
-            // 
-            this.textBox_Log.Location = new System.Drawing.Point(1138, 75);
-            this.textBox_Log.Multiline = true;
-            this.textBox_Log.Name = "textBox_Log";
-            this.textBox_Log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_Log.Size = new System.Drawing.Size(363, 692);
-            this.textBox_Log.TabIndex = 23;
             // 
             // TID
             // 
@@ -441,6 +292,155 @@ namespace SportControl
             this.Racing.Name = "Racing";
             this.Racing.ReadOnly = true;
             this.Racing.Width = 40;
+            // 
+            // button_TimeFormOpen
+            // 
+            this.button_TimeFormOpen.Location = new System.Drawing.Point(1219, 745);
+            this.button_TimeFormOpen.Name = "button_TimeFormOpen";
+            this.button_TimeFormOpen.Size = new System.Drawing.Size(75, 23);
+            this.button_TimeFormOpen.TabIndex = 12;
+            this.button_TimeFormOpen.Text = "Экран";
+            this.button_TimeFormOpen.UseVisualStyleBackColor = true;
+            this.button_TimeFormOpen.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button_StartRace
+            // 
+            this.button_StartRace.Location = new System.Drawing.Point(849, 745);
+            this.button_StartRace.Name = "button_StartRace";
+            this.button_StartRace.Size = new System.Drawing.Size(80, 23);
+            this.button_StartRace.TabIndex = 13;
+            this.button_StartRace.Text = "Старт Гонка";
+            this.button_StartRace.UseVisualStyleBackColor = true;
+            this.button_StartRace.Click += new System.EventHandler(this.button_StartRace_Click);
+            // 
+            // label_TimeStart
+            // 
+            this.label_TimeStart.AutoSize = true;
+            this.label_TimeStart.Location = new System.Drawing.Point(180, 4);
+            this.label_TimeStart.Name = "label_TimeStart";
+            this.label_TimeStart.Size = new System.Drawing.Size(31, 13);
+            this.label_TimeStart.TabIndex = 14;
+            this.label_TimeStart.Text = "0000";
+            // 
+            // label_TimeRace
+            // 
+            this.label_TimeRace.AutoSize = true;
+            this.label_TimeRace.Location = new System.Drawing.Point(423, 4);
+            this.label_TimeRace.Name = "label_TimeRace";
+            this.label_TimeRace.Size = new System.Drawing.Size(31, 13);
+            this.label_TimeRace.TabIndex = 15;
+            this.label_TimeRace.Text = "0000";
+            // 
+            // button_StopRace
+            // 
+            this.button_StopRace.Location = new System.Drawing.Point(935, 745);
+            this.button_StopRace.Name = "button_StopRace";
+            this.button_StopRace.Size = new System.Drawing.Size(75, 23);
+            this.button_StopRace.TabIndex = 16;
+            this.button_StopRace.Text = "Стоп Гонка";
+            this.button_StopRace.UseVisualStyleBackColor = true;
+            this.button_StopRace.Click += new System.EventHandler(this.button_StopRace_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(340, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(75, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Время гонки:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(97, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Время старта:";
+            // 
+            // timer_1s
+            // 
+            this.timer_1s.Interval = 1000;
+            this.timer_1s.Tick += new System.EventHandler(this.Timer1SHandler);
+            // 
+            // button_OnStart
+            // 
+            this.button_OnStart.Location = new System.Drawing.Point(526, 745);
+            this.button_OnStart.Name = "button_OnStart";
+            this.button_OnStart.Size = new System.Drawing.Size(149, 23);
+            this.button_OnStart.TabIndex = 18;
+            this.button_OnStart.Text = "Участников На Старт!";
+            this.button_OnStart.UseVisualStyleBackColor = true;
+            this.button_OnStart.Click += new System.EventHandler(this.button_OnStart_Click);
+            // 
+            // dataGridView_RacerData
+            // 
+            this.dataGridView_RacerData.AllowUserToAddRows = false;
+            this.dataGridView_RacerData.AllowUserToDeleteRows = false;
+            this.dataGridView_RacerData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_RacerData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CycleNum,
+            this.CycleDeltaDT,
+            this.CycleDT});
+            this.dataGridView_RacerData.Location = new System.Drawing.Point(849, 27);
+            this.dataGridView_RacerData.Name = "dataGridView_RacerData";
+            this.dataGridView_RacerData.ReadOnly = true;
+            this.dataGridView_RacerData.RowHeadersWidth = 25;
+            this.dataGridView_RacerData.Size = new System.Drawing.Size(284, 692);
+            this.dataGridView_RacerData.TabIndex = 20;
+            // 
+            // CycleNum
+            // 
+            this.CycleNum.HeaderText = "Номер";
+            this.CycleNum.Name = "CycleNum";
+            this.CycleNum.ReadOnly = true;
+            this.CycleNum.Width = 50;
+            // 
+            // CycleDeltaDT
+            // 
+            this.CycleDeltaDT.HeaderText = "Время цикла";
+            this.CycleDeltaDT.Name = "CycleDeltaDT";
+            this.CycleDeltaDT.ReadOnly = true;
+            // 
+            // CycleDT
+            // 
+            this.CycleDT.HeaderText = "Время";
+            this.CycleDT.Name = "CycleDT";
+            this.CycleDT.ReadOnly = true;
+            // 
+            // timer_race
+            // 
+            this.timer_race.Tick += new System.EventHandler(this.timer_race_Tick);
+            // 
+            // button_Save
+            // 
+            this.button_Save.Location = new System.Drawing.Point(1138, 745);
+            this.button_Save.Name = "button_Save";
+            this.button_Save.Size = new System.Drawing.Size(75, 23);
+            this.button_Save.TabIndex = 21;
+            this.button_Save.Text = "Сохранить";
+            this.button_Save.UseVisualStyleBackColor = true;
+            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
+            // 
+            // button_Finished
+            // 
+            this.button_Finished.Location = new System.Drawing.Point(681, 745);
+            this.button_Finished.Name = "button_Finished";
+            this.button_Finished.Size = new System.Drawing.Size(108, 23);
+            this.button_Finished.TabIndex = 22;
+            this.button_Finished.Text = "Финишировал";
+            this.button_Finished.UseVisualStyleBackColor = true;
+            this.button_Finished.Click += new System.EventHandler(this.button_Finished_Click);
+            // 
+            // textBox_Log
+            // 
+            this.textBox_Log.Location = new System.Drawing.Point(1138, 27);
+            this.textBox_Log.Multiline = true;
+            this.textBox_Log.Name = "textBox_Log";
+            this.textBox_Log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_Log.Size = new System.Drawing.Size(363, 692);
+            this.textBox_Log.TabIndex = 23;
             // 
             // Form1
             // 
