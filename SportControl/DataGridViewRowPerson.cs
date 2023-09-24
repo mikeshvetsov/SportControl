@@ -47,7 +47,7 @@ namespace SportControl
 
         public DataGridViewRowRacer(DataGridView dataGridView, TagDT tagdt, Color ColorActive, Func<string, bool> LogHandler) : base(dataGridView, tagdt)
         {
-            this.Name = tagdt.tag.EPC;
+            this.Name = tagdt.tag.EPC + "|" + tagdt.tag.TID;
             this.ColorActive = ColorActive;
             DisplayedTime = MaxRSSI_StrDT;
             //TODO: нужно уйти от создания ячеек по индексу. Те перестановка столбцов в таблице
