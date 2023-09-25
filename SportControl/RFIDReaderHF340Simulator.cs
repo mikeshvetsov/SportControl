@@ -1,0 +1,61 @@
+﻿using RFIDReaderAPI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Timers;
+
+namespace SportControl
+{
+    public class RFIDReaderHF340Simulator
+    {
+        List<string> TID = new List<string>() { "T1", "T2", "T3", "T4", "T5", "T6"};
+
+        Func<TagDT, bool> TagHandler;
+        public Boolean isConnected = false;
+
+        const double INTERVAL_MSG = 1000;
+        internal System.Timers.Timer timer;
+
+        public RFIDReaderHF340Simulator(Func<TagDT, bool> TagHandler)
+        {
+            this.TagHandler = TagHandler;
+
+            timer = new System.Timers.Timer(INTERVAL_MSG);
+            timer.Elapsed += OutPutTags;
+        }
+
+        public Boolean Connect()
+        {
+            timer.Start();
+            isConnected = true;
+            return true;
+        }
+
+        public void Disconnect()
+        {
+            timer.Stop();
+            isConnected = false;
+        }
+
+
+        // Tag CallBack
+        public virtual void OutPutTags(object sender, ElapsedEventArgs e)
+        {
+            RFIDReaderAPI.Models.Tag_Model tag = new RFIDReaderAPI.Models.Tag_Model();
+            tag.TID = "T123";
+            tag.EPC = "E321";
+            tag.RSSI = 10;
+
+            TagDT tagdt = new TagDT(tag, DateTime.Now);
+            TagHandler(tagdt);
+
+        }
+
+    
+
+        ~RFIDReaderHF340Simulator() { }
+    }
+
+}

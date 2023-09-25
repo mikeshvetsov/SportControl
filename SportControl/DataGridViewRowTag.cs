@@ -31,12 +31,14 @@ namespace SportControl
             timer.Elapsed += SetOld;
             timer.Start();
             active = true;
+            UpdateView();
         }
 
         public virtual void SetOld(object sender, ElapsedEventArgs e)
         {
             active = false;
             timer.Stop();
+            UpdateView();
         }
        
         internal void UpdateTag(TagDT tagdt)
@@ -46,6 +48,7 @@ namespace SportControl
             UpdateMaxRSSI();
             timer.Stop();
             timer.Start();
+            UpdateView();
         }
 
         void UpdateMaxRSSI()
@@ -55,6 +58,14 @@ namespace SportControl
                 MaxRSSI = tagdt.tag.RSSI;
                 MaxRSSI_DT = tagdt.dt;
             }
+        }
+
+        public void UpdateView()
+        {
+            if (active)
+                this.DefaultCellStyle.BackColor = Color.LightGreen;
+            else
+                this.DefaultCellStyle.BackColor = Color.White;
         }
 
     }

@@ -42,6 +42,16 @@ namespace SportControl
             this.checkBox_ant1 = new System.Windows.Forms.CheckBox();
             this.button_Read = new System.Windows.Forms.Button();
             this.dataGridView_Racers = new System.Windows.Forms.DataGridView();
+            this.TID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimePoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BestCycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BestCycle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DT_MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Racing = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_TimeFormOpen = new System.Windows.Forms.Button();
             this.button_StartRace = new System.Windows.Forms.Button();
             this.label_TimeStart = new System.Windows.Forms.Label();
@@ -59,16 +69,7 @@ namespace SportControl
             this.button_Save = new System.Windows.Forms.Button();
             this.button_Finished = new System.Windows.Forms.Button();
             this.textBox_Log = new System.Windows.Forms.TextBox();
-            this.TID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimePoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BestCycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BestCycle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DT_MAX_RSSI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Racing = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkBox_Simulator = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Racers)).BeginInit();
@@ -226,6 +227,73 @@ namespace SportControl
             this.dataGridView_Racers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Racers_CellContentClick);
             this.dataGridView_Racers.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Racers_RowEnter);
             // 
+            // TID
+            // 
+            this.TID.HeaderText = "TID";
+            this.TID.Name = "TID";
+            this.TID.ReadOnly = true;
+            this.TID.Width = 250;
+            // 
+            // EPC
+            // 
+            this.EPC.HeaderText = "Номер (EPC)";
+            this.EPC.Name = "EPC";
+            this.EPC.ReadOnly = true;
+            this.EPC.Width = 150;
+            // 
+            // Count
+            // 
+            this.Count.HeaderText = "Круг";
+            this.Count.Name = "Count";
+            this.Count.ReadOnly = true;
+            this.Count.Width = 50;
+            // 
+            // CycleTime
+            // 
+            this.CycleTime.HeaderText = "Время круга";
+            this.CycleTime.Name = "CycleTime";
+            this.CycleTime.ReadOnly = true;
+            // 
+            // TimePoint
+            // 
+            this.TimePoint.HeaderText = "Время";
+            this.TimePoint.Name = "TimePoint";
+            this.TimePoint.ReadOnly = true;
+            // 
+            // BestCycleTime
+            // 
+            this.BestCycleTime.HeaderText = "Лучшее время";
+            this.BestCycleTime.Name = "BestCycleTime";
+            this.BestCycleTime.ReadOnly = true;
+            // 
+            // BestCycle
+            // 
+            this.BestCycle.HeaderText = "Лучший круг";
+            this.BestCycle.Name = "BestCycle";
+            this.BestCycle.ReadOnly = true;
+            this.BestCycle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // MAX_RSSI
+            // 
+            this.MAX_RSSI.HeaderText = "MAX_RSSI";
+            this.MAX_RSSI.Name = "MAX_RSSI";
+            this.MAX_RSSI.ReadOnly = true;
+            this.MAX_RSSI.Visible = false;
+            // 
+            // DT_MAX_RSSI
+            // 
+            this.DT_MAX_RSSI.HeaderText = "DT_MAX_RSSI";
+            this.DT_MAX_RSSI.Name = "DT_MAX_RSSI";
+            this.DT_MAX_RSSI.ReadOnly = true;
+            this.DT_MAX_RSSI.Visible = false;
+            // 
+            // Racing
+            // 
+            this.Racing.HeaderText = "Учтен";
+            this.Racing.Name = "Racing";
+            this.Racing.ReadOnly = true;
+            this.Racing.Width = 40;
+            // 
             // button_TimeFormOpen
             // 
             this.button_TimeFormOpen.Location = new System.Drawing.Point(1219, 745);
@@ -375,78 +443,22 @@ namespace SportControl
             this.textBox_Log.Size = new System.Drawing.Size(363, 692);
             this.textBox_Log.TabIndex = 23;
             // 
-            // TID
+            // checkBox_Simulator
             // 
-            this.TID.HeaderText = "TID";
-            this.TID.Name = "TID";
-            this.TID.ReadOnly = true;
-            this.TID.Width = 250;
-            // 
-            // EPC
-            // 
-            this.EPC.HeaderText = "Номер (EPC)";
-            this.EPC.Name = "EPC";
-            this.EPC.ReadOnly = true;
-            this.EPC.Width = 150;
-            // 
-            // Count
-            // 
-            this.Count.HeaderText = "Круг";
-            this.Count.Name = "Count";
-            this.Count.ReadOnly = true;
-            this.Count.Width = 50;
-            // 
-            // CycleTime
-            // 
-            this.CycleTime.HeaderText = "Время круга";
-            this.CycleTime.Name = "CycleTime";
-            this.CycleTime.ReadOnly = true;
-            // 
-            // TimePoint
-            // 
-            this.TimePoint.HeaderText = "Время";
-            this.TimePoint.Name = "TimePoint";
-            this.TimePoint.ReadOnly = true;
-            // 
-            // BestCycleTime
-            // 
-            this.BestCycleTime.HeaderText = "Лучшее время";
-            this.BestCycleTime.Name = "BestCycleTime";
-            this.BestCycleTime.ReadOnly = true;
-            // 
-            // BestCycle
-            // 
-            this.BestCycle.HeaderText = "Лучший круг";
-            this.BestCycle.Name = "BestCycle";
-            this.BestCycle.ReadOnly = true;
-            this.BestCycle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // MAX_RSSI
-            // 
-            this.MAX_RSSI.HeaderText = "MAX_RSSI";
-            this.MAX_RSSI.Name = "MAX_RSSI";
-            this.MAX_RSSI.ReadOnly = true;
-            this.MAX_RSSI.Visible = false;
-            // 
-            // DT_MAX_RSSI
-            // 
-            this.DT_MAX_RSSI.HeaderText = "DT_MAX_RSSI";
-            this.DT_MAX_RSSI.Name = "DT_MAX_RSSI";
-            this.DT_MAX_RSSI.ReadOnly = true;
-            this.DT_MAX_RSSI.Visible = false;
-            // 
-            // Racing
-            // 
-            this.Racing.HeaderText = "Учтен";
-            this.Racing.Name = "Racing";
-            this.Racing.ReadOnly = true;
-            this.Racing.Width = 40;
+            this.checkBox_Simulator.AutoSize = true;
+            this.checkBox_Simulator.Location = new System.Drawing.Point(6, 725);
+            this.checkBox_Simulator.Name = "checkBox_Simulator";
+            this.checkBox_Simulator.Size = new System.Drawing.Size(81, 17);
+            this.checkBox_Simulator.TabIndex = 24;
+            this.checkBox_Simulator.Text = "Симулятор";
+            this.checkBox_Simulator.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1508, 861);
+            this.Controls.Add(this.checkBox_Simulator);
             this.Controls.Add(this.textBox_Log);
             this.Controls.Add(this.button_Finished);
             this.Controls.Add(this.button_Save);
@@ -521,6 +533,7 @@ namespace SportControl
         private System.Windows.Forms.DataGridViewTextBoxColumn MAX_RSSI;
         private System.Windows.Forms.DataGridViewTextBoxColumn DT_MAX_RSSI;
         private System.Windows.Forms.DataGridViewTextBoxColumn Racing;
+        private System.Windows.Forms.CheckBox checkBox_Simulator;
     }
 }
 

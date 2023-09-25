@@ -16,6 +16,7 @@ namespace SportControl
         Color TAG_NORMAL_ACTIVE_COLOR = Color.LightGreen;
         Color TAG_ALARM_ACTIVE_COLOR = Color.Red;
         public RFIDReaderHF340 hf340;
+        public RFIDReaderHF340Simulator hf340Sim;
         Form2 FormTimeRacing = new Form2();
         Dictionary<String, DataGridViewRowRacer> dic_Rows_Racers = new Dictionary<string, DataGridViewRowRacer>();
        // List<String> ListFinished = new List<string>();
@@ -29,7 +30,7 @@ namespace SportControl
         {
             InitializeComponent();
             hf340 = new RFIDReaderHF340(TagHandler: TagHandler);
-           
+            hf340Sim = new RFIDReaderHF340Simulator(TagHandler: TagHandler);
         }
 
         delegate bool AddTag(TagDT tagdt);
@@ -133,32 +134,40 @@ namespace SportControl
         private void button_connect_Click(object sender, EventArgs e)
         {
             Boolean res;
-            string ip = maskedTextBox_reader_ip.Text.Trim() + ":" + numericUpDown_reader_port.Value.ToString();
-            #region Get antenna number & single reading/cyclic reading
-            Int32 antNUM = 0;
-            eAntennaNo antNo = eAntennaNo._1;
-            int count = 0;
 
-            foreach (var item in groupBox_ant.Controls)
+            if (checkBox_Simulator.Checked)
             {
-                CheckBox control = item as CheckBox;
-                if (control != null && control.Checked)
-                {
-                    antNUM += Int32.Parse(control.Tag.ToString());
-                    if (count == 0)
-                        antNo = (eAntennaNo)Int32.Parse(control.Tag.ToString());
-                    else
-                        antNo = antNo | (eAntennaNo)Int32.Parse(control.Tag.ToString());
-                    count++;
-                    
-                }
+                res = hf340Sim.Connect();
             }
+            else
+            {
 
-            #endregion
+                string ip = maskedTextBox_reader_ip.Text.Trim() + ":" + numericUpDown_reader_port.Value.ToString();
+                #region Get antenna number & single reading/cyclic reading
+                Int32 antNUM = 0;
+                eAntennaNo antNo = eAntennaNo._1;
+                int count = 0;
 
+                foreach (var item in groupBox_ant.Controls)
+                {
+                    CheckBox control = item as CheckBox;
+                    if (control != null && control.Checked)
+                    {
+                        antNUM += Int32.Parse(control.Tag.ToString());
+                        if (count == 0)
+                            antNo = (eAntennaNo)Int32.Parse(control.Tag.ToString());
+                        else
+                            antNo = antNo | (eAntennaNo)Int32.Parse(control.Tag.ToString());
+                        count++;
 
-            label_connection_status.Text = "Подключение ...";
-            res = hf340.Connect(ip, antNUM, antNo);
+                    }
+                }
+
+                #endregion
+
+                label_connection_status.Text = "Подключение ...";
+                res = hf340.Connect(ip, antNUM, antNo);
+            }
 
             if (res)
                label_connection_status.Text = "Подключен";
@@ -168,11 +177,19 @@ namespace SportControl
 
         private void button_disconnect_Click(object sender, EventArgs e)
         {
-            hf340.Disconnect();
+            if (checkBox_Simulator.Checked)
+            {
+                hf340Sim.Disconnect();
+            }
+            else
+            {
+                hf340.Disconnect();
+            }
+            
             label_connection_status.Text = "Отключен";
             timer_1s.Stop();
 
-            foreach(var i in dic_Rows_Racers)
+            foreach (var i in dic_Rows_Racers)
                 i.Value.Deactivate();
             
         }
