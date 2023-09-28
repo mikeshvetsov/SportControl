@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace SportControl
 {
 
-    class DataGridViewRowTag : DataGridViewRow
+    class RowTagForDataGridView : DataGridViewRow
     {
         const double INTERVAL_OLD = 2000;
         internal System.Timers.Timer timer;
@@ -21,7 +21,7 @@ namespace SportControl
             } 
         }
         
-        public DataGridViewRowTag(DataGridView dataGridView, TagDT tagdt)
+        public RowTagForDataGridView(DataGridView dataGridView, TagDT tagdt)
         {
             this.tagdt = tagdt;
             MaxRSSI = tagdt.tag.RSSI;

@@ -32,7 +32,7 @@ namespace SportControl
             }
         }
     }
-    class DataGridViewRowRacer : DataGridViewRowTag
+    class DataGridViewRowRacer : RowTagForDataGridView
     {
         string Name;
         string DisplayedTime;

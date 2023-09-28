@@ -10,12 +10,12 @@ namespace SportControl
 {
     public class RFIDReaderHF340Simulator
     {
-        List<string> TID = new List<string>() { "T1", "T2", "T3", "T4", "T5", "T6"};
+        List<string> TIDList = new List<string>() { "T1", "T2", "T3", "T4", "T5", "T6"};
 
         Func<TagDT, bool> TagHandler;
         public Boolean isConnected = false;
 
-        const double INTERVAL_MSG = 1000;
+        const double INTERVAL_MSG = 500;
         internal System.Timers.Timer timer;
 
         public RFIDReaderHF340Simulator(Func<TagDT, bool> TagHandler)
@@ -44,7 +44,11 @@ namespace SportControl
         public virtual void OutPutTags(object sender, ElapsedEventArgs e)
         {
             RFIDReaderAPI.Models.Tag_Model tag = new RFIDReaderAPI.Models.Tag_Model();
-            tag.TID = "T123";
+
+            Random rnd = new Random();
+            int randIndex = rnd.Next(TIDList.Count);
+
+            tag.TID = TIDList[randIndex];
             tag.EPC = "E321";
             tag.RSSI = 10;
 

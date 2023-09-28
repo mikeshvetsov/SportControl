@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace SportControl
@@ -17,14 +18,21 @@ namespace SportControl
 
         public RFIDReaderHF340 hf340;
         public RFIDReaderHF340Simulator hf340Sim;
-        DataGridPersonManager PersonManager;
+        
+        const double INTERVAL_REMOVE_OLD_RECORDS = 1000;
+       // internal System.Timers.Timer timerRemoveOldRecords;
+
         public FormMain()
         {
             InitializeComponent();
             hf340 = new RFIDReaderHF340(TagHandler: TagHandler);
             hf340Sim = new RFIDReaderHF340Simulator(TagHandler: TagHandler);
-            PersonManager = new DataGridPersonManager(dgvPerson);
+
+           // timerRemoveOldRecords = new System.Timers.Timer(INTERVAL_REMOVE_OLD_RECORDS);
+           // timerRemoveOldRecords.Elapsed += RemoveOldRecords;
+           // timerRemoveOldRecords.Start();
         }
+
 
         delegate bool AddTag(TagDT tagdt);
         private bool TagHandler(TagDT tagdt)
@@ -47,7 +55,7 @@ namespace SportControl
                   Console.WriteLine($"id = {row.Field<long>("id")} name = {row.Field<string>("name")} family = {row.Field<string>("family")}");
               }
             */
-            PersonManager.UpdateTag(tagdt);
+            dgvPerson.UpdateTag(tagdt);
 
             /*DataGridViewRowRacer dgvr = null;
             
@@ -72,6 +80,7 @@ namespace SportControl
 
             return true;
         }
+
         private void button_connect_Click(object sender, EventArgs e)
         {
             // Подключение к считывателю
@@ -142,21 +151,9 @@ namespace SportControl
 
         }
 
-        private void timerRemoveRow_Tick(object sender, EventArgs e)
+        private void timerRemoveOldRecords_Tick(object sender, EventArgs e)
         {
-           /* lock (dic_Rows_Racers)
-            {
-                List<string> removals = new List<string>();
-                foreach (var i in dic_Rows_Racers)
-                    if (!i.Value.Racing && !i.Value.active)
-                        removals.Add(i.Key);
-                foreach (string key in removals)
-                {
-                    dataGridView_Racers.Rows.Remove(dic_Rows_Racers[key]);
-                    dic_Rows_Racers.Remove(key);
-                }
-            }
-           */
+            dgvPerson.RemoveOldRecords();
         }
     }
 }

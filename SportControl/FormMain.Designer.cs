@@ -32,13 +32,6 @@ namespace SportControl
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dgvPerson = new System.Windows.Forms.DataGridView();
-            this.TID1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RacingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Family = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button_Read = new System.Windows.Forms.Button();
             this.groupBox_ant = new System.Windows.Forms.GroupBox();
             this.checkBox_ant4 = new System.Windows.Forms.CheckBox();
@@ -51,12 +44,19 @@ namespace SportControl
             this.checkBox_Simulator = new System.Windows.Forms.CheckBox();
             this.button_connect = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.timerRemoveRow = new System.Windows.Forms.Timer(this.components);
+            this.timerRemoveOldRecords = new System.Windows.Forms.Timer(this.components);
+            this.dgvPerson = new SportControl.DataGridViewPersonTag();
+            this.TID1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RacingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Family = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).BeginInit();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -86,69 +86,6 @@ namespace SportControl
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // dgvPerson
-            // 
-            this.dgvPerson.AllowUserToAddRows = false;
-            this.dgvPerson.AllowUserToDeleteRows = false;
-            this.dgvPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPerson.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.TID1,
-            this.TID2,
-            this.RacingNumber,
-            this.Family,
-            this.FirstName,
-            this.Kid});
-            this.dgvPerson.Location = new System.Drawing.Point(8, 60);
-            this.dgvPerson.Name = "dgvPerson";
-            this.dgvPerson.ReadOnly = true;
-            this.dgvPerson.RowHeadersWidth = 25;
-            this.dgvPerson.Size = new System.Drawing.Size(1019, 474);
-            this.dgvPerson.TabIndex = 32;
-            // 
-            // TID1
-            // 
-            this.TID1.HeaderText = "TID1";
-            this.TID1.Name = "TID1";
-            this.TID1.ReadOnly = true;
-            this.TID1.Width = 250;
-            // 
-            // TID2
-            // 
-            this.TID2.HeaderText = "TID2";
-            this.TID2.Name = "TID2";
-            this.TID2.ReadOnly = true;
-            this.TID2.Width = 250;
-            // 
-            // RacingNumber
-            // 
-            this.RacingNumber.HeaderText = "Номер";
-            this.RacingNumber.Name = "RacingNumber";
-            this.RacingNumber.ReadOnly = true;
-            this.RacingNumber.Width = 50;
-            // 
-            // Family
-            // 
-            this.Family.HeaderText = "Фамилия";
-            this.Family.Name = "Family";
-            this.Family.ReadOnly = true;
-            this.Family.Width = 200;
-            // 
-            // FirstName
-            // 
-            this.FirstName.HeaderText = "Имя";
-            this.FirstName.Name = "FirstName";
-            this.FirstName.ReadOnly = true;
-            this.FirstName.Width = 200;
-            // 
-            // Kid
-            // 
-            this.Kid.HeaderText = "-18";
-            this.Kid.Name = "Kid";
-            this.Kid.ReadOnly = true;
-            this.Kid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Kid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Kid.Width = 30;
             // 
             // button_Read
             // 
@@ -284,9 +221,74 @@ namespace SportControl
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // timerRemoveRow
+            // timerRemoveOldRecords
             // 
-            this.timerRemoveRow.Tick += new System.EventHandler(this.timerRemoveRow_Tick);
+            this.timerRemoveOldRecords.Enabled = true;
+            this.timerRemoveOldRecords.Interval = 1000;
+            this.timerRemoveOldRecords.Tick += new System.EventHandler(this.timerRemoveOldRecords_Tick);
+            // 
+            // dgvPerson
+            // 
+            this.dgvPerson.AllowUserToAddRows = false;
+            this.dgvPerson.AllowUserToDeleteRows = false;
+            this.dgvPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPerson.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TID1,
+            this.TID2,
+            this.RacingNumber,
+            this.Family,
+            this.FirstName,
+            this.Kid});
+            this.dgvPerson.Location = new System.Drawing.Point(8, 60);
+            this.dgvPerson.Name = "dgvPerson";
+            this.dgvPerson.ReadOnly = true;
+            this.dgvPerson.RowHeadersWidth = 25;
+            this.dgvPerson.Size = new System.Drawing.Size(1019, 474);
+            this.dgvPerson.TabIndex = 32;
+            // 
+            // TID1
+            // 
+            this.TID1.HeaderText = "TID1";
+            this.TID1.Name = "TID1";
+            this.TID1.ReadOnly = true;
+            this.TID1.Width = 250;
+            // 
+            // TID2
+            // 
+            this.TID2.HeaderText = "TID2";
+            this.TID2.Name = "TID2";
+            this.TID2.ReadOnly = true;
+            this.TID2.Width = 250;
+            // 
+            // RacingNumber
+            // 
+            this.RacingNumber.HeaderText = "Номер";
+            this.RacingNumber.Name = "RacingNumber";
+            this.RacingNumber.ReadOnly = true;
+            this.RacingNumber.Width = 50;
+            // 
+            // Family
+            // 
+            this.Family.HeaderText = "Фамилия";
+            this.Family.Name = "Family";
+            this.Family.ReadOnly = true;
+            this.Family.Width = 200;
+            // 
+            // FirstName
+            // 
+            this.FirstName.HeaderText = "Имя";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.ReadOnly = true;
+            this.FirstName.Width = 200;
+            // 
+            // Kid
+            // 
+            this.Kid.HeaderText = "-18";
+            this.Kid.Name = "Kid";
+            this.Kid.ReadOnly = true;
+            this.Kid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Kid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Kid.Width = 30;
             // 
             // FormMain
             // 
@@ -299,10 +301,10 @@ namespace SportControl
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).EndInit();
             this.groupBox_ant.ResumeLayout(false);
             this.groupBox_ant.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -323,13 +325,13 @@ namespace SportControl
         private System.Windows.Forms.Button button_disconnect;
         private System.Windows.Forms.NumericUpDown numericUpDown_reader_port;
         private System.Windows.Forms.MaskedTextBox maskedTextBox_reader_ip;
-        private System.Windows.Forms.DataGridView dgvPerson;
+        private DataGridViewPersonTag dgvPerson;
         private System.Windows.Forms.DataGridViewTextBoxColumn TID1;
         private System.Windows.Forms.DataGridViewTextBoxColumn TID2;
         private System.Windows.Forms.DataGridViewTextBoxColumn RacingNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn Family;
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Kid;
-        private System.Windows.Forms.Timer timerRemoveRow;
+        private System.Windows.Forms.Timer timerRemoveOldRecords;
     }
 }
