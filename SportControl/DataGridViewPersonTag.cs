@@ -1,5 +1,6 @@
 ﻿/*
  * DataGridViewPersonTag - таблица отображающая метки в поле антены.
+ * Строки типа RowTagForDataGridView
  * 
  * Все метки так или иначе отображаютс в таблицах. Поэтому любая метка это строка (Row) в таблице.
  * Для понимани нахождения метки в поле антены каждая строка соответствующая метке имет таймер, который следует
@@ -16,6 +17,8 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,92 +29,97 @@ namespace SportControl
 {
     class DataGridViewPersonTag : DataGridView
     {
-        /* 
-         * У каждого частника может быть две метки. Поэтому два словаря, каждый привязывает строку к одной метке.
-         * Один словарь связывает строку с меткой1, второй с меткой2.
-         * 
-         */
-        Dictionary<String, RowTagForDataGridView> dicRowsPersonTID1;
-        Dictionary<String, RowTagForDataGridView> dicRowsPersonTID2;
+
+        Dictionary<(String,String), RowTagForDataGridView> dicRowsPersonTID;
 
         public DataGridViewPersonTag():base()
         {
-            dicRowsPersonTID1 = new Dictionary<string, RowTagForDataGridView>();
-            dicRowsPersonTID2 = new Dictionary<string, RowTagForDataGridView>();
+            dicRowsPersonTID = new Dictionary<(string, string), RowTagForDataGridView>();
         }
 
         public void RemoveOldRecords()
         {
 
-            List<RowTagForDataGridView> removals = new List<RowTagForDataGridView>();
-            String key1, key2;
+            List<(string, string)> removals = new List<(string, string)>();
 
-            foreach (RowTagForDataGridView row in Rows)
+            lock (dicRowsPersonTID)
             {
-                if (!row.active)
+                foreach (KeyValuePair<(string, string), RowTagForDataGridView> entry in dicRowsPersonTID)
+                    if (!entry.Value.active)
+                        removals.Add(entry.Key);
+
+                foreach ((string, string) key in removals)
                 {
-                    removals.Add(row);
+                    Rows.Remove(dicRowsPersonTID[key]);
+                    dicRowsPersonTID.Remove(key);   
                 }
             }
-
-            foreach (RowTagForDataGridView row in removals)
-            {
-                key1 = row.Cells["TID1"].Value?.ToString();
-                key2 = row.Cells["TID2"].Value?.ToString();
-                Rows.Remove(row);
-
-                lock (dicRowsPersonTID1)
-                {
-                    if (key1 != null && dicRowsPersonTID1.ContainsKey(key1))
-                    {
-                        dicRowsPersonTID1.Remove(key1);
-                    }
-                }
-
-                lock (dicRowsPersonTID2)
-                {
-                    if (key2 != null && dicRowsPersonTID2.ContainsKey(key2))
-                    {
-                        dicRowsPersonTID2.Remove(key2);
-                    }
-                }
-            }
-
         }
 
         public void UpdateTag(TagDT tagdt)
         {
 
-            String key = tagdt.tag.TID;
-            RowTagForDataGridView Row = null;
+            RowTagForDataGridView row = SearchRowByTID(tagdt.tag.TID);
 
-            lock (dicRowsPersonTID2)
+            if (row != null)
             {
-                if (dicRowsPersonTID2.ContainsKey(key))
+                row.UpdateTag(tagdt);
+            } 
+            else
+            {
+                lock (dicRowsPersonTID)
                 {
-                    Row = dicRowsPersonTID2[key];
-                    Row.UpdateTag(tagdt);
-                }
-                else
-                {
-                    lock (dicRowsPersonTID1)
-                    {
-                        if (dicRowsPersonTID1.ContainsKey(key))
-                        {
-                            Row = dicRowsPersonTID1[key];
-                            Row.UpdateTag(tagdt);
-                        }
-                        else
-                        {
-                            Row = new RowTagForDataGridView(this, tagdt);
-                            dicRowsPersonTID1.Add(key, Row);
+                    Program.command.CommandText = $"SELECT * FROM Person WHERE tid1 = '{tagdt.tag.TID}' OR tid2 = '{tagdt.tag.TID}'";
+                    DataTable data = new DataTable();
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(Program.command);
+                    adapter.Fill(data);
 
-                            Row.CreateCells(this, new object[] { tagdt.tag.TID });
-                            Rows.Add(Row);
-                        }
+                    row = new RowTagForDataGridView(this, tagdt);
+                    (string, string) key = ("", "");
+
+                    if (data.Rows.Count == 0)
+                    {
+                        row.CreateCells(this, new object[] { tagdt.tag.TID });
+                        key.Item1 = tagdt.tag.TID;
                     }
+                    else
+                    {
+                        DataRow rowDB = data.Rows[0];
+                        row.CreateCells(this, new object[] {
+                        rowDB.Field<string>("tid1"),
+                        rowDB.Field<string>("tid2"),
+                        rowDB.IsNull("number")?"": rowDB.Field<long>("number").ToString(),
+                        rowDB.Field<string>("family"),
+                        rowDB.Field<string>("name"),
+                        rowDB.IsNull("age")?"":rowDB.Field<long>("age").ToString(),
+                        rowDB.IsNull("id")?"":rowDB.Field<long>("id").ToString(),
+                    });
+
+                        key.Item1 = rowDB.Field<string>("tid1");
+                        key.Item2 = rowDB.Field<string>("tid2");
+                    }
+
+
+                    Rows.Add(row);
+                    dicRowsPersonTID.Add(key, row);
                 }
             }
+        }
+
+        private RowTagForDataGridView SearchRowByTID(string searchValue)
+        {
+
+            RowTagForDataGridView row = null;
+
+            foreach (KeyValuePair<(string, string), RowTagForDataGridView> entry in dicRowsPersonTID)
+            {
+                if(entry.Key.Item1 == searchValue || entry.Key.Item2 == searchValue)
+                {
+                    row = entry.Value;
+                }
+            }
+
+            return row;
         }
     }
 }

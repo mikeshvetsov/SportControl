@@ -34,6 +34,7 @@ namespace SportControl
             this.label_TimeStart = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label_TimeRace = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_StopRace
@@ -86,12 +87,22 @@ namespace SportControl
             this.label_TimeRace.TabIndex = 7;
             this.label_TimeRace.Text = "0000";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(129, 347);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "label2";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label_TimeRace);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label_TimeStart);
@@ -110,5 +121,6 @@ namespace SportControl
         public System.Windows.Forms.Label label_TimeStart;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.Label label_TimeRace;
+        private System.Windows.Forms.Label label2;
     }
 }

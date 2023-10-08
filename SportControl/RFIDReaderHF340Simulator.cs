@@ -10,12 +10,12 @@ namespace SportControl
 {
     public class RFIDReaderHF340Simulator
     {
-        List<string> TIDList = new List<string>() { "T1", "T2", "T3", "T4", "T5", "T6"};
+        List<string> TIDList = new List<string>() { "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17", "T18" };
 
         Func<TagDT, bool> TagHandler;
         public Boolean isConnected = false;
 
-        const double INTERVAL_MSG = 500;
+        const double INTERVAL_MSG = 100;
         internal System.Timers.Timer timer;
 
         public RFIDReaderHF340Simulator(Func<TagDT, bool> TagHandler)

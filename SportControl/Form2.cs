@@ -20,7 +20,7 @@ namespace SportControl
 
         private void button_StopRace_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
 
     }
