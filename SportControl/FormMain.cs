@@ -134,7 +134,9 @@ namespace SportControl
              * строки всей - все переносим в поля редактирования
              */
 
-            int i = 0;
+            if (e.RowIndex < 0)
+                return;
+
             DataGridViewRow dgvr = dgvPerson.Rows[e.RowIndex];
   
             if (dgvr.Cells["ID"].Value != null)
