@@ -32,6 +32,13 @@ namespace SportControl
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox_ID = new System.Windows.Forms.TextBox();
+            this.button_SavePerson = new System.Windows.Forms.Button();
+            this.textBox_Name = new System.Windows.Forms.TextBox();
+            this.textBox_SecondName = new System.Windows.Forms.TextBox();
+            this.textBox_Num = new System.Windows.Forms.TextBox();
+            this.textBox_TID2 = new System.Windows.Forms.TextBox();
+            this.textBox_TID1 = new System.Windows.Forms.TextBox();
             this.button_Read = new System.Windows.Forms.Button();
             this.groupBox_ant = new System.Windows.Forms.GroupBox();
             this.checkBox_ant4 = new System.Windows.Forms.CheckBox();
@@ -45,14 +52,10 @@ namespace SportControl
             this.button_connect = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.timerRemoveOldRecords = new System.Windows.Forms.Timer(this.components);
-            this.textBox_TID1 = new System.Windows.Forms.TextBox();
-            this.textBox_TID2 = new System.Windows.Forms.TextBox();
-            this.textBox_Num = new System.Windows.Forms.TextBox();
-            this.textBox_SecondName = new System.Windows.Forms.TextBox();
-            this.textBox_Name = new System.Windows.Forms.TextBox();
-            this.button_SavePerson = new System.Windows.Forms.Button();
-            this.textBox_ID = new System.Windows.Forms.TextBox();
             this.dgvPerson = new SportControl.DataGridViewPersonTag();
+            this.textBox_Age = new System.Windows.Forms.TextBox();
+            this.button_Clear = new System.Windows.Forms.Button();
+            this.flowLayoutPanel_Edit = new System.Windows.Forms.FlowLayoutPanel();
             this.TID1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RacingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +68,7 @@ namespace SportControl
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).BeginInit();
+            this.flowLayoutPanel_Edit.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -74,18 +78,12 @@ namespace SportControl
             this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1119, 614);
+            this.tabControl1.Size = new System.Drawing.Size(1119, 624);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.textBox_ID);
-            this.tabPage1.Controls.Add(this.button_SavePerson);
-            this.tabPage1.Controls.Add(this.textBox_Name);
-            this.tabPage1.Controls.Add(this.textBox_SecondName);
-            this.tabPage1.Controls.Add(this.textBox_Num);
-            this.tabPage1.Controls.Add(this.textBox_TID2);
-            this.tabPage1.Controls.Add(this.textBox_TID1);
+            this.tabPage1.Controls.Add(this.flowLayoutPanel_Edit);
             this.tabPage1.Controls.Add(this.dgvPerson);
             this.tabPage1.Controls.Add(this.button_Read);
             this.tabPage1.Controls.Add(this.groupBox_ant);
@@ -97,10 +95,63 @@ namespace SportControl
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1111, 588);
+            this.tabPage1.Size = new System.Drawing.Size(1111, 598);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // textBox_ID
+            // 
+            this.textBox_ID.Enabled = false;
+            this.textBox_ID.Location = new System.Drawing.Point(1028, 3);
+            this.textBox_ID.Name = "textBox_ID";
+            this.textBox_ID.Size = new System.Drawing.Size(58, 20);
+            this.textBox_ID.TabIndex = 39;
+            // 
+            // button_SavePerson
+            // 
+            this.button_SavePerson.Location = new System.Drawing.Point(3, 29);
+            this.button_SavePerson.Name = "button_SavePerson";
+            this.button_SavePerson.Size = new System.Drawing.Size(75, 23);
+            this.button_SavePerson.TabIndex = 38;
+            this.button_SavePerson.Text = "Сохранить";
+            this.button_SavePerson.UseVisualStyleBackColor = true;
+            this.button_SavePerson.Click += new System.EventHandler(this.button_SavePerson_Click);
+            // 
+            // textBox_Name
+            // 
+            this.textBox_Name.Location = new System.Drawing.Point(797, 3);
+            this.textBox_Name.Name = "textBox_Name";
+            this.textBox_Name.Size = new System.Drawing.Size(182, 20);
+            this.textBox_Name.TabIndex = 37;
+            // 
+            // textBox_SecondName
+            // 
+            this.textBox_SecondName.Location = new System.Drawing.Point(610, 3);
+            this.textBox_SecondName.Name = "textBox_SecondName";
+            this.textBox_SecondName.Size = new System.Drawing.Size(181, 20);
+            this.textBox_SecondName.TabIndex = 36;
+            // 
+            // textBox_Num
+            // 
+            this.textBox_Num.Location = new System.Drawing.Point(533, 3);
+            this.textBox_Num.Name = "textBox_Num";
+            this.textBox_Num.Size = new System.Drawing.Size(71, 20);
+            this.textBox_Num.TabIndex = 35;
+            // 
+            // textBox_TID2
+            // 
+            this.textBox_TID2.Location = new System.Drawing.Point(263, 3);
+            this.textBox_TID2.Name = "textBox_TID2";
+            this.textBox_TID2.Size = new System.Drawing.Size(264, 20);
+            this.textBox_TID2.TabIndex = 34;
+            // 
+            // textBox_TID1
+            // 
+            this.textBox_TID1.Location = new System.Drawing.Point(3, 3);
+            this.textBox_TID1.Name = "textBox_TID1";
+            this.textBox_TID1.Size = new System.Drawing.Size(254, 20);
+            this.textBox_TID1.TabIndex = 33;
             // 
             // button_Read
             // 
@@ -242,59 +293,6 @@ namespace SportControl
             this.timerRemoveOldRecords.Interval = 1000;
             this.timerRemoveOldRecords.Tick += new System.EventHandler(this.timerRemoveOldRecords_Tick);
             // 
-            // textBox_TID1
-            // 
-            this.textBox_TID1.Location = new System.Drawing.Point(105, 540);
-            this.textBox_TID1.Name = "textBox_TID1";
-            this.textBox_TID1.Size = new System.Drawing.Size(240, 20);
-            this.textBox_TID1.TabIndex = 33;
-            // 
-            // textBox_TID2
-            // 
-            this.textBox_TID2.Location = new System.Drawing.Point(351, 540);
-            this.textBox_TID2.Name = "textBox_TID2";
-            this.textBox_TID2.Size = new System.Drawing.Size(240, 20);
-            this.textBox_TID2.TabIndex = 34;
-            // 
-            // textBox_Num
-            // 
-            this.textBox_Num.Location = new System.Drawing.Point(597, 540);
-            this.textBox_Num.Name = "textBox_Num";
-            this.textBox_Num.Size = new System.Drawing.Size(71, 20);
-            this.textBox_Num.TabIndex = 35;
-            // 
-            // textBox_SecondName
-            // 
-            this.textBox_SecondName.Location = new System.Drawing.Point(674, 540);
-            this.textBox_SecondName.Name = "textBox_SecondName";
-            this.textBox_SecondName.Size = new System.Drawing.Size(171, 20);
-            this.textBox_SecondName.TabIndex = 36;
-            // 
-            // textBox_Name
-            // 
-            this.textBox_Name.Location = new System.Drawing.Point(851, 540);
-            this.textBox_Name.Name = "textBox_Name";
-            this.textBox_Name.Size = new System.Drawing.Size(171, 20);
-            this.textBox_Name.TabIndex = 37;
-            // 
-            // button_SavePerson
-            // 
-            this.button_SavePerson.Location = new System.Drawing.Point(1028, 537);
-            this.button_SavePerson.Name = "button_SavePerson";
-            this.button_SavePerson.Size = new System.Drawing.Size(75, 23);
-            this.button_SavePerson.TabIndex = 38;
-            this.button_SavePerson.Text = "Сохранить";
-            this.button_SavePerson.UseVisualStyleBackColor = true;
-            this.button_SavePerson.Click += new System.EventHandler(this.button_SavePerson_Click);
-            // 
-            // textBox_ID
-            // 
-            this.textBox_ID.Enabled = false;
-            this.textBox_ID.Location = new System.Drawing.Point(14, 540);
-            this.textBox_ID.Name = "textBox_ID";
-            this.textBox_ID.Size = new System.Drawing.Size(85, 20);
-            this.textBox_ID.TabIndex = 39;
-            // 
             // dgvPerson
             // 
             this.dgvPerson.AllowUserToAddRows = false;
@@ -315,6 +313,39 @@ namespace SportControl
             this.dgvPerson.Size = new System.Drawing.Size(1097, 474);
             this.dgvPerson.TabIndex = 32;
             this.dgvPerson.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPerson_CellMouseDoubleClick);
+            // 
+            // textBox_Age
+            // 
+            this.textBox_Age.Location = new System.Drawing.Point(985, 3);
+            this.textBox_Age.Name = "textBox_Age";
+            this.textBox_Age.Size = new System.Drawing.Size(37, 20);
+            this.textBox_Age.TabIndex = 40;
+            // 
+            // button_Clear
+            // 
+            this.button_Clear.Location = new System.Drawing.Point(84, 29);
+            this.button_Clear.Name = "button_Clear";
+            this.button_Clear.Size = new System.Drawing.Size(75, 23);
+            this.button_Clear.TabIndex = 41;
+            this.button_Clear.Text = "Очистить";
+            this.button_Clear.UseVisualStyleBackColor = true;
+            this.button_Clear.Click += new System.EventHandler(this.button_Clear_Click);
+            // 
+            // flowLayoutPanel_Edit
+            // 
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_TID1);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_TID2);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Num);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_SecondName);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Name);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Age);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_ID);
+            this.flowLayoutPanel_Edit.Controls.Add(this.button_SavePerson);
+            this.flowLayoutPanel_Edit.Controls.Add(this.button_Clear);
+            this.flowLayoutPanel_Edit.Location = new System.Drawing.Point(8, 535);
+            this.flowLayoutPanel_Edit.Name = "flowLayoutPanel_Edit";
+            this.flowLayoutPanel_Edit.Size = new System.Drawing.Size(1097, 52);
+            this.flowLayoutPanel_Edit.TabIndex = 42;
             // 
             // TID1
             // 
@@ -364,12 +395,13 @@ namespace SportControl
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
+            this.ID.Width = 80;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1122, 613);
+            this.ClientSize = new System.Drawing.Size(1122, 622);
             this.Controls.Add(this.tabControl1);
             this.Name = "FormMain";
             this.Text = "FormMain";
@@ -380,6 +412,8 @@ namespace SportControl
             this.groupBox_ant.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).EndInit();
+            this.flowLayoutPanel_Edit.ResumeLayout(false);
+            this.flowLayoutPanel_Edit.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -409,6 +443,9 @@ namespace SportControl
         private System.Windows.Forms.TextBox textBox_TID1;
         private System.Windows.Forms.Button button_SavePerson;
         private System.Windows.Forms.TextBox textBox_ID;
+        private System.Windows.Forms.TextBox textBox_Age;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Edit;
+        private System.Windows.Forms.Button button_Clear;
         private System.Windows.Forms.DataGridViewTextBoxColumn TID1;
         private System.Windows.Forms.DataGridViewTextBoxColumn TID2;
         private System.Windows.Forms.DataGridViewTextBoxColumn RacingNumber;

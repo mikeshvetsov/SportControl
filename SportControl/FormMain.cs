@@ -147,6 +147,7 @@ namespace SportControl
                 textBox_Num.Text = dgvr.Cells["RacingNumber"].Value.ToString();
                 textBox_SecondName.Text = dgvr.Cells["SecondName"].Value.ToString();
                 textBox_Name.Text = dgvr.Cells["FirstName"].Value.ToString();
+                textBox_Age.Text = dgvr.Cells["age"].Value.ToString();
             } else
             {
                 if (textBox_TID1.Text.Length == 0)
@@ -193,27 +194,37 @@ namespace SportControl
             if (textBox_ID.Text.Length > 0)
             {
                 // запись в бд существует, обновляем
-                Program.command.CommandText = "UPDATE Person SET name=:name, family=:family, number=:number, tid1=:tid1, tid2=:tid2 WHERE ID=:id";
+                Program.command.CommandText = "UPDATE Person SET name=:name, family=:family, number=:number, tid1=:tid1, tid2=:tid2, age=:age WHERE ID=:id";
                 Program.command.Parameters.AddWithValue("name", textBox_Name.Text);
                 Program.command.Parameters.AddWithValue("family", textBox_SecondName.Text);
                 Program.command.Parameters.AddWithValue("number", textBox_Num.Text);
                 Program.command.Parameters.AddWithValue("tid1", textBox_TID1.Text);
                 Program.command.Parameters.AddWithValue("tid2", textBox_TID2.Text);
                 Program.command.Parameters.AddWithValue("id", textBox_ID.Text);
+                Program.command.Parameters.AddWithValue("age", textBox_Age.Text);
                 Program.command.ExecuteNonQuery();
             } 
             else
             {
-                Program.command.CommandText = "INSERT INTO Person (name, family, number, tid1, tid2) VALUES (:name, :family, :number, :tid1, :tid2)";
+                Program.command.CommandText = "INSERT INTO Person (name, family, number, tid1, tid2, age) VALUES (:name, :family, :number, :tid1, :tid2, :age)";
                 Program.command.Parameters.AddWithValue("name", textBox_Name.Text);
                 Program.command.Parameters.AddWithValue("family", textBox_SecondName.Text);
                 Program.command.Parameters.AddWithValue("number", textBox_Num.Text);
                 Program.command.Parameters.AddWithValue("tid1", textBox_TID1.Text);
                 Program.command.Parameters.AddWithValue("tid2", textBox_TID2.Text);
+                Program.command.Parameters.AddWithValue("age", textBox_Age.Text);
                 Program.command.ExecuteNonQuery();
             }
 
 
+        }
+
+        private void button_Clear_Click(object sender, EventArgs e)
+        {
+            foreach (TextBox txtBox in flowLayoutPanel_Edit.Controls.OfType<TextBox>())
+            {
+                txtBox.Clear();
+            }
         }
     }
 }
