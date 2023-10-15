@@ -56,6 +56,15 @@ namespace SportControl
             }
         }
 
+        public void ClearData()
+        {
+            lock (dicRowsPersonTID)
+            {
+                dicRowsPersonTID.Clear();
+                Rows.Clear();
+            }
+        }
+
         public void UpdateTag(TagDT tagdt)
         {
 

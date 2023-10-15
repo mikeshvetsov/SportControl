@@ -32,30 +32,7 @@ namespace SportControl
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.textBox_ID = new System.Windows.Forms.TextBox();
-            this.button_SavePerson = new System.Windows.Forms.Button();
-            this.textBox_Name = new System.Windows.Forms.TextBox();
-            this.textBox_SecondName = new System.Windows.Forms.TextBox();
-            this.textBox_Num = new System.Windows.Forms.TextBox();
-            this.textBox_TID2 = new System.Windows.Forms.TextBox();
-            this.textBox_TID1 = new System.Windows.Forms.TextBox();
-            this.button_Read = new System.Windows.Forms.Button();
-            this.groupBox_ant = new System.Windows.Forms.GroupBox();
-            this.checkBox_ant4 = new System.Windows.Forms.CheckBox();
-            this.checkBox_ant3 = new System.Windows.Forms.CheckBox();
-            this.checkBox_ant2 = new System.Windows.Forms.CheckBox();
-            this.checkBox_ant1 = new System.Windows.Forms.CheckBox();
-            this.button_disconnect = new System.Windows.Forms.Button();
-            this.numericUpDown_reader_port = new System.Windows.Forms.NumericUpDown();
-            this.maskedTextBox_reader_ip = new System.Windows.Forms.MaskedTextBox();
-            this.checkBox_Simulator = new System.Windows.Forms.CheckBox();
-            this.button_connect = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.timerRemoveOldRecords = new System.Windows.Forms.Timer(this.components);
             this.dgvPerson = new SportControl.DataGridViewPersonTag();
-            this.textBox_Age = new System.Windows.Forms.TextBox();
-            this.button_Clear = new System.Windows.Forms.Button();
-            this.flowLayoutPanel_Edit = new System.Windows.Forms.FlowLayoutPanel();
             this.TID1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RacingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,11 +40,37 @@ namespace SportControl
             this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox_ant = new System.Windows.Forms.GroupBox();
+            this.checkBox_ant4 = new System.Windows.Forms.CheckBox();
+            this.checkBox_ant3 = new System.Windows.Forms.CheckBox();
+            this.checkBox_ant2 = new System.Windows.Forms.CheckBox();
+            this.checkBox_ant1 = new System.Windows.Forms.CheckBox();
+            this.button_Read = new System.Windows.Forms.Button();
+            this.maskedTextBox_reader_ip = new System.Windows.Forms.MaskedTextBox();
+            this.checkBox_Simulator = new System.Windows.Forms.CheckBox();
+            this.button_disconnect = new System.Windows.Forms.Button();
+            this.button_connect = new System.Windows.Forms.Button();
+            this.numericUpDown_reader_port = new System.Windows.Forms.NumericUpDown();
+            this.flowLayoutPanel_Edit = new System.Windows.Forms.FlowLayoutPanel();
+            this.textBox_TID1 = new System.Windows.Forms.TextBox();
+            this.textBox_TID2 = new System.Windows.Forms.TextBox();
+            this.textBox_Num = new System.Windows.Forms.TextBox();
+            this.textBox_SecondName = new System.Windows.Forms.TextBox();
+            this.textBox_Name = new System.Windows.Forms.TextBox();
+            this.textBox_Age = new System.Windows.Forms.TextBox();
+            this.textBox_ID = new System.Windows.Forms.TextBox();
+            this.button_SavePerson = new System.Windows.Forms.Button();
+            this.button_Clear = new System.Windows.Forms.Button();
+            this.timerRemoveOldRecords = new System.Windows.Forms.Timer(this.components);
+            this.comboBox_PersonDataSource = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).BeginInit();
             this.flowLayoutPanel_Edit.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,93 +78,123 @@ namespace SportControl
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1119, 624);
+            this.tabControl1.Size = new System.Drawing.Size(1119, 607);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.flowLayoutPanel_Edit);
+            this.tabPage1.Controls.Add(this.comboBox_PersonDataSource);
             this.tabPage1.Controls.Add(this.dgvPerson);
-            this.tabPage1.Controls.Add(this.button_Read);
-            this.tabPage1.Controls.Add(this.groupBox_ant);
-            this.tabPage1.Controls.Add(this.button_disconnect);
-            this.tabPage1.Controls.Add(this.numericUpDown_reader_port);
-            this.tabPage1.Controls.Add(this.maskedTextBox_reader_ip);
-            this.tabPage1.Controls.Add(this.checkBox_Simulator);
-            this.tabPage1.Controls.Add(this.button_connect);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1111, 598);
+            this.tabPage1.Size = new System.Drawing.Size(1111, 581);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // textBox_ID
+            // dgvPerson
             // 
-            this.textBox_ID.Enabled = false;
-            this.textBox_ID.Location = new System.Drawing.Point(1028, 3);
-            this.textBox_ID.Name = "textBox_ID";
-            this.textBox_ID.Size = new System.Drawing.Size(58, 20);
-            this.textBox_ID.TabIndex = 39;
+            this.dgvPerson.AllowUserToAddRows = false;
+            this.dgvPerson.AllowUserToDeleteRows = false;
+            this.dgvPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPerson.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TID1,
+            this.TID2,
+            this.RacingNumber,
+            this.SecondName,
+            this.FirstName,
+            this.Age,
+            this.ID});
+            this.dgvPerson.Location = new System.Drawing.Point(8, 40);
+            this.dgvPerson.Name = "dgvPerson";
+            this.dgvPerson.ReadOnly = true;
+            this.dgvPerson.RowHeadersWidth = 25;
+            this.dgvPerson.Size = new System.Drawing.Size(1097, 473);
+            this.dgvPerson.TabIndex = 32;
+            this.dgvPerson.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPerson_CellMouseDoubleClick);
             // 
-            // button_SavePerson
+            // TID1
             // 
-            this.button_SavePerson.Location = new System.Drawing.Point(3, 29);
-            this.button_SavePerson.Name = "button_SavePerson";
-            this.button_SavePerson.Size = new System.Drawing.Size(75, 23);
-            this.button_SavePerson.TabIndex = 38;
-            this.button_SavePerson.Text = "Сохранить";
-            this.button_SavePerson.UseVisualStyleBackColor = true;
-            this.button_SavePerson.Click += new System.EventHandler(this.button_SavePerson_Click);
+            this.TID1.HeaderText = "TID1";
+            this.TID1.Name = "TID1";
+            this.TID1.ReadOnly = true;
+            this.TID1.Width = 250;
             // 
-            // textBox_Name
+            // TID2
             // 
-            this.textBox_Name.Location = new System.Drawing.Point(797, 3);
-            this.textBox_Name.Name = "textBox_Name";
-            this.textBox_Name.Size = new System.Drawing.Size(182, 20);
-            this.textBox_Name.TabIndex = 37;
+            this.TID2.HeaderText = "TID2";
+            this.TID2.Name = "TID2";
+            this.TID2.ReadOnly = true;
+            this.TID2.Width = 250;
             // 
-            // textBox_SecondName
+            // RacingNumber
             // 
-            this.textBox_SecondName.Location = new System.Drawing.Point(610, 3);
-            this.textBox_SecondName.Name = "textBox_SecondName";
-            this.textBox_SecondName.Size = new System.Drawing.Size(181, 20);
-            this.textBox_SecondName.TabIndex = 36;
+            this.RacingNumber.HeaderText = "Номер";
+            this.RacingNumber.Name = "RacingNumber";
+            this.RacingNumber.ReadOnly = true;
+            this.RacingNumber.Width = 50;
             // 
-            // textBox_Num
+            // SecondName
             // 
-            this.textBox_Num.Location = new System.Drawing.Point(533, 3);
-            this.textBox_Num.Name = "textBox_Num";
-            this.textBox_Num.Size = new System.Drawing.Size(71, 20);
-            this.textBox_Num.TabIndex = 35;
+            this.SecondName.HeaderText = "Фамилия";
+            this.SecondName.Name = "SecondName";
+            this.SecondName.ReadOnly = true;
+            this.SecondName.Width = 200;
             // 
-            // textBox_TID2
+            // FirstName
             // 
-            this.textBox_TID2.Location = new System.Drawing.Point(263, 3);
-            this.textBox_TID2.Name = "textBox_TID2";
-            this.textBox_TID2.Size = new System.Drawing.Size(264, 20);
-            this.textBox_TID2.TabIndex = 34;
+            this.FirstName.HeaderText = "Имя";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.ReadOnly = true;
+            this.FirstName.Width = 200;
             // 
-            // textBox_TID1
+            // Age
             // 
-            this.textBox_TID1.Location = new System.Drawing.Point(3, 3);
-            this.textBox_TID1.Name = "textBox_TID1";
-            this.textBox_TID1.Size = new System.Drawing.Size(254, 20);
-            this.textBox_TID1.TabIndex = 33;
+            this.Age.HeaderText = "Age";
+            this.Age.Name = "Age";
+            this.Age.ReadOnly = true;
+            this.Age.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Age.Width = 30;
             // 
-            // button_Read
+            // ID
             // 
-            this.button_Read.Location = new System.Drawing.Point(569, 18);
-            this.button_Read.Margin = new System.Windows.Forms.Padding(1);
-            this.button_Read.Name = "button_Read";
-            this.button_Read.Size = new System.Drawing.Size(86, 23);
-            this.button_Read.TabIndex = 31;
-            this.button_Read.Text = "Читать";
-            this.button_Read.UseVisualStyleBackColor = true;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 80;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1111, 598);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.groupBox_ant);
+            this.tabPage3.Controls.Add(this.button_Read);
+            this.tabPage3.Controls.Add(this.maskedTextBox_reader_ip);
+            this.tabPage3.Controls.Add(this.checkBox_Simulator);
+            this.tabPage3.Controls.Add(this.button_disconnect);
+            this.tabPage3.Controls.Add(this.button_connect);
+            this.tabPage3.Controls.Add(this.numericUpDown_reader_port);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1111, 598);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // groupBox_ant
             // 
@@ -169,7 +202,7 @@ namespace SportControl
             this.groupBox_ant.Controls.Add(this.checkBox_ant3);
             this.groupBox_ant.Controls.Add(this.checkBox_ant2);
             this.groupBox_ant.Controls.Add(this.checkBox_ant1);
-            this.groupBox_ant.Location = new System.Drawing.Point(8, 6);
+            this.groupBox_ant.Location = new System.Drawing.Point(11, 38);
             this.groupBox_ant.Name = "groupBox_ant";
             this.groupBox_ant.Size = new System.Drawing.Size(228, 48);
             this.groupBox_ant.TabIndex = 30;
@@ -222,9 +255,37 @@ namespace SportControl
             this.checkBox_ant1.Text = "Ант1";
             this.checkBox_ant1.UseVisualStyleBackColor = true;
             // 
+            // button_Read
+            // 
+            this.button_Read.Location = new System.Drawing.Point(587, 51);
+            this.button_Read.Margin = new System.Windows.Forms.Padding(1);
+            this.button_Read.Name = "button_Read";
+            this.button_Read.Size = new System.Drawing.Size(86, 23);
+            this.button_Read.TabIndex = 31;
+            this.button_Read.Text = "Читать";
+            this.button_Read.UseVisualStyleBackColor = true;
+            // 
+            // maskedTextBox_reader_ip
+            // 
+            this.maskedTextBox_reader_ip.Location = new System.Drawing.Point(256, 55);
+            this.maskedTextBox_reader_ip.Name = "maskedTextBox_reader_ip";
+            this.maskedTextBox_reader_ip.Size = new System.Drawing.Size(88, 20);
+            this.maskedTextBox_reader_ip.TabIndex = 27;
+            this.maskedTextBox_reader_ip.Text = "192.168.1.116";
+            // 
+            // checkBox_Simulator
+            // 
+            this.checkBox_Simulator.AutoSize = true;
+            this.checkBox_Simulator.Location = new System.Drawing.Point(411, 57);
+            this.checkBox_Simulator.Name = "checkBox_Simulator";
+            this.checkBox_Simulator.Size = new System.Drawing.Size(81, 17);
+            this.checkBox_Simulator.TabIndex = 26;
+            this.checkBox_Simulator.Text = "Симулятор";
+            this.checkBox_Simulator.UseVisualStyleBackColor = true;
+            // 
             // button_disconnect
             // 
-            this.button_disconnect.Location = new System.Drawing.Point(659, 18);
+            this.button_disconnect.Location = new System.Drawing.Point(677, 51);
             this.button_disconnect.Name = "button_disconnect";
             this.button_disconnect.Size = new System.Drawing.Size(85, 23);
             this.button_disconnect.TabIndex = 29;
@@ -232,9 +293,19 @@ namespace SportControl
             this.button_disconnect.UseVisualStyleBackColor = true;
             this.button_disconnect.Click += new System.EventHandler(this.button_disconnect_Click);
             // 
+            // button_connect
+            // 
+            this.button_connect.Location = new System.Drawing.Point(498, 51);
+            this.button_connect.Name = "button_connect";
+            this.button_connect.Size = new System.Drawing.Size(85, 23);
+            this.button_connect.TabIndex = 25;
+            this.button_connect.Text = "Подключить";
+            this.button_connect.UseVisualStyleBackColor = true;
+            this.button_connect.Click += new System.EventHandler(this.button_connect_Click);
+            // 
             // numericUpDown_reader_port
             // 
-            this.numericUpDown_reader_port.Location = new System.Drawing.Point(332, 23);
+            this.numericUpDown_reader_port.Location = new System.Drawing.Point(350, 56);
             this.numericUpDown_reader_port.Maximum = new decimal(new int[] {
             65000,
             0,
@@ -249,88 +320,6 @@ namespace SportControl
             0,
             0});
             // 
-            // maskedTextBox_reader_ip
-            // 
-            this.maskedTextBox_reader_ip.Location = new System.Drawing.Point(238, 22);
-            this.maskedTextBox_reader_ip.Name = "maskedTextBox_reader_ip";
-            this.maskedTextBox_reader_ip.Size = new System.Drawing.Size(88, 20);
-            this.maskedTextBox_reader_ip.TabIndex = 27;
-            this.maskedTextBox_reader_ip.Text = "192.168.1.116";
-            // 
-            // checkBox_Simulator
-            // 
-            this.checkBox_Simulator.AutoSize = true;
-            this.checkBox_Simulator.Location = new System.Drawing.Point(393, 24);
-            this.checkBox_Simulator.Name = "checkBox_Simulator";
-            this.checkBox_Simulator.Size = new System.Drawing.Size(81, 17);
-            this.checkBox_Simulator.TabIndex = 26;
-            this.checkBox_Simulator.Text = "Симулятор";
-            this.checkBox_Simulator.UseVisualStyleBackColor = true;
-            // 
-            // button_connect
-            // 
-            this.button_connect.Location = new System.Drawing.Point(480, 18);
-            this.button_connect.Name = "button_connect";
-            this.button_connect.Size = new System.Drawing.Size(85, 23);
-            this.button_connect.TabIndex = 25;
-            this.button_connect.Text = "Подключить";
-            this.button_connect.UseVisualStyleBackColor = true;
-            this.button_connect.Click += new System.EventHandler(this.button_connect_Click);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1111, 588);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // timerRemoveOldRecords
-            // 
-            this.timerRemoveOldRecords.Enabled = true;
-            this.timerRemoveOldRecords.Interval = 1000;
-            this.timerRemoveOldRecords.Tick += new System.EventHandler(this.timerRemoveOldRecords_Tick);
-            // 
-            // dgvPerson
-            // 
-            this.dgvPerson.AllowUserToAddRows = false;
-            this.dgvPerson.AllowUserToDeleteRows = false;
-            this.dgvPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPerson.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.TID1,
-            this.TID2,
-            this.RacingNumber,
-            this.SecondName,
-            this.FirstName,
-            this.Age,
-            this.ID});
-            this.dgvPerson.Location = new System.Drawing.Point(8, 60);
-            this.dgvPerson.Name = "dgvPerson";
-            this.dgvPerson.ReadOnly = true;
-            this.dgvPerson.RowHeadersWidth = 25;
-            this.dgvPerson.Size = new System.Drawing.Size(1097, 474);
-            this.dgvPerson.TabIndex = 32;
-            this.dgvPerson.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPerson_CellMouseDoubleClick);
-            // 
-            // textBox_Age
-            // 
-            this.textBox_Age.Location = new System.Drawing.Point(985, 3);
-            this.textBox_Age.Name = "textBox_Age";
-            this.textBox_Age.Size = new System.Drawing.Size(37, 20);
-            this.textBox_Age.TabIndex = 40;
-            // 
-            // button_Clear
-            // 
-            this.button_Clear.Location = new System.Drawing.Point(84, 29);
-            this.button_Clear.Name = "button_Clear";
-            this.button_Clear.Size = new System.Drawing.Size(75, 23);
-            this.button_Clear.TabIndex = 41;
-            this.button_Clear.Text = "Очистить";
-            this.button_Clear.UseVisualStyleBackColor = true;
-            this.button_Clear.Click += new System.EventHandler(this.button_Clear_Click);
-            // 
             // flowLayoutPanel_Edit
             // 
             this.flowLayoutPanel_Edit.Controls.Add(this.textBox_TID1);
@@ -342,76 +331,115 @@ namespace SportControl
             this.flowLayoutPanel_Edit.Controls.Add(this.textBox_ID);
             this.flowLayoutPanel_Edit.Controls.Add(this.button_SavePerson);
             this.flowLayoutPanel_Edit.Controls.Add(this.button_Clear);
-            this.flowLayoutPanel_Edit.Location = new System.Drawing.Point(8, 535);
+            this.flowLayoutPanel_Edit.Location = new System.Drawing.Point(8, 519);
             this.flowLayoutPanel_Edit.Name = "flowLayoutPanel_Edit";
             this.flowLayoutPanel_Edit.Size = new System.Drawing.Size(1097, 52);
             this.flowLayoutPanel_Edit.TabIndex = 42;
             // 
-            // TID1
+            // textBox_TID1
             // 
-            this.TID1.HeaderText = "TID1";
-            this.TID1.Name = "TID1";
-            this.TID1.ReadOnly = true;
-            this.TID1.Width = 250;
+            this.textBox_TID1.Location = new System.Drawing.Point(3, 3);
+            this.textBox_TID1.Name = "textBox_TID1";
+            this.textBox_TID1.Size = new System.Drawing.Size(254, 20);
+            this.textBox_TID1.TabIndex = 33;
             // 
-            // TID2
+            // textBox_TID2
             // 
-            this.TID2.HeaderText = "TID2";
-            this.TID2.Name = "TID2";
-            this.TID2.ReadOnly = true;
-            this.TID2.Width = 250;
+            this.textBox_TID2.Location = new System.Drawing.Point(263, 3);
+            this.textBox_TID2.Name = "textBox_TID2";
+            this.textBox_TID2.Size = new System.Drawing.Size(264, 20);
+            this.textBox_TID2.TabIndex = 34;
             // 
-            // RacingNumber
+            // textBox_Num
             // 
-            this.RacingNumber.HeaderText = "Номер";
-            this.RacingNumber.Name = "RacingNumber";
-            this.RacingNumber.ReadOnly = true;
-            this.RacingNumber.Width = 50;
+            this.textBox_Num.Location = new System.Drawing.Point(533, 3);
+            this.textBox_Num.Name = "textBox_Num";
+            this.textBox_Num.Size = new System.Drawing.Size(71, 20);
+            this.textBox_Num.TabIndex = 35;
             // 
-            // SecondName
+            // textBox_SecondName
             // 
-            this.SecondName.HeaderText = "Фамилия";
-            this.SecondName.Name = "SecondName";
-            this.SecondName.ReadOnly = true;
-            this.SecondName.Width = 200;
+            this.textBox_SecondName.Location = new System.Drawing.Point(610, 3);
+            this.textBox_SecondName.Name = "textBox_SecondName";
+            this.textBox_SecondName.Size = new System.Drawing.Size(181, 20);
+            this.textBox_SecondName.TabIndex = 36;
             // 
-            // FirstName
+            // textBox_Name
             // 
-            this.FirstName.HeaderText = "Имя";
-            this.FirstName.Name = "FirstName";
-            this.FirstName.ReadOnly = true;
-            this.FirstName.Width = 200;
+            this.textBox_Name.Location = new System.Drawing.Point(797, 3);
+            this.textBox_Name.Name = "textBox_Name";
+            this.textBox_Name.Size = new System.Drawing.Size(182, 20);
+            this.textBox_Name.TabIndex = 37;
             // 
-            // Age
+            // textBox_Age
             // 
-            this.Age.HeaderText = "Age";
-            this.Age.Name = "Age";
-            this.Age.ReadOnly = true;
-            this.Age.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Age.Width = 30;
+            this.textBox_Age.Location = new System.Drawing.Point(985, 3);
+            this.textBox_Age.Name = "textBox_Age";
+            this.textBox_Age.Size = new System.Drawing.Size(37, 20);
+            this.textBox_Age.TabIndex = 40;
             // 
-            // ID
+            // textBox_ID
             // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 80;
+            this.textBox_ID.Enabled = false;
+            this.textBox_ID.Location = new System.Drawing.Point(1028, 3);
+            this.textBox_ID.Name = "textBox_ID";
+            this.textBox_ID.Size = new System.Drawing.Size(58, 20);
+            this.textBox_ID.TabIndex = 39;
+            // 
+            // button_SavePerson
+            // 
+            this.button_SavePerson.Location = new System.Drawing.Point(3, 29);
+            this.button_SavePerson.Name = "button_SavePerson";
+            this.button_SavePerson.Size = new System.Drawing.Size(75, 23);
+            this.button_SavePerson.TabIndex = 38;
+            this.button_SavePerson.Text = "Сохранить";
+            this.button_SavePerson.UseVisualStyleBackColor = true;
+            this.button_SavePerson.Click += new System.EventHandler(this.button_SavePerson_Click);
+            // 
+            // button_Clear
+            // 
+            this.button_Clear.Location = new System.Drawing.Point(84, 29);
+            this.button_Clear.Name = "button_Clear";
+            this.button_Clear.Size = new System.Drawing.Size(75, 23);
+            this.button_Clear.TabIndex = 41;
+            this.button_Clear.Text = "Очистить";
+            this.button_Clear.UseVisualStyleBackColor = true;
+            this.button_Clear.Click += new System.EventHandler(this.button_Clear_Click);
+            // 
+            // timerRemoveOldRecords
+            // 
+            this.timerRemoveOldRecords.Enabled = true;
+            this.timerRemoveOldRecords.Interval = 1000;
+            this.timerRemoveOldRecords.Tick += new System.EventHandler(this.timerRemoveOldRecords_Tick);
+            // 
+            // comboBox_PersonDataSource
+            // 
+            this.comboBox_PersonDataSource.FormattingEnabled = true;
+            this.comboBox_PersonDataSource.Items.AddRange(new object[] {
+            "Файл",
+            "Считыватель"});
+            this.comboBox_PersonDataSource.Location = new System.Drawing.Point(8, 8);
+            this.comboBox_PersonDataSource.Name = "comboBox_PersonDataSource";
+            this.comboBox_PersonDataSource.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_PersonDataSource.TabIndex = 35;
+            this.comboBox_PersonDataSource.SelectedValueChanged += new System.EventHandler(this.comboBox_PersonDataSource_SelectedValueChanged);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1122, 622);
+            this.ClientSize = new System.Drawing.Size(1249, 615);
             this.Controls.Add(this.tabControl1);
             this.Name = "FormMain";
             this.Text = "FormMain";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.groupBox_ant.ResumeLayout(false);
             this.groupBox_ant.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).EndInit();
             this.flowLayoutPanel_Edit.ResumeLayout(false);
             this.flowLayoutPanel_Edit.PerformLayout();
             this.ResumeLayout(false);
@@ -453,5 +481,7 @@ namespace SportControl
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Age;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ComboBox comboBox_PersonDataSource;
     }
 }

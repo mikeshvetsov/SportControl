@@ -44,7 +44,10 @@ namespace SportControl
                 return false;
             }
 
-            dgvPerson.UpdateTag(tagdt);
+            if (comboBox_PersonDataSource.SelectedIndex == 1)
+            {
+                dgvPerson.UpdateTag(tagdt);
+            }
 
             return true;
         }
@@ -137,7 +140,8 @@ namespace SportControl
             if (e.RowIndex < 0)
                 return;
 
-            DataGridViewRow dgvr = dgvPerson.Rows[e.RowIndex];
+            DataGridViewPersonTag dgv = sender as DataGridViewPersonTag;
+            DataGridViewRow dgvr = dgv.Rows[e.RowIndex];
   
             if (dgvr.Cells["ID"].Value != null)
             {
@@ -224,6 +228,36 @@ namespace SportControl
             foreach (TextBox txtBox in flowLayoutPanel_Edit.Controls.OfType<TextBox>())
             {
                 txtBox.Clear();
+            }
+        }
+
+        private void comboBox_PersonDataSource_SelectedValueChanged(object sender, EventArgs e)
+        {
+            dgvPerson.ClearData();
+            
+            if (comboBox_PersonDataSource.SelectedIndex == 0)
+            {
+                Program.command.CommandText = $"SELECT * FROM Person";
+                DataTable data = new DataTable();
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(Program.command);
+                adapter.Fill(data);
+
+                foreach (DataRow rowDB in data.Rows)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dgvPerson, new object[] {
+                        rowDB.Field<string>("tid1"),
+                        rowDB.Field<string>("tid2"),
+                        rowDB.IsNull("number")?"": rowDB.Field<long>("number").ToString(),
+                        rowDB.Field<string>("family"),
+                        rowDB.Field<string>("name"),
+                        rowDB.IsNull("age")?"":rowDB.Field<long>("age").ToString(),
+                        rowDB.IsNull("id")?"":rowDB.Field<long>("id").ToString(),
+                    });
+
+                    dgvPerson.Rows.Add(row);
+                }
+
             }
         }
     }
