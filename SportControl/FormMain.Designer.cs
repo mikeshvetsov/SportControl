@@ -32,14 +32,23 @@ namespace SportControl
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dgvPerson = new SportControl.DataGridViewPersonTag();
-            this.TID1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RacingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SecondName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.flowLayoutPanel_Edit = new System.Windows.Forms.FlowLayoutPanel();
+            this.textBox_TID1 = new System.Windows.Forms.TextBox();
+            this.textBox_TID2 = new System.Windows.Forms.TextBox();
+            this.textBox_Num = new System.Windows.Forms.TextBox();
+            this.textBox_SecondName = new System.Windows.Forms.TextBox();
+            this.textBox_Name = new System.Windows.Forms.TextBox();
+            this.textBox_Age = new System.Windows.Forms.TextBox();
+            this.textBox_ID = new System.Windows.Forms.TextBox();
+            this.button_SavePerson = new System.Windows.Forms.Button();
+            this.button_Clear = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.checkBox_Race1 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Race2 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Race3 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Race4 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Race5 = new System.Windows.Forms.CheckBox();
+            this.comboBox_PersonDataSource = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox_ant = new System.Windows.Forms.GroupBox();
@@ -53,25 +62,28 @@ namespace SportControl
             this.button_disconnect = new System.Windows.Forms.Button();
             this.button_connect = new System.Windows.Forms.Button();
             this.numericUpDown_reader_port = new System.Windows.Forms.NumericUpDown();
-            this.flowLayoutPanel_Edit = new System.Windows.Forms.FlowLayoutPanel();
-            this.textBox_TID1 = new System.Windows.Forms.TextBox();
-            this.textBox_TID2 = new System.Windows.Forms.TextBox();
-            this.textBox_Num = new System.Windows.Forms.TextBox();
-            this.textBox_SecondName = new System.Windows.Forms.TextBox();
-            this.textBox_Name = new System.Windows.Forms.TextBox();
-            this.textBox_Age = new System.Windows.Forms.TextBox();
-            this.textBox_ID = new System.Windows.Forms.TextBox();
-            this.button_SavePerson = new System.Windows.Forms.Button();
-            this.button_Clear = new System.Windows.Forms.Button();
             this.timerRemoveOldRecords = new System.Windows.Forms.Timer(this.components);
-            this.comboBox_PersonDataSource = new System.Windows.Forms.ComboBox();
+            this.dgvPerson = new SportControl.DataGridViewPersonTag();
+            this.TID1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RacingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SecondName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Race1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Race2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Race3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Race4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Race5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).BeginInit();
+            this.flowLayoutPanel_Edit.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
-            this.flowLayoutPanel_Edit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -82,7 +94,7 @@ namespace SportControl
             this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1119, 607);
+            this.tabControl1.Size = new System.Drawing.Size(1350, 607);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -93,88 +105,180 @@ namespace SportControl
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1111, 581);
+            this.tabPage1.Size = new System.Drawing.Size(1342, 581);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // dgvPerson
+            // flowLayoutPanel_Edit
             // 
-            this.dgvPerson.AllowUserToAddRows = false;
-            this.dgvPerson.AllowUserToDeleteRows = false;
-            this.dgvPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPerson.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.TID1,
-            this.TID2,
-            this.RacingNumber,
-            this.SecondName,
-            this.FirstName,
-            this.Age,
-            this.ID});
-            this.dgvPerson.Location = new System.Drawing.Point(8, 40);
-            this.dgvPerson.Name = "dgvPerson";
-            this.dgvPerson.ReadOnly = true;
-            this.dgvPerson.RowHeadersWidth = 25;
-            this.dgvPerson.Size = new System.Drawing.Size(1097, 473);
-            this.dgvPerson.TabIndex = 32;
-            this.dgvPerson.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPerson_CellMouseDoubleClick);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_TID1);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_TID2);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Num);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_SecondName);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Name);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Age);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_ID);
+            this.flowLayoutPanel_Edit.Controls.Add(this.button_SavePerson);
+            this.flowLayoutPanel_Edit.Controls.Add(this.button_Clear);
+            this.flowLayoutPanel_Edit.Controls.Add(this.label1);
+            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race1);
+            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race2);
+            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race3);
+            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race4);
+            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race5);
+            this.flowLayoutPanel_Edit.Location = new System.Drawing.Point(8, 519);
+            this.flowLayoutPanel_Edit.Name = "flowLayoutPanel_Edit";
+            this.flowLayoutPanel_Edit.Size = new System.Drawing.Size(1256, 52);
+            this.flowLayoutPanel_Edit.TabIndex = 42;
             // 
-            // TID1
+            // textBox_TID1
             // 
-            this.TID1.HeaderText = "TID1";
-            this.TID1.Name = "TID1";
-            this.TID1.ReadOnly = true;
-            this.TID1.Width = 250;
+            this.textBox_TID1.Location = new System.Drawing.Point(3, 3);
+            this.textBox_TID1.Name = "textBox_TID1";
+            this.textBox_TID1.Size = new System.Drawing.Size(254, 20);
+            this.textBox_TID1.TabIndex = 33;
             // 
-            // TID2
+            // textBox_TID2
             // 
-            this.TID2.HeaderText = "TID2";
-            this.TID2.Name = "TID2";
-            this.TID2.ReadOnly = true;
-            this.TID2.Width = 250;
+            this.textBox_TID2.Location = new System.Drawing.Point(263, 3);
+            this.textBox_TID2.Name = "textBox_TID2";
+            this.textBox_TID2.Size = new System.Drawing.Size(264, 20);
+            this.textBox_TID2.TabIndex = 34;
             // 
-            // RacingNumber
+            // textBox_Num
             // 
-            this.RacingNumber.HeaderText = "Номер";
-            this.RacingNumber.Name = "RacingNumber";
-            this.RacingNumber.ReadOnly = true;
-            this.RacingNumber.Width = 50;
+            this.textBox_Num.Location = new System.Drawing.Point(533, 3);
+            this.textBox_Num.Name = "textBox_Num";
+            this.textBox_Num.Size = new System.Drawing.Size(71, 20);
+            this.textBox_Num.TabIndex = 35;
             // 
-            // SecondName
+            // textBox_SecondName
             // 
-            this.SecondName.HeaderText = "Фамилия";
-            this.SecondName.Name = "SecondName";
-            this.SecondName.ReadOnly = true;
-            this.SecondName.Width = 200;
+            this.textBox_SecondName.Location = new System.Drawing.Point(610, 3);
+            this.textBox_SecondName.Name = "textBox_SecondName";
+            this.textBox_SecondName.Size = new System.Drawing.Size(181, 20);
+            this.textBox_SecondName.TabIndex = 36;
             // 
-            // FirstName
+            // textBox_Name
             // 
-            this.FirstName.HeaderText = "Имя";
-            this.FirstName.Name = "FirstName";
-            this.FirstName.ReadOnly = true;
-            this.FirstName.Width = 200;
+            this.textBox_Name.Location = new System.Drawing.Point(797, 3);
+            this.textBox_Name.Name = "textBox_Name";
+            this.textBox_Name.Size = new System.Drawing.Size(182, 20);
+            this.textBox_Name.TabIndex = 37;
             // 
-            // Age
+            // textBox_Age
             // 
-            this.Age.HeaderText = "Age";
-            this.Age.Name = "Age";
-            this.Age.ReadOnly = true;
-            this.Age.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Age.Width = 30;
+            this.textBox_Age.Location = new System.Drawing.Point(985, 3);
+            this.textBox_Age.Name = "textBox_Age";
+            this.textBox_Age.Size = new System.Drawing.Size(37, 20);
+            this.textBox_Age.TabIndex = 40;
             // 
-            // ID
+            // textBox_ID
             // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 80;
+            this.textBox_ID.Enabled = false;
+            this.textBox_ID.Location = new System.Drawing.Point(1028, 3);
+            this.textBox_ID.Name = "textBox_ID";
+            this.textBox_ID.Size = new System.Drawing.Size(58, 20);
+            this.textBox_ID.TabIndex = 39;
+            // 
+            // button_SavePerson
+            // 
+            this.button_SavePerson.Location = new System.Drawing.Point(1092, 3);
+            this.button_SavePerson.Name = "button_SavePerson";
+            this.button_SavePerson.Size = new System.Drawing.Size(75, 23);
+            this.button_SavePerson.TabIndex = 38;
+            this.button_SavePerson.Text = "Сохранить";
+            this.button_SavePerson.UseVisualStyleBackColor = true;
+            this.button_SavePerson.Click += new System.EventHandler(this.button_SavePerson_Click);
+            // 
+            // button_Clear
+            // 
+            this.button_Clear.Location = new System.Drawing.Point(1173, 3);
+            this.button_Clear.Name = "button_Clear";
+            this.button_Clear.Size = new System.Drawing.Size(75, 23);
+            this.button_Clear.TabIndex = 41;
+            this.button_Clear.Text = "Очистить";
+            this.button_Clear.UseVisualStyleBackColor = true;
+            this.button_Clear.Click += new System.EventHandler(this.button_Clear_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 47;
+            this.label1.Text = "Заезд";
+            // 
+            // checkBox_Race1
+            // 
+            this.checkBox_Race1.AutoSize = true;
+            this.checkBox_Race1.Location = new System.Drawing.Point(47, 32);
+            this.checkBox_Race1.Name = "checkBox_Race1";
+            this.checkBox_Race1.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_Race1.TabIndex = 42;
+            this.checkBox_Race1.Text = "1";
+            this.checkBox_Race1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Race2
+            // 
+            this.checkBox_Race2.AutoSize = true;
+            this.checkBox_Race2.Location = new System.Drawing.Point(85, 32);
+            this.checkBox_Race2.Name = "checkBox_Race2";
+            this.checkBox_Race2.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_Race2.TabIndex = 43;
+            this.checkBox_Race2.Text = "2";
+            this.checkBox_Race2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Race3
+            // 
+            this.checkBox_Race3.AutoSize = true;
+            this.checkBox_Race3.Location = new System.Drawing.Point(123, 32);
+            this.checkBox_Race3.Name = "checkBox_Race3";
+            this.checkBox_Race3.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_Race3.TabIndex = 44;
+            this.checkBox_Race3.Text = "3";
+            this.checkBox_Race3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Race4
+            // 
+            this.checkBox_Race4.AutoSize = true;
+            this.checkBox_Race4.Location = new System.Drawing.Point(161, 32);
+            this.checkBox_Race4.Name = "checkBox_Race4";
+            this.checkBox_Race4.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_Race4.TabIndex = 45;
+            this.checkBox_Race4.Text = "4";
+            this.checkBox_Race4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Race5
+            // 
+            this.checkBox_Race5.AutoSize = true;
+            this.checkBox_Race5.Location = new System.Drawing.Point(199, 32);
+            this.checkBox_Race5.Name = "checkBox_Race5";
+            this.checkBox_Race5.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_Race5.TabIndex = 46;
+            this.checkBox_Race5.Text = "5";
+            this.checkBox_Race5.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_PersonDataSource
+            // 
+            this.comboBox_PersonDataSource.FormattingEnabled = true;
+            this.comboBox_PersonDataSource.Items.AddRange(new object[] {
+            "Файл",
+            "Считыватель"});
+            this.comboBox_PersonDataSource.Location = new System.Drawing.Point(8, 8);
+            this.comboBox_PersonDataSource.Name = "comboBox_PersonDataSource";
+            this.comboBox_PersonDataSource.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_PersonDataSource.TabIndex = 35;
+            this.comboBox_PersonDataSource.SelectedValueChanged += new System.EventHandler(this.comboBox_PersonDataSource_SelectedValueChanged);
             // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1111, 598);
+            this.tabPage2.Size = new System.Drawing.Size(1342, 581);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -191,7 +295,7 @@ namespace SportControl
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1111, 598);
+            this.tabPage3.Size = new System.Drawing.Size(1342, 581);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -320,128 +424,150 @@ namespace SportControl
             0,
             0});
             // 
-            // flowLayoutPanel_Edit
-            // 
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_TID1);
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_TID2);
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Num);
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_SecondName);
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Name);
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Age);
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_ID);
-            this.flowLayoutPanel_Edit.Controls.Add(this.button_SavePerson);
-            this.flowLayoutPanel_Edit.Controls.Add(this.button_Clear);
-            this.flowLayoutPanel_Edit.Location = new System.Drawing.Point(8, 519);
-            this.flowLayoutPanel_Edit.Name = "flowLayoutPanel_Edit";
-            this.flowLayoutPanel_Edit.Size = new System.Drawing.Size(1097, 52);
-            this.flowLayoutPanel_Edit.TabIndex = 42;
-            // 
-            // textBox_TID1
-            // 
-            this.textBox_TID1.Location = new System.Drawing.Point(3, 3);
-            this.textBox_TID1.Name = "textBox_TID1";
-            this.textBox_TID1.Size = new System.Drawing.Size(254, 20);
-            this.textBox_TID1.TabIndex = 33;
-            // 
-            // textBox_TID2
-            // 
-            this.textBox_TID2.Location = new System.Drawing.Point(263, 3);
-            this.textBox_TID2.Name = "textBox_TID2";
-            this.textBox_TID2.Size = new System.Drawing.Size(264, 20);
-            this.textBox_TID2.TabIndex = 34;
-            // 
-            // textBox_Num
-            // 
-            this.textBox_Num.Location = new System.Drawing.Point(533, 3);
-            this.textBox_Num.Name = "textBox_Num";
-            this.textBox_Num.Size = new System.Drawing.Size(71, 20);
-            this.textBox_Num.TabIndex = 35;
-            // 
-            // textBox_SecondName
-            // 
-            this.textBox_SecondName.Location = new System.Drawing.Point(610, 3);
-            this.textBox_SecondName.Name = "textBox_SecondName";
-            this.textBox_SecondName.Size = new System.Drawing.Size(181, 20);
-            this.textBox_SecondName.TabIndex = 36;
-            // 
-            // textBox_Name
-            // 
-            this.textBox_Name.Location = new System.Drawing.Point(797, 3);
-            this.textBox_Name.Name = "textBox_Name";
-            this.textBox_Name.Size = new System.Drawing.Size(182, 20);
-            this.textBox_Name.TabIndex = 37;
-            // 
-            // textBox_Age
-            // 
-            this.textBox_Age.Location = new System.Drawing.Point(985, 3);
-            this.textBox_Age.Name = "textBox_Age";
-            this.textBox_Age.Size = new System.Drawing.Size(37, 20);
-            this.textBox_Age.TabIndex = 40;
-            // 
-            // textBox_ID
-            // 
-            this.textBox_ID.Enabled = false;
-            this.textBox_ID.Location = new System.Drawing.Point(1028, 3);
-            this.textBox_ID.Name = "textBox_ID";
-            this.textBox_ID.Size = new System.Drawing.Size(58, 20);
-            this.textBox_ID.TabIndex = 39;
-            // 
-            // button_SavePerson
-            // 
-            this.button_SavePerson.Location = new System.Drawing.Point(3, 29);
-            this.button_SavePerson.Name = "button_SavePerson";
-            this.button_SavePerson.Size = new System.Drawing.Size(75, 23);
-            this.button_SavePerson.TabIndex = 38;
-            this.button_SavePerson.Text = "Сохранить";
-            this.button_SavePerson.UseVisualStyleBackColor = true;
-            this.button_SavePerson.Click += new System.EventHandler(this.button_SavePerson_Click);
-            // 
-            // button_Clear
-            // 
-            this.button_Clear.Location = new System.Drawing.Point(84, 29);
-            this.button_Clear.Name = "button_Clear";
-            this.button_Clear.Size = new System.Drawing.Size(75, 23);
-            this.button_Clear.TabIndex = 41;
-            this.button_Clear.Text = "Очистить";
-            this.button_Clear.UseVisualStyleBackColor = true;
-            this.button_Clear.Click += new System.EventHandler(this.button_Clear_Click);
-            // 
             // timerRemoveOldRecords
             // 
             this.timerRemoveOldRecords.Enabled = true;
             this.timerRemoveOldRecords.Interval = 1000;
             this.timerRemoveOldRecords.Tick += new System.EventHandler(this.timerRemoveOldRecords_Tick);
             // 
-            // comboBox_PersonDataSource
+            // dgvPerson
             // 
-            this.comboBox_PersonDataSource.FormattingEnabled = true;
-            this.comboBox_PersonDataSource.Items.AddRange(new object[] {
-            "Файл",
-            "Считыватель"});
-            this.comboBox_PersonDataSource.Location = new System.Drawing.Point(8, 8);
-            this.comboBox_PersonDataSource.Name = "comboBox_PersonDataSource";
-            this.comboBox_PersonDataSource.Size = new System.Drawing.Size(121, 21);
-            this.comboBox_PersonDataSource.TabIndex = 35;
-            this.comboBox_PersonDataSource.SelectedValueChanged += new System.EventHandler(this.comboBox_PersonDataSource_SelectedValueChanged);
+            this.dgvPerson.AllowUserToAddRows = false;
+            this.dgvPerson.AllowUserToDeleteRows = false;
+            this.dgvPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPerson.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TID1,
+            this.TID2,
+            this.RacingNumber,
+            this.SecondName,
+            this.FirstName,
+            this.Age,
+            this.ID,
+            this.Race1,
+            this.Race2,
+            this.Race3,
+            this.Race4,
+            this.Race5,
+            this.DT});
+            this.dgvPerson.Location = new System.Drawing.Point(8, 40);
+            this.dgvPerson.Name = "dgvPerson";
+            this.dgvPerson.ReadOnly = true;
+            this.dgvPerson.RowHeadersWidth = 25;
+            this.dgvPerson.Size = new System.Drawing.Size(1256, 473);
+            this.dgvPerson.TabIndex = 32;
+            this.dgvPerson.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPerson_CellMouseDoubleClick);
+            // 
+            // TID1
+            // 
+            this.TID1.HeaderText = "TID1";
+            this.TID1.Name = "TID1";
+            this.TID1.ReadOnly = true;
+            this.TID1.Width = 250;
+            // 
+            // TID2
+            // 
+            this.TID2.HeaderText = "TID2";
+            this.TID2.Name = "TID2";
+            this.TID2.ReadOnly = true;
+            this.TID2.Width = 250;
+            // 
+            // RacingNumber
+            // 
+            this.RacingNumber.HeaderText = "Номер";
+            this.RacingNumber.Name = "RacingNumber";
+            this.RacingNumber.ReadOnly = true;
+            this.RacingNumber.Width = 50;
+            // 
+            // SecondName
+            // 
+            this.SecondName.HeaderText = "Фамилия";
+            this.SecondName.Name = "SecondName";
+            this.SecondName.ReadOnly = true;
+            this.SecondName.Width = 200;
+            // 
+            // FirstName
+            // 
+            this.FirstName.HeaderText = "Имя";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.ReadOnly = true;
+            this.FirstName.Width = 200;
+            // 
+            // Age
+            // 
+            this.Age.HeaderText = "Age";
+            this.Age.Name = "Age";
+            this.Age.ReadOnly = true;
+            this.Age.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Age.Width = 30;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            this.ID.Width = 80;
+            // 
+            // Race1
+            // 
+            this.Race1.HeaderText = "1";
+            this.Race1.Name = "Race1";
+            this.Race1.ReadOnly = true;
+            this.Race1.Width = 20;
+            // 
+            // Race2
+            // 
+            this.Race2.HeaderText = "2";
+            this.Race2.Name = "Race2";
+            this.Race2.ReadOnly = true;
+            this.Race2.Width = 20;
+            // 
+            // Race3
+            // 
+            this.Race3.HeaderText = "3";
+            this.Race3.Name = "Race3";
+            this.Race3.ReadOnly = true;
+            this.Race3.Width = 20;
+            // 
+            // Race4
+            // 
+            this.Race4.HeaderText = "4";
+            this.Race4.Name = "Race4";
+            this.Race4.ReadOnly = true;
+            this.Race4.Width = 20;
+            // 
+            // Race5
+            // 
+            this.Race5.HeaderText = "5";
+            this.Race5.Name = "Race5";
+            this.Race5.ReadOnly = true;
+            this.Race5.Width = 20;
+            // 
+            // DT
+            // 
+            this.DT.HeaderText = "Дата";
+            this.DT.Name = "DT";
+            this.DT.ReadOnly = true;
+            this.DT.Width = 130;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1249, 615);
+            this.ClientSize = new System.Drawing.Size(1384, 661);
             this.Controls.Add(this.tabControl1);
             this.Name = "FormMain";
             this.Text = "FormMain";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).EndInit();
+            this.flowLayoutPanel_Edit.ResumeLayout(false);
+            this.flowLayoutPanel_Edit.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.groupBox_ant.ResumeLayout(false);
             this.groupBox_ant.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).EndInit();
-            this.flowLayoutPanel_Edit.ResumeLayout(false);
-            this.flowLayoutPanel_Edit.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -474,6 +600,14 @@ namespace SportControl
         private System.Windows.Forms.TextBox textBox_Age;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Edit;
         private System.Windows.Forms.Button button_Clear;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ComboBox comboBox_PersonDataSource;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox checkBox_Race1;
+        private System.Windows.Forms.CheckBox checkBox_Race2;
+        private System.Windows.Forms.CheckBox checkBox_Race3;
+        private System.Windows.Forms.CheckBox checkBox_Race4;
+        private System.Windows.Forms.CheckBox checkBox_Race5;
         private System.Windows.Forms.DataGridViewTextBoxColumn TID1;
         private System.Windows.Forms.DataGridViewTextBoxColumn TID2;
         private System.Windows.Forms.DataGridViewTextBoxColumn RacingNumber;
@@ -481,7 +615,11 @@ namespace SportControl
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Age;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ComboBox comboBox_PersonDataSource;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Race1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Race2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Race3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Race4;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Race5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DT;
     }
 }

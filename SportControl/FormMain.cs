@@ -140,8 +140,7 @@ namespace SportControl
             if (e.RowIndex < 0)
                 return;
 
-            DataGridViewPersonTag dgv = sender as DataGridViewPersonTag;
-            DataGridViewRow dgvr = dgv.Rows[e.RowIndex];
+            DataGridViewRow dgvr = dgvPerson.Rows[e.RowIndex];
   
             if (dgvr.Cells["ID"].Value != null)
             {
@@ -195,10 +194,12 @@ namespace SportControl
 
           */
 
+
             if (textBox_ID.Text.Length > 0)
             {
                 // запись в бд существует, обновляем
-                Program.command.CommandText = "UPDATE Person SET name=:name, family=:family, number=:number, tid1=:tid1, tid2=:tid2, age=:age WHERE ID=:id";
+                Program.command.CommandText = "UPDATE Person SET name=:name, family=:family, number=:number, tid1=:tid1, tid2=:tid2, age=:age, " +
+                    "race1=:race1, race2=:race2, race3=:race3, race4=:race4, race5=:race5, date_time=datetime('now') WHERE ID=:id";
                 Program.command.Parameters.AddWithValue("name", textBox_Name.Text);
                 Program.command.Parameters.AddWithValue("family", textBox_SecondName.Text);
                 Program.command.Parameters.AddWithValue("number", textBox_Num.Text);
@@ -206,17 +207,28 @@ namespace SportControl
                 Program.command.Parameters.AddWithValue("tid2", textBox_TID2.Text);
                 Program.command.Parameters.AddWithValue("id", textBox_ID.Text);
                 Program.command.Parameters.AddWithValue("age", textBox_Age.Text);
+                Program.command.Parameters.AddWithValue("race1", checkBox_Race1.Checked ? 1 : 0);
+                Program.command.Parameters.AddWithValue("race2", checkBox_Race2.Checked ? 1 : 0);
+                Program.command.Parameters.AddWithValue("race3", checkBox_Race3.Checked ? 1 : 0);
+                Program.command.Parameters.AddWithValue("race4", checkBox_Race4.Checked ? 1 : 0);
+                Program.command.Parameters.AddWithValue("race5", checkBox_Race5.Checked ? 1 : 0);
                 Program.command.ExecuteNonQuery();
             } 
             else
             {
-                Program.command.CommandText = "INSERT INTO Person (name, family, number, tid1, tid2, age) VALUES (:name, :family, :number, :tid1, :tid2, :age)";
+                Program.command.CommandText = "INSERT INTO Person (name, family, number, tid1, tid2, age, race1, race2, race3, race4, race5, date_time) VALUES (:name, :family, :number, :tid1, :tid2, :age, " +
+                    ":race1, :race2, :race3, :race4, :race5, datetime('now'))";
                 Program.command.Parameters.AddWithValue("name", textBox_Name.Text);
                 Program.command.Parameters.AddWithValue("family", textBox_SecondName.Text);
                 Program.command.Parameters.AddWithValue("number", textBox_Num.Text);
                 Program.command.Parameters.AddWithValue("tid1", textBox_TID1.Text);
                 Program.command.Parameters.AddWithValue("tid2", textBox_TID2.Text);
                 Program.command.Parameters.AddWithValue("age", textBox_Age.Text);
+                Program.command.Parameters.AddWithValue("race1", checkBox_Race1.Checked ? 1 : 0);
+                Program.command.Parameters.AddWithValue("race2", checkBox_Race2.Checked ? 1 : 0);
+                Program.command.Parameters.AddWithValue("race3", checkBox_Race3.Checked ? 1 : 0);
+                Program.command.Parameters.AddWithValue("race4", checkBox_Race4.Checked ? 1 : 0);
+                Program.command.Parameters.AddWithValue("race5", checkBox_Race5.Checked ? 1 : 0);
                 Program.command.ExecuteNonQuery();
             }
 
@@ -228,6 +240,11 @@ namespace SportControl
             foreach (TextBox txtBox in flowLayoutPanel_Edit.Controls.OfType<TextBox>())
             {
                 txtBox.Clear();
+            }
+
+            foreach (CheckBox ChkBox in flowLayoutPanel_Edit.Controls.OfType<CheckBox>())
+            {
+                ChkBox.Checked = false;
             }
         }
 
@@ -253,6 +270,13 @@ namespace SportControl
                         rowDB.Field<string>("name"),
                         rowDB.IsNull("age")?"":rowDB.Field<long>("age").ToString(),
                         rowDB.IsNull("id")?"":rowDB.Field<long>("id").ToString(),
+                        rowDB.IsNull("race1")?false:rowDB.Field<long>("race1") > 0,
+                        rowDB.IsNull("race2")?false:rowDB.Field<long>("race2") > 0,
+                        rowDB.IsNull("race3")?false:rowDB.Field<long>("race3") > 0,
+                        rowDB.IsNull("race4")?false:rowDB.Field<long>("race4") > 0,
+                        rowDB.IsNull("race5")?false:rowDB.Field<long>("race5") > 0,
+                        rowDB.Field<string>("date_time")
+
                     });
 
                     dgvPerson.Rows.Add(row);

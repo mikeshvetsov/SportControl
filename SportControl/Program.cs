@@ -35,7 +35,7 @@ namespace SportControl
             {
                 command = new SQLiteCommand(connection)
                 {
-                    CommandText = "CREATE TABLE IF NOT EXISTS [Person]([id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, [name] TEXT, [family] TEXT, [number] INTEGER, [tid1] TEXT, [tid2] TEXT, [age] INTEGER);"
+                    CommandText = "CREATE TABLE IF NOT EXISTS [Person]([id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, [name] TEXT, [family] TEXT NOT NULL, [number] INTEGER NOT NULL, [tid1] TEXT, [tid2] TEXT, [age] INTEGER, [race1] INTEGER,  [race2] INTEGER,  [race3] INTEGER,  [race4] INTEGER,  [race5] INTEGER, date_time TEXT NOT NULL);"
                 };
                 command.ExecuteNonQuery();
                 return true;
