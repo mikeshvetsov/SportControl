@@ -172,73 +172,56 @@ namespace SportControl
             /* Сохраняем все в БД.
              */
 
-            /*  Program.command.CommandText = $"SELECT * FROM Person WHERE tid1 = '{key}' OR tid2 = '{key}'";
-            DataTable data = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(Program.command);
-            adapter.Fill(data);
-            Console.WriteLine($"Прочитано {data.Rows.Count} записей из таблицы БД");
-            foreach (DataRow row in data.Rows)
-            {
-                Console.WriteLine($"id = {row.Field<long>("id")} name = {row.Field<string>("name")} family = {row.Field<string>("family")}");
-            }
-
-
-            command.CommandText = "INSERT INTO Person (name, family, age) VALUES (\"Иванов\",\"Иван\", 25)";
-            command.ExecuteNonQuery();
-
-            проверка на существование:
-            cmd.CommandText = "SELECT count(*) FROM wordlist WHERE word='word'"; 
-            int count = Convert.ToInt32(cmd.ExecuteScalar());
-            if(count == 0)
-            {
-                cmd.CommandText = "INSERT INTO wordlist(word) VALUES ('word')"; 
-                cmd.ExecuteNonQuery();
-            }
+            /*
 
             редактирование:
             https://ru.stackoverflow.com/questions/932351/Модифицировать-или-добавить-запись-если-она-существует
 
           */
 
-
             if (textBox_ID.Text.Length > 0)
             {
                 // запись в бд существует, обновляем
                 Program.command.CommandText = "UPDATE Person SET name=:name, family=:family, number=:number, tid1=:tid1, tid2=:tid2, age=:age, " +
                     "race1=:race1, race2=:race2, race3=:race3, race4=:race4, race5=:race5, date_time=datetime('now') WHERE ID=:id";
-                Program.command.Parameters.AddWithValue("name", textBox_Name.Text);
-                Program.command.Parameters.AddWithValue("family", textBox_SecondName.Text);
-                Program.command.Parameters.AddWithValue("number", textBox_Num.Text);
-                Program.command.Parameters.AddWithValue("tid1", textBox_TID1.Text);
-                Program.command.Parameters.AddWithValue("tid2", textBox_TID2.Text);
                 Program.command.Parameters.AddWithValue("id", textBox_ID.Text);
-                Program.command.Parameters.AddWithValue("age", textBox_Age.Text);
-                Program.command.Parameters.AddWithValue("race1", checkBox_Race1.Checked ? 1 : 0);
-                Program.command.Parameters.AddWithValue("race2", checkBox_Race2.Checked ? 1 : 0);
-                Program.command.Parameters.AddWithValue("race3", checkBox_Race3.Checked ? 1 : 0);
-                Program.command.Parameters.AddWithValue("race4", checkBox_Race4.Checked ? 1 : 0);
-                Program.command.Parameters.AddWithValue("race5", checkBox_Race5.Checked ? 1 : 0);
-                Program.command.ExecuteNonQuery();
             } 
             else
             {
                 Program.command.CommandText = "INSERT INTO Person (name, family, number, tid1, tid2, age, race1, race2, race3, race4, race5, date_time) VALUES (:name, :family, :number, :tid1, :tid2, :age, " +
                     ":race1, :race2, :race3, :race4, :race5, datetime('now'))";
-                Program.command.Parameters.AddWithValue("name", textBox_Name.Text);
-                Program.command.Parameters.AddWithValue("family", textBox_SecondName.Text);
-                Program.command.Parameters.AddWithValue("number", textBox_Num.Text);
-                Program.command.Parameters.AddWithValue("tid1", textBox_TID1.Text);
-                Program.command.Parameters.AddWithValue("tid2", textBox_TID2.Text);
-                Program.command.Parameters.AddWithValue("age", textBox_Age.Text);
-                Program.command.Parameters.AddWithValue("race1", checkBox_Race1.Checked ? 1 : 0);
-                Program.command.Parameters.AddWithValue("race2", checkBox_Race2.Checked ? 1 : 0);
-                Program.command.Parameters.AddWithValue("race3", checkBox_Race3.Checked ? 1 : 0);
-                Program.command.Parameters.AddWithValue("race4", checkBox_Race4.Checked ? 1 : 0);
-                Program.command.Parameters.AddWithValue("race5", checkBox_Race5.Checked ? 1 : 0);
-                Program.command.ExecuteNonQuery();
+            }
+            Program.command.Parameters.AddWithValue("name", textBox_Name.Text);
+            Program.command.Parameters.AddWithValue("family", textBox_SecondName.Text);
+            Program.command.Parameters.AddWithValue("number", textBox_Num.Text);
+            Program.command.Parameters.AddWithValue("tid1", textBox_TID1.Text);
+            Program.command.Parameters.AddWithValue("tid2", textBox_TID2.Text);
+            Program.command.Parameters.AddWithValue("age", textBox_Age.Text);
+            Program.command.Parameters.AddWithValue("race1", checkBox_Race1.Checked ? 1 : 0);
+            Program.command.Parameters.AddWithValue("race2", checkBox_Race2.Checked ? 1 : 0);
+            Program.command.Parameters.AddWithValue("race3", checkBox_Race3.Checked ? 1 : 0);
+            Program.command.Parameters.AddWithValue("race4", checkBox_Race4.Checked ? 1 : 0);
+            Program.command.Parameters.AddWithValue("race5", checkBox_Race5.Checked ? 1 : 0);
+            Program.command.ExecuteNonQuery();
+
+            comboBox_PersonDataSource_SelectedValueChanged(comboBox_PersonDataSource, EventArgs.Empty);
+            if (textBox_ID.Text.Length > 0)
+            {
+                SelectDGVRowByDBID(textBox_ID.Text);
+            } else
+            {
+                Program.command.CommandText = @"select last_insert_rowid()";
+                SelectDGVRowByDBID(Program.command.ExecuteScalar().ToString());
             }
 
+        }
 
+        private void SelectDGVRowByDBID(string DBRowID)
+        {
+            int rowIndex = -1;
+            DataGridViewRow row = dgvPerson.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["ID"].Value.ToString().Equals(DBRowID)).First();
+            rowIndex = row.Index;
+            dgvPerson.Rows[rowIndex].Selected = true;
         }
 
         private void button_Clear_Click(object sender, EventArgs e)
