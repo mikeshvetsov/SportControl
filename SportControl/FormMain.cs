@@ -152,6 +152,11 @@ namespace SportControl
                 textBox_SecondName.Text = dgvr.Cells["SecondName"].Value.ToString();
                 textBox_Name.Text = dgvr.Cells["FirstName"].Value.ToString();
                 textBox_Age.Text = dgvr.Cells["age"].Value.ToString();
+                checkBox_Race1.Checked = (bool)dgvr.Cells["Race1"].Value;
+                checkBox_Race2.Checked = (bool)dgvr.Cells["Race2"].Value;
+                checkBox_Race3.Checked = (bool)dgvr.Cells["Race3"].Value;
+                checkBox_Race4.Checked = (bool)dgvr.Cells["Race4"].Value;
+                checkBox_Race5.Checked = (bool)dgvr.Cells["Race5"].Value;
             } else
             {
                 if (textBox_TID1.Text.Length == 0)
