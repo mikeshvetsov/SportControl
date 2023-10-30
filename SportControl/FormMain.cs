@@ -27,6 +27,7 @@ namespace SportControl
             InitializeComponent();
             hf340 = new RFIDReaderHF340(TagHandler: TagHandler);
             hf340Sim = new RFIDReaderHF340Simulator(TagHandler: TagHandler);
+            comboBox_PersonDataSource.SelectedIndex = 0;
 
            // timerRemoveOldRecords = new System.Timers.Timer(INTERVAL_REMOVE_OLD_RECORDS);
            // timerRemoveOldRecords.Elapsed += RemoveOldRecords;
