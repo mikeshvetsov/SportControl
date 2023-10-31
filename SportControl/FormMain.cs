@@ -16,6 +16,7 @@ namespace SportControl
     public partial class FormMain : Form
     {
 
+        Boolean ReaderSelectedAsSource = false;
         public RFIDReaderHF340 hf340;
         public RFIDReaderHF340Simulator hf340Sim;
         
@@ -45,7 +46,7 @@ namespace SportControl
                 return false;
             }
 
-            if (comboBox_PersonDataSource.SelectedIndex == 1)
+            if (ReaderSelectedAsSource)
             {
                 dgvPerson.UpdateTag(tagdt);
             }
@@ -204,7 +205,7 @@ namespace SportControl
             Program.command.Parameters.AddWithValue("race5", checkBox_Race5.Checked ? 1 : 0);
             Program.command.ExecuteNonQuery();
 
-            comboBox_PersonDataSource_SelectedValueChanged(comboBox_PersonDataSource, EventArgs.Empty);
+            LoadRacersFromDB();
             if (textBox_ID.Text.Length > 0)
             {
                 SelectDGVRowByDBID(textBox_ID.Text);
@@ -239,8 +240,15 @@ namespace SportControl
 
         private void comboBox_PersonDataSource_SelectedValueChanged(object sender, EventArgs e)
         {
-            dgvPerson.ClearData();
+            LoadRacersFromDB();
+            ReaderSelectedAsSource = comboBox_PersonDataSource.SelectedIndex == 1;
             
+        }
+
+        private void LoadRacersFromDB()
+        {
+            dgvPerson.ClearData();
+
             if (comboBox_PersonDataSource.SelectedIndex == 0)
             {
                 Program.command.CommandText = $"SELECT * FROM Person";
@@ -272,6 +280,13 @@ namespace SportControl
                 }
 
             }
+        }
+        private void clearAllRacesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            Program.command.CommandText = "UPDATE Person SET race1=0, race2=0, race3=0, race4=0, race5=0";
+            Program.command.ExecuteNonQuery();
+            LoadRacersFromDB();
         }
     }
 }

@@ -48,7 +48,6 @@ namespace SportControl
             this.checkBox_Race3 = new System.Windows.Forms.CheckBox();
             this.checkBox_Race4 = new System.Windows.Forms.CheckBox();
             this.checkBox_Race5 = new System.Windows.Forms.CheckBox();
-            this.comboBox_PersonDataSource = new System.Windows.Forms.ComboBox();
             this.dgvPerson = new SportControl.DataGridViewPersonTag();
             this.TID1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,6 +76,12 @@ namespace SportControl
             this.button_connect = new System.Windows.Forms.Button();
             this.numericUpDown_reader_port = new System.Windows.Forms.NumericUpDown();
             this.timerRemoveOldRecords = new System.Windows.Forms.Timer(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearAllRacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.sourceForDGVPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comboBox_PersonDataSource = new System.Windows.Forms.ToolStripComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel_Edit.SuspendLayout();
@@ -84,6 +89,7 @@ namespace SportControl
             this.tabPage3.SuspendLayout();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -94,18 +100,18 @@ namespace SportControl
             this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1350, 607);
+            this.tabControl1.Size = new System.Drawing.Size(1350, 648);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.flowLayoutPanel_Edit);
-            this.tabPage1.Controls.Add(this.comboBox_PersonDataSource);
             this.tabPage1.Controls.Add(this.dgvPerson);
+            this.tabPage1.Controls.Add(this.menuStrip1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1342, 581);
+            this.tabPage1.Size = new System.Drawing.Size(1342, 622);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -127,9 +133,9 @@ namespace SportControl
             this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race3);
             this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race4);
             this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race5);
-            this.flowLayoutPanel_Edit.Location = new System.Drawing.Point(8, 519);
+            this.flowLayoutPanel_Edit.Location = new System.Drawing.Point(8, 555);
             this.flowLayoutPanel_Edit.Name = "flowLayoutPanel_Edit";
-            this.flowLayoutPanel_Edit.Size = new System.Drawing.Size(1256, 52);
+            this.flowLayoutPanel_Edit.Size = new System.Drawing.Size(1256, 61);
             this.flowLayoutPanel_Edit.TabIndex = 42;
             // 
             // textBox_TID1
@@ -261,18 +267,6 @@ namespace SportControl
             this.checkBox_Race5.Text = "5";
             this.checkBox_Race5.UseVisualStyleBackColor = true;
             // 
-            // comboBox_PersonDataSource
-            // 
-            this.comboBox_PersonDataSource.FormattingEnabled = true;
-            this.comboBox_PersonDataSource.Items.AddRange(new object[] {
-            "Файл",
-            "Считыватель"});
-            this.comboBox_PersonDataSource.Location = new System.Drawing.Point(8, 8);
-            this.comboBox_PersonDataSource.Name = "comboBox_PersonDataSource";
-            this.comboBox_PersonDataSource.Size = new System.Drawing.Size(121, 21);
-            this.comboBox_PersonDataSource.TabIndex = 35;
-            this.comboBox_PersonDataSource.SelectedValueChanged += new System.EventHandler(this.comboBox_PersonDataSource_SelectedValueChanged);
-            // 
             // dgvPerson
             // 
             this.dgvPerson.AllowUserToAddRows = false;
@@ -292,13 +286,13 @@ namespace SportControl
             this.Race4,
             this.Race5,
             this.DT});
-            this.dgvPerson.Location = new System.Drawing.Point(8, 40);
+            this.dgvPerson.Location = new System.Drawing.Point(3, 30);
             this.dgvPerson.MultiSelect = false;
             this.dgvPerson.Name = "dgvPerson";
             this.dgvPerson.ReadOnly = true;
             this.dgvPerson.RowHeadersWidth = 25;
             this.dgvPerson.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPerson.Size = new System.Drawing.Size(1256, 473);
+            this.dgvPerson.Size = new System.Drawing.Size(1256, 519);
             this.dgvPerson.TabIndex = 32;
             this.dgvPerson.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPerson_CellMouseDoubleClick);
             // 
@@ -400,7 +394,7 @@ namespace SportControl
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1342, 581);
+            this.tabPage2.Size = new System.Drawing.Size(1342, 599);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -417,7 +411,7 @@ namespace SportControl
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1342, 581);
+            this.tabPage3.Size = new System.Drawing.Size(1342, 599);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -552,16 +546,67 @@ namespace SportControl
             this.timerRemoveOldRecords.Interval = 1000;
             this.timerRemoveOldRecords.Tick += new System.EventHandler(this.timerRemoveOldRecords_Tick);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sourceForDGVPersonToolStripMenuItem,
+            this.toolStripMenuItem1});
+            this.menuStrip1.Location = new System.Drawing.Point(3, 3);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1336, 24);
+            this.menuStrip1.TabIndex = 43;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearAllRacesToolStripMenuItem,
+            this.toolStripSeparator1});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(77, 20);
+            this.toolStripMenuItem1.Text = "Участники";
+            // 
+            // clearAllRacesToolStripMenuItem
+            // 
+            this.clearAllRacesToolStripMenuItem.Name = "clearAllRacesToolStripMenuItem";
+            this.clearAllRacesToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.clearAllRacesToolStripMenuItem.Text = "Очистить заезды всех в базе";
+            this.clearAllRacesToolStripMenuItem.Click += new System.EventHandler(this.clearAllRacesToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(226, 6);
+            // 
+            // sourceForDGVPersonToolStripMenuItem
+            // 
+            this.sourceForDGVPersonToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.comboBox_PersonDataSource});
+            this.sourceForDGVPersonToolStripMenuItem.Name = "sourceForDGVPersonToolStripMenuItem";
+            this.sourceForDGVPersonToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.sourceForDGVPersonToolStripMenuItem.Text = "Источник данных";
+            // 
+            // comboBox_PersonDataSource
+            // 
+            this.comboBox_PersonDataSource.Items.AddRange(new object[] {
+            "Файл",
+            "Считыватель"});
+            this.comboBox_PersonDataSource.Name = "comboBox_PersonDataSource";
+            this.comboBox_PersonDataSource.Size = new System.Drawing.Size(121, 23);
+            this.comboBox_PersonDataSource.SelectedIndexChanged += new System.EventHandler(this.comboBox_PersonDataSource_SelectedValueChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 661);
             this.Controls.Add(this.tabControl1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
             this.Text = "FormMain";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.flowLayoutPanel_Edit.ResumeLayout(false);
             this.flowLayoutPanel_Edit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).EndInit();
@@ -570,6 +615,8 @@ namespace SportControl
             this.groupBox_ant.ResumeLayout(false);
             this.groupBox_ant.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -603,7 +650,6 @@ namespace SportControl
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Edit;
         private System.Windows.Forms.Button button_Clear;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ComboBox comboBox_PersonDataSource;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBox_Race1;
         private System.Windows.Forms.CheckBox checkBox_Race2;
@@ -623,5 +669,11 @@ namespace SportControl
         private System.Windows.Forms.DataGridViewCheckBoxColumn Race4;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Race5;
         private System.Windows.Forms.DataGridViewTextBoxColumn DT;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem clearAllRacesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem sourceForDGVPersonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox comboBox_PersonDataSource;
     }
 }
