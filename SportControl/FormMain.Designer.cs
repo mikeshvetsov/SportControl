@@ -295,6 +295,7 @@ namespace SportControl
             this.dgvPerson.Size = new System.Drawing.Size(1256, 519);
             this.dgvPerson.TabIndex = 32;
             this.dgvPerson.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPerson_CellMouseDoubleClick);
+            this.dgvPerson.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPerson_RowPostPaint);
             // 
             // TID1
             // 
