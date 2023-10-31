@@ -28,7 +28,7 @@ namespace SportControl
             InitializeComponent();
             hf340 = new RFIDReaderHF340(TagHandler: TagHandler);
             hf340Sim = new RFIDReaderHF340Simulator(TagHandler: TagHandler);
-            comboBox_PersonDataSource.SelectedIndex = 0;
+            toolStripComboBox_PersonDataSource.SelectedIndex = 0;
 
            // timerRemoveOldRecords = new System.Timers.Timer(INTERVAL_REMOVE_OLD_RECORDS);
            // timerRemoveOldRecords.Elapsed += RemoveOldRecords;
@@ -241,17 +241,17 @@ namespace SportControl
         private void comboBox_PersonDataSource_SelectedValueChanged(object sender, EventArgs e)
         {
             LoadRacersFromDB();
-            ReaderSelectedAsSource = comboBox_PersonDataSource.SelectedIndex == 1;
+            ReaderSelectedAsSource = toolStripComboBox_PersonDataSource.SelectedIndex == 1;
             
         }
 
-        private void LoadRacersFromDB()
+        private void LoadRacersFromDB(string where="")
         {
             dgvPerson.ClearData();
 
-            if (comboBox_PersonDataSource.SelectedIndex == 0)
+            if (toolStripComboBox_PersonDataSource.SelectedIndex == 0)
             {
-                Program.command.CommandText = $"SELECT * FROM Person";
+                Program.command.CommandText = $"SELECT * FROM Person "+ where;
                 DataTable data = new DataTable();
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(Program.command);
                 adapter.Fill(data);
@@ -302,6 +302,19 @@ namespace SportControl
 
             var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
             e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
+        }
+
+        private void toolStripComboBox_SelectRace_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int i = toolStripComboBox_SelectRace.SelectedIndex;
+
+            string where = i > 0 ? $"WHERE race{i}=1" : "";
+
+            LoadRacersFromDB(where);
+            
+            toolStripComboBox_PersonDataSource.SelectedIndex = 0;
+            ReaderSelectedAsSource = false;
+
         }
     }
 }
