@@ -353,7 +353,16 @@ namespace SportControl
                     if (row.Cells["dgvRaceCellID"].Value.ToString().Equals(searchValue))
                     {
                         rowIndex = row.Index;
-                        row.Cells["dgvRaceCellCycle"].Value = mRacer.ListCycles.Count;
+
+                        row.Cells["dgvRaceCellCycle"].Value = mRacer.ListCycles.Count - 1;
+                        row.Cells["dgvRaceCellCycleTime"].Value = mRacer.LastCycleTime;
+                        row.Cells["dgvRaceCellBestCycleTime"].Value = mRacer.BestCycleTime;
+
+                        if (mRacer.active)
+                            row.DefaultCellStyle.BackColor = Color.LightGreen;
+                        else
+                            row.DefaultCellStyle.BackColor = Color.White;
+
                         break;
                     }
                 }
@@ -370,6 +379,16 @@ namespace SportControl
                     dgvRace.Rows.Add(row);
                 }
             }
+        }
+
+        private void button_RaceStart_Click(object sender, EventArgs e)
+        {
+            mRace.Start();
+        }
+
+        private void button_RaceStop_Click(object sender, EventArgs e)
+        {
+            mRace.Stop();
         }
     }
 }

@@ -13,9 +13,28 @@ namespace SportControl
         public string id;
         public string Name;
         public string Number;
-        public int BestCycle = 0;
+        int BestCycle = 0;
         public List<CycleTime> ListCycles = new List<CycleTime>();
+        public string LastCycleTime {
+            get
+            {
+                if (ListCycles.Count > 0)
+                    return ListCycles.Last().StrDeltaDT;
+                else
+                    return new CycleTime(new DateTime(0), new TimeSpan(0)).StrDeltaDT;
+            }
+        }
 
+        public string BestCycleTime
+        {
+            get
+            {
+                if (ListCycles.Count > 0)
+                    return ListCycles[BestCycle].StrDeltaDT;
+                else
+                    return new CycleTime(new DateTime(0), new TimeSpan(0)).StrDeltaDT;
+            }
+        }
         string TID1;
         string TID2;
 

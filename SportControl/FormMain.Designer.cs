@@ -71,8 +71,8 @@ namespace SportControl
             this.SelectRaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox_SelectRace = new System.Windows.Forms.ToolStripComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_RaceStop = new System.Windows.Forms.Button();
+            this.button_RaceStart = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dgvRace = new SportControl.DataGridViewPersonTag();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -92,9 +92,10 @@ namespace SportControl
             this.dgvRaceCellID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvRaceCellCycle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvRaceCellCycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvRaceCellBestCycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel_Edit.SuspendLayout();
@@ -477,8 +478,8 @@ namespace SportControl
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button2);
-            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.button_RaceStop);
+            this.tabPage2.Controls.Add(this.button_RaceStart);
             this.tabPage2.Controls.Add(this.comboBox1);
             this.tabPage2.Controls.Add(this.dgvRace);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -486,26 +487,28 @@ namespace SportControl
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1342, 622);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Заед";
+            this.tabPage2.Text = "Заезд";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // button_RaceStop
             // 
-            this.button2.Location = new System.Drawing.Point(476, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 36;
-            this.button2.Text = "Стоп";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button_RaceStop.Location = new System.Drawing.Point(235, 3);
+            this.button_RaceStop.Name = "button_RaceStop";
+            this.button_RaceStop.Size = new System.Drawing.Size(75, 23);
+            this.button_RaceStop.TabIndex = 36;
+            this.button_RaceStop.Text = "Стоп";
+            this.button_RaceStop.UseVisualStyleBackColor = true;
+            this.button_RaceStop.Click += new System.EventHandler(this.button_RaceStop_Click);
             // 
-            // button1
+            // button_RaceStart
             // 
-            this.button1.Location = new System.Drawing.Point(274, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 35;
-            this.button1.Text = "Старт!";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button_RaceStart.Location = new System.Drawing.Point(142, 3);
+            this.button_RaceStart.Name = "button_RaceStart";
+            this.button_RaceStart.Size = new System.Drawing.Size(75, 23);
+            this.button_RaceStart.TabIndex = 35;
+            this.button_RaceStart.Text = "Старт!";
+            this.button_RaceStart.UseVisualStyleBackColor = true;
+            this.button_RaceStart.Click += new System.EventHandler(this.button_RaceStart_Click);
             // 
             // comboBox1
             // 
@@ -516,7 +519,7 @@ namespace SportControl
             "Заезд 3",
             "Заезд 4",
             "Заезд 5"});
-            this.comboBox1.Location = new System.Drawing.Point(43, 7);
+            this.comboBox1.Location = new System.Drawing.Point(5, 3);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 34;
@@ -531,15 +534,16 @@ namespace SportControl
             this.dgvRaceCellID,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn8,
-            this.dgvRaceCellCycle});
+            this.dgvRaceCellCycle,
+            this.dgvRaceCellCycleTime,
+            this.dgvRaceCellBestCycleTime});
             this.dgvRace.Location = new System.Drawing.Point(5, 52);
             this.dgvRace.MultiSelect = false;
             this.dgvRace.Name = "dgvRace";
             this.dgvRace.ReadOnly = true;
             this.dgvRace.RowHeadersWidth = 25;
-            this.dgvRace.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvRace.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvRace.Size = new System.Drawing.Size(1333, 519);
             this.dgvRace.TabIndex = 33;
             // 
@@ -693,7 +697,6 @@ namespace SportControl
             // timerUpdateRaceView
             // 
             this.timerUpdateRaceView.Enabled = true;
-            this.timerUpdateRaceView.Interval = 1000;
             this.timerUpdateRaceView.Tick += new System.EventHandler(this.timerUpdateRaceView_Tick);
             // 
             // dgvRaceCellID
@@ -713,17 +716,10 @@ namespace SportControl
             // 
             // dataGridViewTextBoxColumn4
             // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Фамилия";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Участник";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Width = 200;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Имя";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 200;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -738,6 +734,18 @@ namespace SportControl
             this.dgvRaceCellCycle.HeaderText = "Круг";
             this.dgvRaceCellCycle.Name = "dgvRaceCellCycle";
             this.dgvRaceCellCycle.ReadOnly = true;
+            // 
+            // dgvRaceCellCycleTime
+            // 
+            this.dgvRaceCellCycleTime.HeaderText = "Время круга";
+            this.dgvRaceCellCycleTime.Name = "dgvRaceCellCycleTime";
+            this.dgvRaceCellCycleTime.ReadOnly = true;
+            // 
+            // dgvRaceCellBestCycleTime
+            // 
+            this.dgvRaceCellBestCycleTime.HeaderText = "Лучшее время";
+            this.dgvRaceCellBestCycleTime.Name = "dgvRaceCellBestCycleTime";
+            this.dgvRaceCellBestCycleTime.ReadOnly = true;
             // 
             // FormMain
             // 
@@ -824,15 +832,16 @@ namespace SportControl
         private System.Windows.Forms.ToolStripMenuItem SelectRaceToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox_SelectRace;
         private DataGridViewPersonTag dgvRace;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_RaceStop;
+        private System.Windows.Forms.Button button_RaceStart;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Timer timerUpdateRaceView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvRaceCellID;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvRaceCellCycle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvRaceCellCycleTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvRaceCellBestCycleTime;
     }
 }

@@ -10,7 +10,7 @@ namespace SportControl
 {
     public class RFIDReaderHF340Simulator
     {
-        List<string> TIDList = new List<string>() { "T12", "T13", "T17" };
+        List<string> TIDList = new List<string>() { "T12", "T13", "T17", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9" };
 
         Func<TagDT, bool> TagHandler;
         public Boolean isConnected = false;

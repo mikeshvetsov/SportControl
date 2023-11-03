@@ -218,7 +218,7 @@ namespace SportControl
             this.MAX_RSSI,
             this.DT_MAX_RSSI,
             this.Racing});
-            this.dataGridView_Racers.Location = new System.Drawing.Point(11, 27);
+            this.dataGridView_Racers.Location = new System.Drawing.Point(9, 27);
             this.dataGridView_Racers.Name = "dataGridView_Racers";
             this.dataGridView_Racers.ReadOnly = true;
             this.dataGridView_Racers.RowHeadersWidth = 25;

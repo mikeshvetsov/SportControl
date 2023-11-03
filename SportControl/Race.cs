@@ -37,7 +37,7 @@ namespace SportControl
 
         public void TagHandler(TagDT tagdt)
         {
-            if (!Started)
+            if (!Started || Finished)
                 return;
 
             foreach (Racer mRacer in Racers)
@@ -45,6 +45,16 @@ namespace SportControl
                 if (mRacer.TagHandler(tagdt))
                     break;
             }
+        }
+
+        public void Start()
+        {
+            Started = true;
+        }
+
+        public void Stop()
+        {
+            Finished = true;
         }
     }
 }
