@@ -19,6 +19,7 @@ namespace SportControl
         Boolean ReaderSelectedAsSource = false;
         public RFIDReaderHF340 hf340;
         public RFIDReaderHF340Simulator hf340Sim;
+        public Race mRace = new Race();
         
         const double INTERVAL_REMOVE_OLD_RECORDS = 1000;
        // internal System.Timers.Timer timerRemoveOldRecords;
@@ -50,6 +51,8 @@ namespace SportControl
             {
                 dgvPerson.UpdateTag(tagdt);
             }
+
+            mRace.TagHandler(tagdt);
 
             return true;
         }
@@ -315,6 +318,58 @@ namespace SportControl
             toolStripComboBox_PersonDataSource.SelectedIndex = 0;
             ReaderSelectedAsSource = false;
 
+        }
+
+        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (mRace.Started)
+            {
+                MessageBox.Show("Операция не может быть выполнена. Гонка не завершена!");
+                return;
+            }
+
+            int i = (sender as ComboBox).SelectedIndex + 1;
+
+            string where = i > 0 ? $"WHERE race{i}=1" : "";
+
+            Program.command.CommandText = $"SELECT * FROM Person " + where;
+            DataTable data = new DataTable();
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(Program.command);
+            adapter.Fill(data);
+
+            mRace.SetNewRacersList(data);
+            dgvRace.Rows.Clear();
+        }
+
+        private void timerUpdateRaceView_Tick(object sender, EventArgs e)
+        {
+            foreach( Racer mRacer in mRace.Racers)
+            {
+
+                String searchValue = mRacer.id;
+                int rowIndex = -1;
+                foreach (DataGridViewRow row in dgvRace.Rows)
+                {
+                    if (row.Cells["dgvRaceCellID"].Value.ToString().Equals(searchValue))
+                    {
+                        rowIndex = row.Index;
+                        row.Cells["dgvRaceCellCycle"].Value = mRacer.ListCycles.Count;
+                        break;
+                    }
+                }
+
+                if (rowIndex == -1)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dgvRace, new object[] {
+                        mRacer.id,
+                        mRacer.Number,
+                        mRacer.Name,
+                        mRacer.ListCycles.Count
+                    });
+                    dgvRace.Rows.Add(row);
+                }
+            }
         }
     }
 }

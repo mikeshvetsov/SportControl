@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SportControl
+{
+    public class Race
+    {
+
+        // 1 список участников загружается по смене комбобокса заездов
+
+        public bool Started = false;
+        public bool Finished = false;
+
+        public List<Racer> Racers = new List<Racer>();
+
+        public Race()
+        {
+            
+        }
+
+        public void SetNewRacersList(DataTable data)
+        {
+            if (Started)
+                return;
+
+            Racers.Clear();
+
+            foreach (DataRow row in data.Rows)
+            {
+                Racers.Add(new Racer(row));
+            }
+        }
+
+        public void TagHandler(TagDT tagdt)
+        {
+            if (!Started)
+                return;
+
+            foreach (Racer mRacer in Racers)
+            {
+                if (mRacer.TagHandler(tagdt))
+                    break;
+            }
+        }
+    }
+}

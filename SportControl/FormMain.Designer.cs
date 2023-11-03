@@ -49,26 +49,6 @@ namespace SportControl
             this.checkBox_Race4 = new System.Windows.Forms.CheckBox();
             this.checkBox_Race5 = new System.Windows.Forms.CheckBox();
             this.dgvPerson = new SportControl.DataGridViewPersonTag();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.groupBox_ant = new System.Windows.Forms.GroupBox();
-            this.checkBox_ant4 = new System.Windows.Forms.CheckBox();
-            this.checkBox_ant3 = new System.Windows.Forms.CheckBox();
-            this.checkBox_ant2 = new System.Windows.Forms.CheckBox();
-            this.checkBox_ant1 = new System.Windows.Forms.CheckBox();
-            this.button_Read = new System.Windows.Forms.Button();
-            this.maskedTextBox_reader_ip = new System.Windows.Forms.MaskedTextBox();
-            this.checkBox_Simulator = new System.Windows.Forms.CheckBox();
-            this.button_disconnect = new System.Windows.Forms.Button();
-            this.button_connect = new System.Windows.Forms.Button();
-            this.numericUpDown_reader_port = new System.Windows.Forms.NumericUpDown();
-            this.timerRemoveOldRecords = new System.Windows.Forms.Timer(this.components);
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearAllRacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.sourceForDGVPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripComboBox_PersonDataSource = new System.Windows.Forms.ToolStripComboBox();
             this.TID1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RacingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,16 +62,49 @@ namespace SportControl
             this.Race4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Race5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.DT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.sourceForDGVPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBox_PersonDataSource = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearAllRacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.SelectRaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox_SelectRace = new System.Windows.Forms.ToolStripComboBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.dgvRace = new SportControl.DataGridViewPersonTag();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox_ant = new System.Windows.Forms.GroupBox();
+            this.checkBox_ant4 = new System.Windows.Forms.CheckBox();
+            this.checkBox_ant3 = new System.Windows.Forms.CheckBox();
+            this.checkBox_ant2 = new System.Windows.Forms.CheckBox();
+            this.checkBox_ant1 = new System.Windows.Forms.CheckBox();
+            this.button_Read = new System.Windows.Forms.Button();
+            this.maskedTextBox_reader_ip = new System.Windows.Forms.MaskedTextBox();
+            this.checkBox_Simulator = new System.Windows.Forms.CheckBox();
+            this.button_disconnect = new System.Windows.Forms.Button();
+            this.button_connect = new System.Windows.Forms.Button();
+            this.numericUpDown_reader_port = new System.Windows.Forms.NumericUpDown();
+            this.timerRemoveOldRecords = new System.Windows.Forms.Timer(this.components);
+            this.timerUpdateRaceView = new System.Windows.Forms.Timer(this.components);
+            this.dgvRaceCellID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvRaceCellCycle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel_Edit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).BeginInit();
+            this.menuStrip1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRace)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -299,8 +312,175 @@ namespace SportControl
             this.dgvPerson.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPerson_CellMouseDoubleClick);
             this.dgvPerson.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPerson_RowPostPaint);
             // 
+            // TID1
+            // 
+            this.TID1.HeaderText = "TID1";
+            this.TID1.Name = "TID1";
+            this.TID1.ReadOnly = true;
+            this.TID1.Width = 250;
+            // 
+            // TID2
+            // 
+            this.TID2.HeaderText = "TID2";
+            this.TID2.Name = "TID2";
+            this.TID2.ReadOnly = true;
+            this.TID2.Width = 250;
+            // 
+            // RacingNumber
+            // 
+            this.RacingNumber.HeaderText = "Номер";
+            this.RacingNumber.Name = "RacingNumber";
+            this.RacingNumber.ReadOnly = true;
+            this.RacingNumber.Width = 50;
+            // 
+            // SecondName
+            // 
+            this.SecondName.HeaderText = "Фамилия";
+            this.SecondName.Name = "SecondName";
+            this.SecondName.ReadOnly = true;
+            this.SecondName.Width = 200;
+            // 
+            // FirstName
+            // 
+            this.FirstName.HeaderText = "Имя";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.ReadOnly = true;
+            this.FirstName.Width = 200;
+            // 
+            // Age
+            // 
+            this.Age.HeaderText = "Age";
+            this.Age.Name = "Age";
+            this.Age.ReadOnly = true;
+            this.Age.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Age.Width = 30;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 80;
+            // 
+            // Race1
+            // 
+            this.Race1.HeaderText = "1";
+            this.Race1.Name = "Race1";
+            this.Race1.ReadOnly = true;
+            this.Race1.Width = 20;
+            // 
+            // Race2
+            // 
+            this.Race2.HeaderText = "2";
+            this.Race2.Name = "Race2";
+            this.Race2.ReadOnly = true;
+            this.Race2.Width = 20;
+            // 
+            // Race3
+            // 
+            this.Race3.HeaderText = "3";
+            this.Race3.Name = "Race3";
+            this.Race3.ReadOnly = true;
+            this.Race3.Width = 20;
+            // 
+            // Race4
+            // 
+            this.Race4.HeaderText = "4";
+            this.Race4.Name = "Race4";
+            this.Race4.ReadOnly = true;
+            this.Race4.Width = 20;
+            // 
+            // Race5
+            // 
+            this.Race5.HeaderText = "5";
+            this.Race5.Name = "Race5";
+            this.Race5.ReadOnly = true;
+            this.Race5.Width = 20;
+            // 
+            // DT
+            // 
+            this.DT.HeaderText = "Дата";
+            this.DT.Name = "DT";
+            this.DT.ReadOnly = true;
+            this.DT.Width = 130;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sourceForDGVPersonToolStripMenuItem,
+            this.toolStripMenuItem1});
+            this.menuStrip1.Location = new System.Drawing.Point(3, 3);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1336, 24);
+            this.menuStrip1.TabIndex = 43;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // sourceForDGVPersonToolStripMenuItem
+            // 
+            this.sourceForDGVPersonToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBox_PersonDataSource});
+            this.sourceForDGVPersonToolStripMenuItem.Name = "sourceForDGVPersonToolStripMenuItem";
+            this.sourceForDGVPersonToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.sourceForDGVPersonToolStripMenuItem.Text = "Источник данных";
+            // 
+            // toolStripComboBox_PersonDataSource
+            // 
+            this.toolStripComboBox_PersonDataSource.Items.AddRange(new object[] {
+            "Файл",
+            "Считыватель"});
+            this.toolStripComboBox_PersonDataSource.Name = "toolStripComboBox_PersonDataSource";
+            this.toolStripComboBox_PersonDataSource.Size = new System.Drawing.Size(121, 23);
+            this.toolStripComboBox_PersonDataSource.SelectedIndexChanged += new System.EventHandler(this.comboBox_PersonDataSource_SelectedValueChanged);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearAllRacesToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.SelectRaceToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(77, 20);
+            this.toolStripMenuItem1.Text = "Участники";
+            // 
+            // clearAllRacesToolStripMenuItem
+            // 
+            this.clearAllRacesToolStripMenuItem.Name = "clearAllRacesToolStripMenuItem";
+            this.clearAllRacesToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.clearAllRacesToolStripMenuItem.Text = "Очистить заезды всех в базе";
+            this.clearAllRacesToolStripMenuItem.Click += new System.EventHandler(this.clearAllRacesToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(226, 6);
+            // 
+            // SelectRaceToolStripMenuItem
+            // 
+            this.SelectRaceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBox_SelectRace});
+            this.SelectRaceToolStripMenuItem.Name = "SelectRaceToolStripMenuItem";
+            this.SelectRaceToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.SelectRaceToolStripMenuItem.Text = "Выбрать заезд";
+            // 
+            // toolStripComboBox_SelectRace
+            // 
+            this.toolStripComboBox_SelectRace.Items.AddRange(new object[] {
+            "Все",
+            "Заезд 1",
+            "Заезд 2",
+            "Заезд 3",
+            "Заезд 4",
+            "Заезд 5"});
+            this.toolStripComboBox_SelectRace.Name = "toolStripComboBox_SelectRace";
+            this.toolStripComboBox_SelectRace.Size = new System.Drawing.Size(121, 23);
+            this.toolStripComboBox_SelectRace.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox_SelectRace_SelectedIndexChanged);
+            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.comboBox1);
+            this.tabPage2.Controls.Add(this.dgvRace);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -308,6 +488,60 @@ namespace SportControl
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Заед";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(476, 6);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 36;
+            this.button2.Text = "Стоп";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(274, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 35;
+            this.button1.Text = "Старт!";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Заезд 1",
+            "Заезд 2",
+            "Заезд 3",
+            "Заезд 4",
+            "Заезд 5"});
+            this.comboBox1.Location = new System.Drawing.Point(43, 7);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 34;
+            this.comboBox1.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
+            // 
+            // dgvRace
+            // 
+            this.dgvRace.AllowUserToAddRows = false;
+            this.dgvRace.AllowUserToDeleteRows = false;
+            this.dgvRace.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRace.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvRaceCellID,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn8,
+            this.dgvRaceCellCycle});
+            this.dgvRace.Location = new System.Drawing.Point(5, 52);
+            this.dgvRace.MultiSelect = false;
+            this.dgvRace.Name = "dgvRace";
+            this.dgvRace.ReadOnly = true;
+            this.dgvRace.RowHeadersWidth = 25;
+            this.dgvRace.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvRace.Size = new System.Drawing.Size(1333, 519);
+            this.dgvRace.TabIndex = 33;
             // 
             // tabPage3
             // 
@@ -456,168 +690,54 @@ namespace SportControl
             this.timerRemoveOldRecords.Interval = 1000;
             this.timerRemoveOldRecords.Tick += new System.EventHandler(this.timerRemoveOldRecords_Tick);
             // 
-            // menuStrip1
+            // timerUpdateRaceView
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sourceForDGVPersonToolStripMenuItem,
-            this.toolStripMenuItem1});
-            this.menuStrip1.Location = new System.Drawing.Point(3, 3);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1336, 24);
-            this.menuStrip1.TabIndex = 43;
-            this.menuStrip1.Text = "menuStrip1";
+            this.timerUpdateRaceView.Enabled = true;
+            this.timerUpdateRaceView.Interval = 1000;
+            this.timerUpdateRaceView.Tick += new System.EventHandler(this.timerUpdateRaceView_Tick);
             // 
-            // toolStripMenuItem1
+            // dgvRaceCellID
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearAllRacesToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.SelectRaceToolStripMenuItem});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(77, 20);
-            this.toolStripMenuItem1.Text = "Участники";
+            this.dgvRaceCellID.HeaderText = "ID";
+            this.dgvRaceCellID.Name = "dgvRaceCellID";
+            this.dgvRaceCellID.ReadOnly = true;
+            this.dgvRaceCellID.Visible = false;
+            this.dgvRaceCellID.Width = 80;
             // 
-            // clearAllRacesToolStripMenuItem
+            // dataGridViewTextBoxColumn3
             // 
-            this.clearAllRacesToolStripMenuItem.Name = "clearAllRacesToolStripMenuItem";
-            this.clearAllRacesToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.clearAllRacesToolStripMenuItem.Text = "Очистить заезды всех в базе";
-            this.clearAllRacesToolStripMenuItem.Click += new System.EventHandler(this.clearAllRacesToolStripMenuItem_Click);
+            this.dataGridViewTextBoxColumn3.HeaderText = "Номер";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 50;
             // 
-            // toolStripSeparator1
+            // dataGridViewTextBoxColumn4
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(226, 6);
+            this.dataGridViewTextBoxColumn4.HeaderText = "Фамилия";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 200;
             // 
-            // sourceForDGVPersonToolStripMenuItem
+            // dataGridViewTextBoxColumn5
             // 
-            this.sourceForDGVPersonToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBox_PersonDataSource});
-            this.sourceForDGVPersonToolStripMenuItem.Name = "sourceForDGVPersonToolStripMenuItem";
-            this.sourceForDGVPersonToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
-            this.sourceForDGVPersonToolStripMenuItem.Text = "Источник данных";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Имя";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 200;
             // 
-            // toolStripComboBox_PersonDataSource
+            // dataGridViewTextBoxColumn8
             // 
-            this.toolStripComboBox_PersonDataSource.Items.AddRange(new object[] {
-            "Файл",
-            "Считыватель"});
-            this.toolStripComboBox_PersonDataSource.Name = "toolStripComboBox_PersonDataSource";
-            this.toolStripComboBox_PersonDataSource.Size = new System.Drawing.Size(121, 23);
-            this.toolStripComboBox_PersonDataSource.SelectedIndexChanged += new System.EventHandler(this.comboBox_PersonDataSource_SelectedValueChanged);
+            this.dataGridViewTextBoxColumn8.HeaderText = "Дата";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Visible = false;
+            this.dataGridViewTextBoxColumn8.Width = 130;
             // 
-            // TID1
+            // dgvRaceCellCycle
             // 
-            this.TID1.HeaderText = "TID1";
-            this.TID1.Name = "TID1";
-            this.TID1.ReadOnly = true;
-            this.TID1.Width = 250;
-            // 
-            // TID2
-            // 
-            this.TID2.HeaderText = "TID2";
-            this.TID2.Name = "TID2";
-            this.TID2.ReadOnly = true;
-            this.TID2.Width = 250;
-            // 
-            // RacingNumber
-            // 
-            this.RacingNumber.HeaderText = "Номер";
-            this.RacingNumber.Name = "RacingNumber";
-            this.RacingNumber.ReadOnly = true;
-            this.RacingNumber.Width = 50;
-            // 
-            // SecondName
-            // 
-            this.SecondName.HeaderText = "Фамилия";
-            this.SecondName.Name = "SecondName";
-            this.SecondName.ReadOnly = true;
-            this.SecondName.Width = 200;
-            // 
-            // FirstName
-            // 
-            this.FirstName.HeaderText = "Имя";
-            this.FirstName.Name = "FirstName";
-            this.FirstName.ReadOnly = true;
-            this.FirstName.Width = 200;
-            // 
-            // Age
-            // 
-            this.Age.HeaderText = "Age";
-            this.Age.Name = "Age";
-            this.Age.ReadOnly = true;
-            this.Age.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Age.Width = 30;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 80;
-            // 
-            // Race1
-            // 
-            this.Race1.HeaderText = "1";
-            this.Race1.Name = "Race1";
-            this.Race1.ReadOnly = true;
-            this.Race1.Width = 20;
-            // 
-            // Race2
-            // 
-            this.Race2.HeaderText = "2";
-            this.Race2.Name = "Race2";
-            this.Race2.ReadOnly = true;
-            this.Race2.Width = 20;
-            // 
-            // Race3
-            // 
-            this.Race3.HeaderText = "3";
-            this.Race3.Name = "Race3";
-            this.Race3.ReadOnly = true;
-            this.Race3.Width = 20;
-            // 
-            // Race4
-            // 
-            this.Race4.HeaderText = "4";
-            this.Race4.Name = "Race4";
-            this.Race4.ReadOnly = true;
-            this.Race4.Width = 20;
-            // 
-            // Race5
-            // 
-            this.Race5.HeaderText = "5";
-            this.Race5.Name = "Race5";
-            this.Race5.ReadOnly = true;
-            this.Race5.Width = 20;
-            // 
-            // DT
-            // 
-            this.DT.HeaderText = "Дата";
-            this.DT.Name = "DT";
-            this.DT.ReadOnly = true;
-            this.DT.Width = 130;
-            // 
-            // SelectRaceToolStripMenuItem
-            // 
-            this.SelectRaceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBox_SelectRace});
-            this.SelectRaceToolStripMenuItem.Name = "SelectRaceToolStripMenuItem";
-            this.SelectRaceToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.SelectRaceToolStripMenuItem.Text = "Выбрать заезд";
-            // 
-            // toolStripComboBox_SelectRace
-            // 
-            this.toolStripComboBox_SelectRace.Items.AddRange(new object[] {
-            "Все",
-            "Заезд 1",
-            "Заезд 2",
-            "Заезд 3",
-            "Заезд 4",
-            "Заезд 5"});
-            this.toolStripComboBox_SelectRace.Name = "toolStripComboBox_SelectRace";
-            this.toolStripComboBox_SelectRace.Size = new System.Drawing.Size(121, 23);
-            this.toolStripComboBox_SelectRace.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox_SelectRace_SelectedIndexChanged);
+            this.dgvRaceCellCycle.HeaderText = "Круг";
+            this.dgvRaceCellCycle.Name = "dgvRaceCellCycle";
+            this.dgvRaceCellCycle.ReadOnly = true;
             // 
             // FormMain
             // 
@@ -634,13 +754,15 @@ namespace SportControl
             this.flowLayoutPanel_Edit.ResumeLayout(false);
             this.flowLayoutPanel_Edit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRace)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.groupBox_ant.ResumeLayout(false);
             this.groupBox_ant.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -701,5 +823,16 @@ namespace SportControl
         private System.Windows.Forms.DataGridViewTextBoxColumn DT;
         private System.Windows.Forms.ToolStripMenuItem SelectRaceToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox_SelectRace;
+        private DataGridViewPersonTag dgvRace;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Timer timerUpdateRaceView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvRaceCellID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvRaceCellCycle;
     }
 }
