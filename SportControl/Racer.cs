@@ -13,7 +13,7 @@ namespace SportControl
         public string id;
         public string Name;
         public string Number;
-        int BestCycle = 0;
+        public int BestCycle = 0;
         public List<CycleTime> ListCycles = new List<CycleTime>();
         public string LastCycleTime {
             get

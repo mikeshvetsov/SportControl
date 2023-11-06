@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -356,7 +357,7 @@ namespace SportControl
 
                         row.Cells["dgvRaceCellCycle"].Value = mRacer.ListCycles.Count - 1;
                         row.Cells["dgvRaceCellCycleTime"].Value = mRacer.LastCycleTime;
-                        row.Cells["dgvRaceCellBestCycleTime"].Value = mRacer.BestCycleTime;
+                        row.Cells["dgvRaceCellBestTime"].Value = mRacer.BestCycleTime;
 
                         if (mRacer.active)
                             row.DefaultCellStyle.BackColor = Color.LightGreen;
@@ -389,6 +390,70 @@ namespace SportControl
         private void button_RaceStop_Click(object sender, EventArgs e)
         {
             mRace.Stop();
+        }
+
+        private void dgvRace_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int i = 0;
+            DataGridViewRow dgvr;
+            string id = (sender as DataGridView).Rows[e.RowIndex].Cells["dgvRaceCellID"].Value.ToString();
+
+            Racer mRacer = mRace.Racers.Find(x => x.id == id);
+
+            dgvRacerData.Rows.Clear();
+
+            foreach (var x in mRacer.ListCycles)
+            {
+                dgvr = new DataGridViewRow();
+                dgvr.CreateCells(dgvRacerData, new object[] { i, x.StrDeltaDT, x.StrDT });
+                if (i == mRacer.BestCycle)
+                    dgvr.DefaultCellStyle.BackColor = Color.LightSeaGreen;
+                dgvRacerData.Rows.Add(dgvr);
+
+                i++;
+            }
+        }
+
+        private void button_Save_Click(object sender, EventArgs e)
+        {
+            string FileName = $@"C:\temp\{comboBoxRace.SelectedItem}.txt";
+            List<String> lines = new List<string>();
+
+            lines.Add("Общая таблица:");
+            lines.Add("Номер\t\tИмя                 \tКругов\tЛучшее время\tID");
+            foreach (DataGridViewRow row in dgvRace.Rows)
+            {
+                lines.Add(
+                    row.Cells["dgvRaceCellNuber"].Value.ToString() + "\t\t\t" +
+                    row.Cells["dgvRaceCellName"].Value.ToString().PadRight(20) + "\t"+
+                    row.Cells["dgvRaceCellCycle"].Value.ToString() + "\t\t" +
+                    row.Cells["dgvRaceCellBestTime"].Value.ToString()+ "\t\t" +
+                    row.Cells["dgvRaceCellID"].Value.ToString() 
+                );
+            }
+
+            System.IO.File.WriteAllLines(FileName, lines);
+
+            lines.Clear();
+            lines.Add("Круги по каждому участнику:");
+            foreach (Racer mRacer in mRace.Racers)
+            {
+                lines.Add($"№{mRacer.Number}\t{mRacer.Name.PadRight(20)}\tКругов: {mRacer.ListCycles.Count - 1}\tЛучшее время: {mRacer.BestCycleTime} Лучший круг: {mRacer.BestCycle}\t\tID: {mRacer.id}");
+                int j = 0;
+                foreach (var i in mRacer.ListCycles)
+                {
+                    if (j > 0)
+                        lines.Add(string.Format("{0}\t{1}", j, i.StrDeltaDT.PadRight(13)));
+                    j++;
+                }
+                
+
+                lines.Add("--------------------------------------------------------");
+            }
+
+            File.AppendAllLines(FileName, lines);
+            
+
         }
     }
 }
