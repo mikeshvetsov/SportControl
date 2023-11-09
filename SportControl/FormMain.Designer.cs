@@ -101,6 +101,10 @@ namespace SportControl
             this.numericUpDown_reader_port = new System.Windows.Forms.NumericUpDown();
             this.timerRemoveOldRecords = new System.Windows.Forms.Timer(this.components);
             this.timerUpdateRaceView = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.label_TimeStart = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label_TimeRace = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel_Edit.SuspendLayout();
@@ -484,6 +488,10 @@ namespace SportControl
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.label_TimeRace);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.label_TimeStart);
             this.tabPage2.Controls.Add(this.button_Save);
             this.tabPage2.Controls.Add(this.dgvRacerData);
             this.tabPage2.Controls.Add(this.button_RaceStop);
@@ -673,7 +681,7 @@ namespace SportControl
             this.groupBox_ant.Controls.Add(this.checkBox_ant3);
             this.groupBox_ant.Controls.Add(this.checkBox_ant2);
             this.groupBox_ant.Controls.Add(this.checkBox_ant1);
-            this.groupBox_ant.Location = new System.Drawing.Point(11, 38);
+            this.groupBox_ant.Location = new System.Drawing.Point(8, 39);
             this.groupBox_ant.Name = "groupBox_ant";
             this.groupBox_ant.Size = new System.Drawing.Size(228, 48);
             this.groupBox_ant.TabIndex = 30;
@@ -728,17 +736,17 @@ namespace SportControl
             // 
             // button_Read
             // 
-            this.button_Read.Location = new System.Drawing.Point(587, 51);
+            this.button_Read.Location = new System.Drawing.Point(92, 103);
             this.button_Read.Margin = new System.Windows.Forms.Padding(1);
             this.button_Read.Name = "button_Read";
-            this.button_Read.Size = new System.Drawing.Size(86, 23);
+            this.button_Read.Size = new System.Drawing.Size(83, 23);
             this.button_Read.TabIndex = 31;
             this.button_Read.Text = "Читать";
             this.button_Read.UseVisualStyleBackColor = true;
             // 
             // maskedTextBox_reader_ip
             // 
-            this.maskedTextBox_reader_ip.Location = new System.Drawing.Point(256, 55);
+            this.maskedTextBox_reader_ip.Location = new System.Drawing.Point(6, 12);
             this.maskedTextBox_reader_ip.Name = "maskedTextBox_reader_ip";
             this.maskedTextBox_reader_ip.Size = new System.Drawing.Size(88, 20);
             this.maskedTextBox_reader_ip.TabIndex = 27;
@@ -747,7 +755,7 @@ namespace SportControl
             // checkBox_Simulator
             // 
             this.checkBox_Simulator.AutoSize = true;
-            this.checkBox_Simulator.Location = new System.Drawing.Point(411, 57);
+            this.checkBox_Simulator.Location = new System.Drawing.Point(161, 14);
             this.checkBox_Simulator.Name = "checkBox_Simulator";
             this.checkBox_Simulator.Size = new System.Drawing.Size(81, 17);
             this.checkBox_Simulator.TabIndex = 26;
@@ -756,9 +764,9 @@ namespace SportControl
             // 
             // button_disconnect
             // 
-            this.button_disconnect.Location = new System.Drawing.Point(677, 51);
+            this.button_disconnect.Location = new System.Drawing.Point(179, 103);
             this.button_disconnect.Name = "button_disconnect";
-            this.button_disconnect.Size = new System.Drawing.Size(85, 23);
+            this.button_disconnect.Size = new System.Drawing.Size(82, 23);
             this.button_disconnect.TabIndex = 29;
             this.button_disconnect.Text = "Отключить";
             this.button_disconnect.UseVisualStyleBackColor = true;
@@ -766,9 +774,9 @@ namespace SportControl
             // 
             // button_connect
             // 
-            this.button_connect.Location = new System.Drawing.Point(498, 51);
+            this.button_connect.Location = new System.Drawing.Point(6, 103);
             this.button_connect.Name = "button_connect";
-            this.button_connect.Size = new System.Drawing.Size(85, 23);
+            this.button_connect.Size = new System.Drawing.Size(82, 23);
             this.button_connect.TabIndex = 25;
             this.button_connect.Text = "Подключить";
             this.button_connect.UseVisualStyleBackColor = true;
@@ -776,7 +784,7 @@ namespace SportControl
             // 
             // numericUpDown_reader_port
             // 
-            this.numericUpDown_reader_port.Location = new System.Drawing.Point(350, 56);
+            this.numericUpDown_reader_port.Location = new System.Drawing.Point(100, 13);
             this.numericUpDown_reader_port.Maximum = new decimal(new int[] {
             65000,
             0,
@@ -802,6 +810,42 @@ namespace SportControl
             this.timerUpdateRaceView.Enabled = true;
             this.timerUpdateRaceView.Tick += new System.EventHandler(this.timerUpdateRaceView_Tick);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 574);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 13);
+            this.label2.TabIndex = 40;
+            this.label2.Text = "Время старта:";
+            // 
+            // label_TimeStart
+            // 
+            this.label_TimeStart.AutoSize = true;
+            this.label_TimeStart.Location = new System.Drawing.Point(91, 574);
+            this.label_TimeStart.Name = "label_TimeStart";
+            this.label_TimeStart.Size = new System.Drawing.Size(31, 13);
+            this.label_TimeStart.TabIndex = 39;
+            this.label_TimeStart.Text = "0000";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(166, 574);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(75, 13);
+            this.label3.TabIndex = 42;
+            this.label3.Text = "Время гонки:";
+            // 
+            // label_TimeRace
+            // 
+            this.label_TimeRace.AutoSize = true;
+            this.label_TimeRace.Location = new System.Drawing.Point(249, 574);
+            this.label_TimeRace.Name = "label_TimeRace";
+            this.label_TimeRace.Size = new System.Drawing.Size(31, 13);
+            this.label_TimeRace.TabIndex = 41;
+            this.label_TimeRace.Text = "0000";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -820,6 +864,7 @@ namespace SportControl
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRacerData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRace)).EndInit();
             this.tabPage3.ResumeLayout(false);
@@ -904,5 +949,9 @@ namespace SportControl
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvRaceCellCycle;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvRaceCellCycleTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvRaceCellBestTime;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_TimeStart;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label_TimeRace;
     }
 }

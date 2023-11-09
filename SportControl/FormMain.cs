@@ -344,6 +344,12 @@ namespace SportControl
 
         private void timerUpdateRaceView_Tick(object sender, EventArgs e)
         {
+
+            if (mRace.Started) {
+                mRace.TimeStartRace.DeltaDT = DateTime.Now - mRace.TimeStartRace.DT;
+                label_TimeRace.Text = mRace.TimeStartRace.StrDeltaDT;
+            }
+                 
             foreach( Racer mRacer in mRace.Racers)
             {
 
@@ -385,6 +391,7 @@ namespace SportControl
         private void button_RaceStart_Click(object sender, EventArgs e)
         {
             mRace.Start();
+            label_TimeStart.Text = mRace.TimeStartRace.StrDT;
         }
 
         private void button_RaceStop_Click(object sender, EventArgs e)

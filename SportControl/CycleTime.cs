@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SportControl
 {
-    public struct CycleTime
+    public class CycleTime
     {
         public DateTime DT;
         public TimeSpan DeltaDT;
@@ -32,5 +32,6 @@ namespace SportControl
                 return string.Format("{0:d2}:{1:d2}:{2:d2}:{3}", DeltaDT.Hours, DeltaDT.Minutes, DeltaDT.Seconds, DeltaDT.Milliseconds);
             }
         }
+
     }
 }

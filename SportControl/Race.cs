@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace SportControl
 {
@@ -13,7 +14,8 @@ namespace SportControl
         // 1 список участников загружается по смене комбобокса заездов
 
         public bool Started = false;
-        public bool Finished = false;
+
+        public CycleTime TimeStartRace = new CycleTime(DateTime.Now, TimeSpan.Zero);
 
         public List<Racer> Racers = new List<Racer>();
 
@@ -37,7 +39,7 @@ namespace SportControl
 
         public void TagHandler(TagDT tagdt)
         {
-            if (!Started || Finished)
+            if (!Started)
                 return;
 
             foreach (Racer mRacer in Racers)
@@ -50,11 +52,13 @@ namespace SportControl
         public void Start()
         {
             Started = true;
+            TimeStartRace.DT = DateTime.Now;           
         }
 
         public void Stop()
         {
-            Finished = true;
+            Started = false;
         }
+
     }
 }
