@@ -48,20 +48,6 @@ namespace SportControl
             this.checkBox_Race3 = new System.Windows.Forms.CheckBox();
             this.checkBox_Race4 = new System.Windows.Forms.CheckBox();
             this.checkBox_Race5 = new System.Windows.Forms.CheckBox();
-            this.dgvPerson = new SportControl.DataGridViewPersonTag();
-            this.TID1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RacingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SecondName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Race1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Race2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Race3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Race4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Race5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sourceForDGVPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox_PersonDataSource = new System.Windows.Forms.ToolStripComboBox();
@@ -71,6 +57,10 @@ namespace SportControl
             this.SelectRaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox_SelectRace = new System.Windows.Forms.ToolStripComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label_TimeRace = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label_TimeStart = new System.Windows.Forms.Label();
             this.button_Save = new System.Windows.Forms.Button();
             this.dgvRacerData = new System.Windows.Forms.DataGridView();
             this.CycleNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,14 +69,6 @@ namespace SportControl
             this.button_RaceStop = new System.Windows.Forms.Button();
             this.button_RaceStart = new System.Windows.Forms.Button();
             this.comboBoxRace = new System.Windows.Forms.ComboBox();
-            this.dgvRace = new SportControl.DataGridViewPersonTag();
-            this.dgvRaceCellID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvRaceCellNuber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvRaceCellName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvRaceCellDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvRaceCellCycle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvRaceCellCycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvRaceCellBestTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox_ant = new System.Windows.Forms.GroupBox();
             this.checkBox_ant4 = new System.Windows.Forms.CheckBox();
@@ -101,21 +83,41 @@ namespace SportControl
             this.numericUpDown_reader_port = new System.Windows.Forms.NumericUpDown();
             this.timerRemoveOldRecords = new System.Windows.Forms.Timer(this.components);
             this.timerUpdateRaceView = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.label_TimeStart = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label_TimeRace = new System.Windows.Forms.Label();
+            this.dgvPerson = new SportControl.DataGridViewPersonTag();
+            this.TID1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RacingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SecondName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Race1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Race2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Race3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Race4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Race5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvRace = new SportControl.DataGridViewPersonTag();
+            this.dgvRaceCellID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvRaceCellNuber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvRaceCellName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvRaceCellDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvRaceCellCycle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvRaceCellCycleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvRaceCellBestTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBox_log = new System.Windows.Forms.TextBox();
+            this.textBox_log2 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel_Edit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRacerData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRace)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRace)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -293,128 +295,6 @@ namespace SportControl
             this.checkBox_Race5.Text = "5";
             this.checkBox_Race5.UseVisualStyleBackColor = true;
             // 
-            // dgvPerson
-            // 
-            this.dgvPerson.AllowUserToAddRows = false;
-            this.dgvPerson.AllowUserToDeleteRows = false;
-            this.dgvPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPerson.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.TID1,
-            this.TID2,
-            this.RacingNumber,
-            this.SecondName,
-            this.FirstName,
-            this.Age,
-            this.ID,
-            this.Race1,
-            this.Race2,
-            this.Race3,
-            this.Race4,
-            this.Race5,
-            this.DT});
-            this.dgvPerson.Location = new System.Drawing.Point(3, 30);
-            this.dgvPerson.MultiSelect = false;
-            this.dgvPerson.Name = "dgvPerson";
-            this.dgvPerson.ReadOnly = true;
-            this.dgvPerson.RowHeadersWidth = 25;
-            this.dgvPerson.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPerson.Size = new System.Drawing.Size(1333, 519);
-            this.dgvPerson.TabIndex = 32;
-            this.dgvPerson.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPerson_CellMouseDoubleClick);
-            this.dgvPerson.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPerson_RowPostPaint);
-            // 
-            // TID1
-            // 
-            this.TID1.HeaderText = "TID1";
-            this.TID1.Name = "TID1";
-            this.TID1.ReadOnly = true;
-            this.TID1.Width = 250;
-            // 
-            // TID2
-            // 
-            this.TID2.HeaderText = "TID2";
-            this.TID2.Name = "TID2";
-            this.TID2.ReadOnly = true;
-            this.TID2.Width = 250;
-            // 
-            // RacingNumber
-            // 
-            this.RacingNumber.HeaderText = "Номер";
-            this.RacingNumber.Name = "RacingNumber";
-            this.RacingNumber.ReadOnly = true;
-            this.RacingNumber.Width = 50;
-            // 
-            // SecondName
-            // 
-            this.SecondName.HeaderText = "Фамилия";
-            this.SecondName.Name = "SecondName";
-            this.SecondName.ReadOnly = true;
-            this.SecondName.Width = 200;
-            // 
-            // FirstName
-            // 
-            this.FirstName.HeaderText = "Имя";
-            this.FirstName.Name = "FirstName";
-            this.FirstName.ReadOnly = true;
-            this.FirstName.Width = 200;
-            // 
-            // Age
-            // 
-            this.Age.HeaderText = "Age";
-            this.Age.Name = "Age";
-            this.Age.ReadOnly = true;
-            this.Age.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Age.Width = 30;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 80;
-            // 
-            // Race1
-            // 
-            this.Race1.HeaderText = "1";
-            this.Race1.Name = "Race1";
-            this.Race1.ReadOnly = true;
-            this.Race1.Width = 20;
-            // 
-            // Race2
-            // 
-            this.Race2.HeaderText = "2";
-            this.Race2.Name = "Race2";
-            this.Race2.ReadOnly = true;
-            this.Race2.Width = 20;
-            // 
-            // Race3
-            // 
-            this.Race3.HeaderText = "3";
-            this.Race3.Name = "Race3";
-            this.Race3.ReadOnly = true;
-            this.Race3.Width = 20;
-            // 
-            // Race4
-            // 
-            this.Race4.HeaderText = "4";
-            this.Race4.Name = "Race4";
-            this.Race4.ReadOnly = true;
-            this.Race4.Width = 20;
-            // 
-            // Race5
-            // 
-            this.Race5.HeaderText = "5";
-            this.Race5.Name = "Race5";
-            this.Race5.ReadOnly = true;
-            this.Race5.Width = 20;
-            // 
-            // DT
-            // 
-            this.DT.HeaderText = "Дата";
-            this.DT.Name = "DT";
-            this.DT.ReadOnly = true;
-            this.DT.Width = 130;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -488,6 +368,8 @@ namespace SportControl
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBox_log2);
+            this.tabPage2.Controls.Add(this.textBox_log);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.label_TimeRace);
             this.tabPage2.Controls.Add(this.label2);
@@ -506,9 +388,45 @@ namespace SportControl
             this.tabPage2.Text = "Заезд";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(166, 574);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(75, 13);
+            this.label3.TabIndex = 42;
+            this.label3.Text = "Время гонки:";
+            // 
+            // label_TimeRace
+            // 
+            this.label_TimeRace.AutoSize = true;
+            this.label_TimeRace.Location = new System.Drawing.Point(249, 574);
+            this.label_TimeRace.Name = "label_TimeRace";
+            this.label_TimeRace.Size = new System.Drawing.Size(31, 13);
+            this.label_TimeRace.TabIndex = 41;
+            this.label_TimeRace.Text = "0000";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 574);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 13);
+            this.label2.TabIndex = 40;
+            this.label2.Text = "Время старта:";
+            // 
+            // label_TimeStart
+            // 
+            this.label_TimeStart.AutoSize = true;
+            this.label_TimeStart.Location = new System.Drawing.Point(91, 574);
+            this.label_TimeStart.Name = "label_TimeStart";
+            this.label_TimeStart.Size = new System.Drawing.Size(31, 13);
+            this.label_TimeStart.TabIndex = 39;
+            this.label_TimeStart.Text = "0000";
+            // 
             // button_Save
             // 
-            this.button_Save.Location = new System.Drawing.Point(614, 6);
+            this.button_Save.Location = new System.Drawing.Point(304, 3);
             this.button_Save.Name = "button_Save";
             this.button_Save.Size = new System.Drawing.Size(75, 23);
             this.button_Save.TabIndex = 38;
@@ -553,7 +471,7 @@ namespace SportControl
             // 
             // button_RaceStop
             // 
-            this.button_RaceStop.Location = new System.Drawing.Point(235, 3);
+            this.button_RaceStop.Location = new System.Drawing.Point(223, 3);
             this.button_RaceStop.Name = "button_RaceStop";
             this.button_RaceStop.Size = new System.Drawing.Size(75, 23);
             this.button_RaceStop.TabIndex = 36;
@@ -585,78 +503,6 @@ namespace SportControl
             this.comboBoxRace.Size = new System.Drawing.Size(121, 21);
             this.comboBoxRace.TabIndex = 34;
             this.comboBoxRace.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
-            // 
-            // dgvRace
-            // 
-            this.dgvRace.AllowUserToAddRows = false;
-            this.dgvRace.AllowUserToDeleteRows = false;
-            this.dgvRace.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRace.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvRaceCellID,
-            this.dgvRaceCellNuber,
-            this.dgvRaceCellName,
-            this.dgvRaceCellDT,
-            this.dgvRaceCellCycle,
-            this.dgvRaceCellCycleTime,
-            this.dgvRaceCellBestTime});
-            this.dgvRace.Location = new System.Drawing.Point(5, 52);
-            this.dgvRace.MultiSelect = false;
-            this.dgvRace.Name = "dgvRace";
-            this.dgvRace.ReadOnly = true;
-            this.dgvRace.RowHeadersWidth = 25;
-            this.dgvRace.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvRace.Size = new System.Drawing.Size(606, 519);
-            this.dgvRace.TabIndex = 33;
-            this.dgvRace.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRace_RowEnter);
-            // 
-            // dgvRaceCellID
-            // 
-            this.dgvRaceCellID.HeaderText = "ID";
-            this.dgvRaceCellID.Name = "dgvRaceCellID";
-            this.dgvRaceCellID.ReadOnly = true;
-            this.dgvRaceCellID.Visible = false;
-            this.dgvRaceCellID.Width = 80;
-            // 
-            // dgvRaceCellNuber
-            // 
-            this.dgvRaceCellNuber.HeaderText = "Номер";
-            this.dgvRaceCellNuber.Name = "dgvRaceCellNuber";
-            this.dgvRaceCellNuber.ReadOnly = true;
-            this.dgvRaceCellNuber.Width = 50;
-            // 
-            // dgvRaceCellName
-            // 
-            this.dgvRaceCellName.HeaderText = "Участник";
-            this.dgvRaceCellName.Name = "dgvRaceCellName";
-            this.dgvRaceCellName.ReadOnly = true;
-            this.dgvRaceCellName.Width = 200;
-            // 
-            // dgvRaceCellDT
-            // 
-            this.dgvRaceCellDT.HeaderText = "Дата";
-            this.dgvRaceCellDT.Name = "dgvRaceCellDT";
-            this.dgvRaceCellDT.ReadOnly = true;
-            this.dgvRaceCellDT.Visible = false;
-            this.dgvRaceCellDT.Width = 130;
-            // 
-            // dgvRaceCellCycle
-            // 
-            this.dgvRaceCellCycle.HeaderText = "Круг";
-            this.dgvRaceCellCycle.Name = "dgvRaceCellCycle";
-            this.dgvRaceCellCycle.ReadOnly = true;
-            // 
-            // dgvRaceCellCycleTime
-            // 
-            this.dgvRaceCellCycleTime.HeaderText = "Время круга";
-            this.dgvRaceCellCycleTime.Name = "dgvRaceCellCycleTime";
-            this.dgvRaceCellCycleTime.ReadOnly = true;
-            // 
-            // dgvRaceCellBestTime
-            // 
-            this.dgvRaceCellBestTime.HeaderText = "Лучшее время";
-            this.dgvRaceCellBestTime.Name = "dgvRaceCellBestTime";
-            this.dgvRaceCellBestTime.ReadOnly = true;
-            this.dgvRaceCellBestTime.Width = 105;
             // 
             // tabPage3
             // 
@@ -810,47 +656,225 @@ namespace SportControl
             this.timerUpdateRaceView.Enabled = true;
             this.timerUpdateRaceView.Tick += new System.EventHandler(this.timerUpdateRaceView_Tick);
             // 
-            // label2
+            // dgvPerson
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 574);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 13);
-            this.label2.TabIndex = 40;
-            this.label2.Text = "Время старта:";
+            this.dgvPerson.AllowUserToAddRows = false;
+            this.dgvPerson.AllowUserToDeleteRows = false;
+            this.dgvPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPerson.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TID1,
+            this.TID2,
+            this.RacingNumber,
+            this.SecondName,
+            this.FirstName,
+            this.Age,
+            this.ID,
+            this.Race1,
+            this.Race2,
+            this.Race3,
+            this.Race4,
+            this.Race5,
+            this.DT});
+            this.dgvPerson.Location = new System.Drawing.Point(3, 30);
+            this.dgvPerson.MultiSelect = false;
+            this.dgvPerson.Name = "dgvPerson";
+            this.dgvPerson.ReadOnly = true;
+            this.dgvPerson.RowHeadersWidth = 25;
+            this.dgvPerson.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPerson.Size = new System.Drawing.Size(1333, 519);
+            this.dgvPerson.TabIndex = 32;
+            this.dgvPerson.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPerson_CellMouseDoubleClick);
+            this.dgvPerson.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPerson_RowPostPaint);
             // 
-            // label_TimeStart
+            // TID1
             // 
-            this.label_TimeStart.AutoSize = true;
-            this.label_TimeStart.Location = new System.Drawing.Point(91, 574);
-            this.label_TimeStart.Name = "label_TimeStart";
-            this.label_TimeStart.Size = new System.Drawing.Size(31, 13);
-            this.label_TimeStart.TabIndex = 39;
-            this.label_TimeStart.Text = "0000";
+            this.TID1.HeaderText = "TID1";
+            this.TID1.Name = "TID1";
+            this.TID1.ReadOnly = true;
+            this.TID1.Width = 250;
             // 
-            // label3
+            // TID2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(166, 574);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
-            this.label3.TabIndex = 42;
-            this.label3.Text = "Время гонки:";
+            this.TID2.HeaderText = "TID2";
+            this.TID2.Name = "TID2";
+            this.TID2.ReadOnly = true;
+            this.TID2.Width = 250;
             // 
-            // label_TimeRace
+            // RacingNumber
             // 
-            this.label_TimeRace.AutoSize = true;
-            this.label_TimeRace.Location = new System.Drawing.Point(249, 574);
-            this.label_TimeRace.Name = "label_TimeRace";
-            this.label_TimeRace.Size = new System.Drawing.Size(31, 13);
-            this.label_TimeRace.TabIndex = 41;
-            this.label_TimeRace.Text = "0000";
+            this.RacingNumber.HeaderText = "Номер";
+            this.RacingNumber.Name = "RacingNumber";
+            this.RacingNumber.ReadOnly = true;
+            this.RacingNumber.Width = 50;
+            // 
+            // SecondName
+            // 
+            this.SecondName.HeaderText = "Фамилия";
+            this.SecondName.Name = "SecondName";
+            this.SecondName.ReadOnly = true;
+            this.SecondName.Width = 200;
+            // 
+            // FirstName
+            // 
+            this.FirstName.HeaderText = "Имя";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.ReadOnly = true;
+            this.FirstName.Width = 200;
+            // 
+            // Age
+            // 
+            this.Age.HeaderText = "Age";
+            this.Age.Name = "Age";
+            this.Age.ReadOnly = true;
+            this.Age.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Age.Width = 30;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 80;
+            // 
+            // Race1
+            // 
+            this.Race1.HeaderText = "1";
+            this.Race1.Name = "Race1";
+            this.Race1.ReadOnly = true;
+            this.Race1.Width = 20;
+            // 
+            // Race2
+            // 
+            this.Race2.HeaderText = "2";
+            this.Race2.Name = "Race2";
+            this.Race2.ReadOnly = true;
+            this.Race2.Width = 20;
+            // 
+            // Race3
+            // 
+            this.Race3.HeaderText = "3";
+            this.Race3.Name = "Race3";
+            this.Race3.ReadOnly = true;
+            this.Race3.Width = 20;
+            // 
+            // Race4
+            // 
+            this.Race4.HeaderText = "4";
+            this.Race4.Name = "Race4";
+            this.Race4.ReadOnly = true;
+            this.Race4.Width = 20;
+            // 
+            // Race5
+            // 
+            this.Race5.HeaderText = "5";
+            this.Race5.Name = "Race5";
+            this.Race5.ReadOnly = true;
+            this.Race5.Width = 20;
+            // 
+            // DT
+            // 
+            this.DT.HeaderText = "Дата";
+            this.DT.Name = "DT";
+            this.DT.ReadOnly = true;
+            this.DT.Width = 130;
+            // 
+            // dgvRace
+            // 
+            this.dgvRace.AllowUserToAddRows = false;
+            this.dgvRace.AllowUserToDeleteRows = false;
+            this.dgvRace.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRace.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvRaceCellID,
+            this.dgvRaceCellNuber,
+            this.dgvRaceCellName,
+            this.dgvRaceCellDT,
+            this.dgvRaceCellCycle,
+            this.dgvRaceCellCycleTime,
+            this.dgvRaceCellBestTime});
+            this.dgvRace.Location = new System.Drawing.Point(5, 52);
+            this.dgvRace.MultiSelect = false;
+            this.dgvRace.Name = "dgvRace";
+            this.dgvRace.ReadOnly = true;
+            this.dgvRace.RowHeadersWidth = 25;
+            this.dgvRace.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvRace.Size = new System.Drawing.Size(606, 519);
+            this.dgvRace.TabIndex = 33;
+            this.dgvRace.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRace_RowEnter);
+            // 
+            // dgvRaceCellID
+            // 
+            this.dgvRaceCellID.HeaderText = "ID";
+            this.dgvRaceCellID.Name = "dgvRaceCellID";
+            this.dgvRaceCellID.ReadOnly = true;
+            this.dgvRaceCellID.Visible = false;
+            this.dgvRaceCellID.Width = 80;
+            // 
+            // dgvRaceCellNuber
+            // 
+            this.dgvRaceCellNuber.HeaderText = "Номер";
+            this.dgvRaceCellNuber.Name = "dgvRaceCellNuber";
+            this.dgvRaceCellNuber.ReadOnly = true;
+            this.dgvRaceCellNuber.Width = 50;
+            // 
+            // dgvRaceCellName
+            // 
+            this.dgvRaceCellName.HeaderText = "Участник";
+            this.dgvRaceCellName.Name = "dgvRaceCellName";
+            this.dgvRaceCellName.ReadOnly = true;
+            this.dgvRaceCellName.Width = 200;
+            // 
+            // dgvRaceCellDT
+            // 
+            this.dgvRaceCellDT.HeaderText = "Дата";
+            this.dgvRaceCellDT.Name = "dgvRaceCellDT";
+            this.dgvRaceCellDT.ReadOnly = true;
+            this.dgvRaceCellDT.Visible = false;
+            this.dgvRaceCellDT.Width = 130;
+            // 
+            // dgvRaceCellCycle
+            // 
+            this.dgvRaceCellCycle.HeaderText = "Круг";
+            this.dgvRaceCellCycle.Name = "dgvRaceCellCycle";
+            this.dgvRaceCellCycle.ReadOnly = true;
+            // 
+            // dgvRaceCellCycleTime
+            // 
+            this.dgvRaceCellCycleTime.HeaderText = "Время круга";
+            this.dgvRaceCellCycleTime.Name = "dgvRaceCellCycleTime";
+            this.dgvRaceCellCycleTime.ReadOnly = true;
+            // 
+            // dgvRaceCellBestTime
+            // 
+            this.dgvRaceCellBestTime.HeaderText = "Лучшее время";
+            this.dgvRaceCellBestTime.Name = "dgvRaceCellBestTime";
+            this.dgvRaceCellBestTime.ReadOnly = true;
+            this.dgvRaceCellBestTime.Width = 105;
+            // 
+            // textBox_log
+            // 
+            this.textBox_log.Location = new System.Drawing.Point(904, 52);
+            this.textBox_log.Multiline = true;
+            this.textBox_log.Name = "textBox_log";
+            this.textBox_log.ReadOnly = true;
+            this.textBox_log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_log.Size = new System.Drawing.Size(432, 436);
+            this.textBox_log.TabIndex = 46;
+            // 
+            // textBox_log2
+            // 
+            this.textBox_log2.Location = new System.Drawing.Point(904, 494);
+            this.textBox_log2.Multiline = true;
+            this.textBox_log2.Name = "textBox_log2";
+            this.textBox_log2.ReadOnly = true;
+            this.textBox_log2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_log2.Size = new System.Drawing.Size(432, 77);
+            this.textBox_log2.TabIndex = 47;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1384, 661);
+            this.ClientSize = new System.Drawing.Size(1349, 661);
             this.Controls.Add(this.tabControl1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
@@ -860,18 +884,18 @@ namespace SportControl
             this.tabPage1.PerformLayout();
             this.flowLayoutPanel_Edit.ResumeLayout(false);
             this.flowLayoutPanel_Edit.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRacerData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRace)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.groupBox_ant.ResumeLayout(false);
             this.groupBox_ant.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRace)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -953,5 +977,7 @@ namespace SportControl
         private System.Windows.Forms.Label label_TimeStart;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label_TimeRace;
+        private System.Windows.Forms.TextBox textBox_log;
+        private System.Windows.Forms.TextBox textBox_log2;
     }
 }

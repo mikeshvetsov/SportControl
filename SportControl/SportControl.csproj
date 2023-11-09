@@ -77,7 +77,6 @@
     <Compile Include="Race.cs" />
     <Compile Include="Racer.cs" />
     <Compile Include="RowTagForDataGridView.cs" />
-    <Compile Include="RowPersonForDataGridView.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>

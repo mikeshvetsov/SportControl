@@ -37,16 +37,23 @@ namespace SportControl
             }
         }
 
-        public void TagHandler(TagDT tagdt)
+        public Racer TagHandler(TagDT tagdt)
         {
+            Racer res = null;
+
             if (!Started)
-                return;
+                return null;
 
             foreach (Racer mRacer in Racers)
             {
                 if (mRacer.TagHandler(tagdt))
+                {
+                    res = mRacer;
                     break;
+                }
             }
+
+            return res;
         }
 
         public void Start()

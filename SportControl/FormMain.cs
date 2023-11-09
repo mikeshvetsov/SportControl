@@ -53,9 +53,23 @@ namespace SportControl
                 dgvPerson.UpdateTag(tagdt);
             }
 
-            mRace.TagHandler(tagdt);
+            Racer mRacer = mRace.TagHandler(tagdt);
+            if (mRacer != null)
+            {
+                AddLog($"{mRacer.Number}: {mRacer.Name} RSSI:{tagdt.tag.RSSI}");
+            } else
+            {
+                AddLog($"Неизвестный: {tagdt.tag.TID} RSSI:{tagdt.tag.RSSI}", false);
+            }
+
 
             return true;
+        }
+
+        private void AddLog(string msg, bool MainWindow = true)
+        {
+            TextBox tb = MainWindow ? textBox_log : textBox_log2;
+            tb.Text = tb.Text.Insert(0, $"{DateTime.Now}: {msg}" + System.Environment.NewLine);
         }
 
         private void button_connect_Click(object sender, EventArgs e)
@@ -329,7 +343,9 @@ namespace SportControl
                 return;
             }
 
-            int i = (sender as ComboBox).SelectedIndex + 1;
+            ComboBox cb = sender as ComboBox;
+            int i = cb.SelectedIndex + 1;
+            AddLog($"Установка: {cb.Text}");
 
             string where = i > 0 ? $"WHERE race{i}=1" : "";
 
@@ -392,11 +408,13 @@ namespace SportControl
         {
             mRace.Start();
             label_TimeStart.Text = mRace.TimeStartRace.StrDT;
+            AddLog("Старт!");
         }
 
         private void button_RaceStop_Click(object sender, EventArgs e)
         {
             mRace.Stop();
+            AddLog("Стоп!");
         }
 
         private void dgvRace_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -459,8 +477,8 @@ namespace SportControl
             }
 
             File.AppendAllLines(FileName, lines);
-            
 
+            AddLog("Запись в файл");
         }
     }
 }
