@@ -20,7 +20,7 @@ namespace SportControl
         Boolean ReaderSelectedAsSource = false;
         public RFIDReaderHF340 hf340;
         public RFIDReaderHF340Simulator hf340Sim;
-        public Race mRace = new Race();
+        public Race mRace;
         
         const double INTERVAL_REMOVE_OLD_RECORDS = 1000;
        // internal System.Timers.Timer timerRemoveOldRecords;
@@ -30,6 +30,8 @@ namespace SportControl
             InitializeComponent();
             hf340 = new RFIDReaderHF340(TagHandler: TagHandler);
             hf340Sim = new RFIDReaderHF340Simulator(TagHandler: TagHandler);
+            mRace = new Race(AddLog);
+
             toolStripComboBox_PersonDataSource.SelectedIndex = 0;
 
            // timerRemoveOldRecords = new System.Timers.Timer(INTERVAL_REMOVE_OLD_RECORDS);
@@ -54,23 +56,34 @@ namespace SportControl
             }
 
             Racer mRacer = mRace.TagHandler(tagdt);
-            if (mRacer != null)
+            if (checkBox_FullLog.Checked)
             {
-                AddLog($"{mRacer.Number}: {mRacer.Name} RSSI:{tagdt.tag.RSSI}");
-            } else
-            {
-                AddLog($"Неизвестный: {tagdt.tag.TID} RSSI:{tagdt.tag.RSSI}", false);
+                if(mRacer == null){
+                    AddLog($"Неизвестный: {tagdt.tag.TID} RSSI:{tagdt.tag.RSSI}", false); 
+                } else
+                {
+                    AddLog($"{mRacer.Number}: {mRacer.Name} RSSI:{tagdt.tag.RSSI}", false);
+                }
             }
-
 
             return true;
         }
 
-        private void AddLog(string msg, bool MainWindow = true)
+        delegate bool LogText(string msg, bool MainWindow);
+        public bool AddLog(string msg, bool MainWindow = true)
         {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new LogText(AddLog), msg, MainWindow);
+                return false;
+            }
+
             TextBox tb = MainWindow ? textBox_log : textBox_log2;
-            tb.Text = tb.Text.Insert(0, $"{DateTime.Now}: {msg}" + System.Environment.NewLine);
+            tb.Text = tb.Text.Insert(0, $"{DateTime.Now}:\t{msg}" + System.Environment.NewLine);
+
+            return true;
         }
+
 
         private void button_connect_Click(object sender, EventArgs e)
         {
@@ -480,5 +493,6 @@ namespace SportControl
 
             AddLog("Запись в файл");
         }
+
     }
 }

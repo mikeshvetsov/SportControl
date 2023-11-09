@@ -18,10 +18,11 @@ namespace SportControl
         public CycleTime TimeStartRace = new CycleTime(DateTime.Now, TimeSpan.Zero);
 
         public List<Racer> Racers = new List<Racer>();
+        Func<string, bool, bool> AddLog;
 
-        public Race()
+        public Race(Func<string, bool, bool> LogHandler)
         {
-            
+            AddLog = LogHandler;
         }
 
         public void SetNewRacersList(DataTable data)
@@ -33,7 +34,7 @@ namespace SportControl
 
             foreach (DataRow row in data.Rows)
             {
-                Racers.Add(new Racer(row));
+                Racers.Add(new Racer(row, AddLog));
             }
         }
 

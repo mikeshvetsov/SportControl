@@ -15,6 +15,17 @@ namespace SportControl
         public string Number;
         public int BestCycle = 0;
         public List<CycleTime> ListCycles = new List<CycleTime>();
+        Func<string, bool, bool> AddLog;
+
+        public Racer(DataRow data, Func<string, bool, bool> LogHandler)
+        {
+            id = data.Field<long>("id").ToString();
+            Name = data.Field<string>("family") + " " + data.Field<string>("name");
+            TID1 = data.Field<string>("tid1");
+            TID2 = data.Field<string>("tid2");
+            Number = data.IsNull("number") ? "" : data.Field<long>("number").ToString();
+            AddLog = LogHandler;
+        }
 
         public string LastCycleTime {
             get
@@ -39,15 +50,6 @@ namespace SportControl
         string TID1;
         string TID2;
 
-        public Racer(DataRow data)
-        {
-            id = data.Field<long>("id").ToString();
-            Name = data.Field<string>("family") + " " + data.Field<string>("name");
-            TID1 = data.Field<string>("tid1");
-            TID2 = data.Field<string>("tid2");
-            Number = data.IsNull("number") ? "" : data.Field<long>("number").ToString();
-        }
-
         public override void SetDead(object sender, ElapsedEventArgs e)
         {
             base.SetDead(sender, e);
@@ -59,6 +61,8 @@ namespace SportControl
 
             if (ListCycles.Count > 1 && ListCycles[ListCycles.Count - 1].DeltaDT < ListCycles[BestCycle].DeltaDT)
                 BestCycle = ListCycles.Count - 1;
+
+            AddLog($"{Number}\t{Name}", true);
 
         }
         public bool TagHandler(TagDT tagdt)
