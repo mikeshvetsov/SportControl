@@ -251,9 +251,15 @@ namespace SportControl
         private void SelectDGVRowByDBID(string DBRowID)
         {
             int rowIndex = -1;
-            DataGridViewRow row = dgvPerson.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["ID"].Value.ToString().Equals(DBRowID)).First();
-            rowIndex = row.Index;
-            dgvPerson.Rows[rowIndex].Selected = true;
+
+            DataGridViewRow row = dgvPerson.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["ID"].Value.ToString().Equals(DBRowID)).FirstOrDefault();
+            if (row != null)
+            {
+                // Строка найдена — работаем с ней. Может быть не найдена, если метка уже не считывается
+                rowIndex = row.Index;
+                dgvPerson.Rows[rowIndex].Selected = true;
+            }
+
         }
 
         private void button_Clear_Click(object sender, EventArgs e)
@@ -494,5 +500,9 @@ namespace SportControl
             AddLog("Запись в файл");
         }
 
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

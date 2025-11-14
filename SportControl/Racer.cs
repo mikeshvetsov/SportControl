@@ -21,6 +21,8 @@ namespace SportControl
         {
             id = data.Field<long>("id").ToString();
             Name = data.Field<string>("family") + " " + data.Field<string>("name");
+            // к каждому участнику можно выдавать по две метки, для более надежного считывания.
+            // Определение участника произойдет при считывании любой из них
             TID1 = data.Field<string>("tid1");
             TID2 = data.Field<string>("tid2");
             Number = data.IsNull("number") ? "" : data.Field<long>("number").ToString();
@@ -76,8 +78,5 @@ namespace SportControl
                 return false;
             }
         }
-
-        
-
     }
 }

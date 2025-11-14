@@ -30,9 +30,9 @@ namespace SportControl
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.flowLayoutPanel_Edit = new System.Windows.Forms.FlowLayoutPanel();
             this.textBox_TID1 = new System.Windows.Forms.TextBox();
             this.textBox_TID2 = new System.Windows.Forms.TextBox();
             this.textBox_Num = new System.Windows.Forms.TextBox();
@@ -108,9 +108,10 @@ namespace SportControl
             this.numericUpDown_reader_port = new System.Windows.Forms.NumericUpDown();
             this.timerRemoveOldRecords = new System.Windows.Forms.Timer(this.components);
             this.timerUpdateRaceView = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.flowLayoutPanel_Edit = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.flowLayoutPanel_Edit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -119,6 +120,7 @@ namespace SportControl
             this.tabPage3.SuspendLayout();
             this.groupBox_ant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).BeginInit();
+            this.flowLayoutPanel_Edit.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -144,28 +146,6 @@ namespace SportControl
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Регистрация";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // flowLayoutPanel_Edit
-            // 
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_TID1);
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_TID2);
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Num);
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_SecondName);
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Name);
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Age);
-            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_ID);
-            this.flowLayoutPanel_Edit.Controls.Add(this.button_SavePerson);
-            this.flowLayoutPanel_Edit.Controls.Add(this.button_Clear);
-            this.flowLayoutPanel_Edit.Controls.Add(this.label1);
-            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race1);
-            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race2);
-            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race3);
-            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race4);
-            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race5);
-            this.flowLayoutPanel_Edit.Location = new System.Drawing.Point(8, 555);
-            this.flowLayoutPanel_Edit.Name = "flowLayoutPanel_Edit";
-            this.flowLayoutPanel_Edit.Size = new System.Drawing.Size(1256, 61);
-            this.flowLayoutPanel_Edit.TabIndex = 42;
             // 
             // textBox_TID1
             // 
@@ -219,7 +199,7 @@ namespace SportControl
             // 
             // button_SavePerson
             // 
-            this.button_SavePerson.Location = new System.Drawing.Point(1092, 3);
+            this.button_SavePerson.Location = new System.Drawing.Point(237, 29);
             this.button_SavePerson.Name = "button_SavePerson";
             this.button_SavePerson.Size = new System.Drawing.Size(75, 23);
             this.button_SavePerson.TabIndex = 38;
@@ -229,7 +209,7 @@ namespace SportControl
             // 
             // button_Clear
             // 
-            this.button_Clear.Location = new System.Drawing.Point(1173, 3);
+            this.button_Clear.Location = new System.Drawing.Point(318, 29);
             this.button_Clear.Name = "button_Clear";
             this.button_Clear.Size = new System.Drawing.Size(75, 23);
             this.button_Clear.TabIndex = 41;
@@ -241,6 +221,7 @@ namespace SportControl
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 29);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 47;
@@ -249,7 +230,7 @@ namespace SportControl
             // checkBox_Race1
             // 
             this.checkBox_Race1.AutoSize = true;
-            this.checkBox_Race1.Location = new System.Drawing.Point(47, 32);
+            this.checkBox_Race1.Location = new System.Drawing.Point(47, 29);
             this.checkBox_Race1.Name = "checkBox_Race1";
             this.checkBox_Race1.Size = new System.Drawing.Size(32, 17);
             this.checkBox_Race1.TabIndex = 42;
@@ -259,7 +240,7 @@ namespace SportControl
             // checkBox_Race2
             // 
             this.checkBox_Race2.AutoSize = true;
-            this.checkBox_Race2.Location = new System.Drawing.Point(85, 32);
+            this.checkBox_Race2.Location = new System.Drawing.Point(85, 29);
             this.checkBox_Race2.Name = "checkBox_Race2";
             this.checkBox_Race2.Size = new System.Drawing.Size(32, 17);
             this.checkBox_Race2.TabIndex = 43;
@@ -269,7 +250,7 @@ namespace SportControl
             // checkBox_Race3
             // 
             this.checkBox_Race3.AutoSize = true;
-            this.checkBox_Race3.Location = new System.Drawing.Point(123, 32);
+            this.checkBox_Race3.Location = new System.Drawing.Point(123, 29);
             this.checkBox_Race3.Name = "checkBox_Race3";
             this.checkBox_Race3.Size = new System.Drawing.Size(32, 17);
             this.checkBox_Race3.TabIndex = 44;
@@ -279,7 +260,7 @@ namespace SportControl
             // checkBox_Race4
             // 
             this.checkBox_Race4.AutoSize = true;
-            this.checkBox_Race4.Location = new System.Drawing.Point(161, 32);
+            this.checkBox_Race4.Location = new System.Drawing.Point(161, 29);
             this.checkBox_Race4.Name = "checkBox_Race4";
             this.checkBox_Race4.Size = new System.Drawing.Size(32, 17);
             this.checkBox_Race4.TabIndex = 45;
@@ -289,7 +270,7 @@ namespace SportControl
             // checkBox_Race5
             // 
             this.checkBox_Race5.AutoSize = true;
-            this.checkBox_Race5.Location = new System.Drawing.Point(199, 32);
+            this.checkBox_Race5.Location = new System.Drawing.Point(199, 29);
             this.checkBox_Race5.Name = "checkBox_Race5";
             this.checkBox_Race5.Size = new System.Drawing.Size(32, 17);
             this.checkBox_Race5.TabIndex = 46;
@@ -434,7 +415,7 @@ namespace SportControl
             this.sourceForDGVPersonToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripComboBox_PersonDataSource});
             this.sourceForDGVPersonToolStripMenuItem.Name = "sourceForDGVPersonToolStripMenuItem";
-            this.sourceForDGVPersonToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.sourceForDGVPersonToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
             this.sourceForDGVPersonToolStripMenuItem.Text = "Источник данных";
             // 
             // toolStripComboBox_PersonDataSource
@@ -459,21 +440,21 @@ namespace SportControl
             // clearAllRacesToolStripMenuItem
             // 
             this.clearAllRacesToolStripMenuItem.Name = "clearAllRacesToolStripMenuItem";
-            this.clearAllRacesToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.clearAllRacesToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.clearAllRacesToolStripMenuItem.Text = "Очистить заезды всех в базе";
             this.clearAllRacesToolStripMenuItem.Click += new System.EventHandler(this.clearAllRacesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(226, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(225, 6);
             // 
             // SelectRaceToolStripMenuItem
             // 
             this.SelectRaceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripComboBox_SelectRace});
             this.SelectRaceToolStripMenuItem.Name = "SelectRaceToolStripMenuItem";
-            this.SelectRaceToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.SelectRaceToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.SelectRaceToolStripMenuItem.Text = "Выбрать заезд";
             // 
             // toolStripComboBox_SelectRace
@@ -732,6 +713,7 @@ namespace SportControl
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.richTextBox1);
             this.tabPage3.Controls.Add(this.groupBox_ant);
             this.tabPage3.Controls.Add(this.button_Read);
             this.tabPage3.Controls.Add(this.maskedTextBox_reader_ip);
@@ -882,6 +864,38 @@ namespace SportControl
             this.timerUpdateRaceView.Enabled = true;
             this.timerUpdateRaceView.Tick += new System.EventHandler(this.timerUpdateRaceView_Tick);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.richTextBox1.Location = new System.Drawing.Point(332, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(1001, 430);
+            this.richTextBox1.TabIndex = 33;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
+            // flowLayoutPanel_Edit
+            // 
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_TID1);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_TID2);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Num);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_SecondName);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Name);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_Age);
+            this.flowLayoutPanel_Edit.Controls.Add(this.textBox_ID);
+            this.flowLayoutPanel_Edit.Controls.Add(this.label1);
+            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race1);
+            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race2);
+            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race3);
+            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race4);
+            this.flowLayoutPanel_Edit.Controls.Add(this.checkBox_Race5);
+            this.flowLayoutPanel_Edit.Controls.Add(this.button_SavePerson);
+            this.flowLayoutPanel_Edit.Controls.Add(this.button_Clear);
+            this.flowLayoutPanel_Edit.Location = new System.Drawing.Point(2, 555);
+            this.flowLayoutPanel_Edit.Name = "flowLayoutPanel_Edit";
+            this.flowLayoutPanel_Edit.Size = new System.Drawing.Size(1094, 61);
+            this.flowLayoutPanel_Edit.TabIndex = 42;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -894,8 +908,6 @@ namespace SportControl
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.flowLayoutPanel_Edit.ResumeLayout(false);
-            this.flowLayoutPanel_Edit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPerson)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -908,6 +920,8 @@ namespace SportControl
             this.groupBox_ant.ResumeLayout(false);
             this.groupBox_ant.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_reader_port)).EndInit();
+            this.flowLayoutPanel_Edit.ResumeLayout(false);
+            this.flowLayoutPanel_Edit.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -938,7 +952,6 @@ namespace SportControl
         private System.Windows.Forms.Button button_SavePerson;
         private System.Windows.Forms.TextBox textBox_ID;
         private System.Windows.Forms.TextBox textBox_Age;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Edit;
         private System.Windows.Forms.Button button_Clear;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label1;
@@ -992,5 +1005,7 @@ namespace SportControl
         private System.Windows.Forms.TextBox textBox_log;
         private System.Windows.Forms.TextBox textBox_log2;
         private System.Windows.Forms.CheckBox checkBox_FullLog;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Edit;
     }
 }

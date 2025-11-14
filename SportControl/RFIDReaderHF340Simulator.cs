@@ -15,7 +15,7 @@ namespace SportControl
         Func<TagDT, bool> TagHandler;
         public Boolean isConnected = false;
 
-        const double INTERVAL_MSG = 500;
+        const double INTERVAL_MSG = 50;
         internal System.Timers.Timer timer;
 
         public RFIDReaderHF340Simulator(Func<TagDT, bool> TagHandler)

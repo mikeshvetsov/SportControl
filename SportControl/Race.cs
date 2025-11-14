@@ -45,6 +45,7 @@ namespace SportControl
             if (!Started)
                 return null;
 
+            //TODO: может переделать эту секцию так, чтобы сначала найти гонщика и потом вызват обработчик его, а не у каждого вызывать.
             foreach (Racer mRacer in Racers)
             {
                 if (mRacer.TagHandler(tagdt))
