@@ -93,22 +93,24 @@ namespace SportControl
                     }
                     else
                     {
+
                         DataRow rowDB = data.Rows[0];
                         row.CreateCells(this, new object[] {
-                        rowDB.Field<string>("tid1"),
-                        rowDB.Field<string>("tid2"),
-                        rowDB.IsNull("number")?"": rowDB.Field<long>("number").ToString(),
-                        rowDB.Field<string>("family"),
-                        rowDB.Field<string>("name"),
-                        rowDB.IsNull("age")?"":rowDB.Field<long>("age").ToString(),
-                        rowDB.IsNull("id")?"":rowDB.Field<long>("id").ToString(),
-                        rowDB.IsNull("race1")?false:rowDB.Field<long>("race1") > 0,
-                        rowDB.IsNull("race2")?false:rowDB.Field<long>("race2") > 0,
-                        rowDB.IsNull("race3")?false:rowDB.Field<long>("race3") > 0,
-                        rowDB.IsNull("race4")?false:rowDB.Field<long>("race4") > 0,
-                        rowDB.IsNull("race5")?false:rowDB.Field<long>("race5") > 0,
-                        rowDB.Field<string>("date_time")
-                    });
+                            rowDB.Field<string>("tid1"),
+                            rowDB.Field<string>("tid2"),
+                            rowDB.IsNull("number")?"": rowDB.Field<long>("number").ToString(),
+                            rowDB.Field<string>("family"),
+                            rowDB.Field<string>("name"),
+                            rowDB.IsNull("age")?"":rowDB.Field<long>("age").ToString(),
+                            rowDB.IsNull("id")?"":rowDB.Field<long>("id").ToString(),
+                            rowDB.IsNull("race1")?false:rowDB.Field<long>("race1") > 0,
+                            rowDB.IsNull("race2")?false:rowDB.Field<long>("race2") > 0,
+                            rowDB.IsNull("race3")?false:rowDB.Field<long>("race3") > 0,
+                            rowDB.IsNull("race4")?false:rowDB.Field<long>("race4") > 0,
+                            rowDB.IsNull("race5")?false:rowDB.Field<long>("race5") > 0,
+                            rowDB.Field<string>("date_time"),
+                            data.Rows.Count > 1 ? "ВНИМАНИЕ: Есть дубль по ID!":""
+                        });
 
                         key.Item1 = rowDB.Field<string>("tid1");
                         key.Item2 = rowDB.Field<string>("tid2");
