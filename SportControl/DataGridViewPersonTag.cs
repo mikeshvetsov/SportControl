@@ -93,7 +93,6 @@ namespace SportControl
                     }
                     else
                     {
-
                         DataRow rowDB = data.Rows[0];
                         row.CreateCells(this, new object[] {
                             rowDB.Field<string>("tid1"),
@@ -109,13 +108,12 @@ namespace SportControl
                             rowDB.IsNull("race4")?false:rowDB.Field<long>("race4") > 0,
                             rowDB.IsNull("race5")?false:rowDB.Field<long>("race5") > 0,
                             rowDB.Field<string>("date_time"),
-                            data.Rows.Count > 1 ? "ВНИМАНИЕ: Есть дубль по ID!":""
+                            data.Rows.Count > 1 ? "ВНИМАНИЕ: Есть дубль по TID!":""
                         });
 
                         key.Item1 = rowDB.Field<string>("tid1");
                         key.Item2 = rowDB.Field<string>("tid2");
                     }
-
 
                     Rows.Add(row);
                     dicRowsPersonTID.Add(key, row);
