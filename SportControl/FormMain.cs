@@ -17,7 +17,6 @@ namespace SportControl
     public partial class FormMain : Form
     {
 
-        Boolean ReaderSelectedAsSource = false;
         public RFIDReaderHF340 hf340;
         public RFIDReaderHF340Simulator hf340Sim;
         public Race mRace;
@@ -32,8 +31,6 @@ namespace SportControl
             hf340 = new RFIDReaderHF340(TagHandler: TagHandler);
             hf340Sim = new RFIDReaderHF340Simulator(TagHandler: TagHandler);
             mRace = new Race(AddLog);
-
-            toolStripComboBox_PersonDataSource.SelectedIndex = 0;
 
            // timerRemoveOldRecords = new System.Timers.Timer(INTERVAL_REMOVE_OLD_RECORDS);
            // timerRemoveOldRecords.Elapsed += RemoveOldRecords;
@@ -51,11 +48,8 @@ namespace SportControl
                 return false;
             }
 
-            if (ReaderSelectedAsSource)
-            {
-                dgvPerson.UpdateTag(tagdt);
-            }
-
+            dgvPersonActive.UpdateTag(tagdt);
+ 
             Racer mRacer = mRace.TagHandler(tagdt);
             if (checkBox_FullLog.Checked)
             {
@@ -161,49 +155,6 @@ namespace SportControl
             dgvPerson.RemoveOldRecords();
         }
 
-       /*
-       private void button_SavePerson_Click(object sender, EventArgs e)
-       {
-
-
-           if (textBox_ID.Text.Length > 0)
-           {
-               // запись в бд существует, обновляем
-               Program.command.CommandText = "UPDATE Person SET name=:name, family=:family, number=:number, tid1=:tid1, tid2=:tid2, age=:age, " +
-                   "race1=:race1, race2=:race2, race3=:race3, race4=:race4, race5=:race5, date_time=datetime('now') WHERE ID=:id";
-               Program.command.Parameters.AddWithValue("id", textBox_ID.Text);
-           } 
-           else
-           {
-               Program.command.CommandText = "INSERT INTO Person (name, family, number, tid1, tid2, age, race1, race2, race3, race4, race5, date_time) VALUES (:name, :family, :number, :tid1, :tid2, :age, " +
-                   ":race1, :race2, :race3, :race4, :race5, datetime('now'))";
-           }
-           Program.command.Parameters.AddWithValue("name", textBox_Name.Text);
-           Program.command.Parameters.AddWithValue("family", textBox_SecondName.Text);
-           Program.command.Parameters.AddWithValue("number", textBox_Num.Text);
-           Program.command.Parameters.AddWithValue("tid1", textBox_TID1.Text);
-           Program.command.Parameters.AddWithValue("tid2", textBox_TID2.Text);
-           Program.command.Parameters.AddWithValue("age", textBox_Age.Text);
-           Program.command.Parameters.AddWithValue("race1", checkBox_Race1.Checked ? 1 : 0);
-           Program.command.Parameters.AddWithValue("race2", checkBox_Race2.Checked ? 1 : 0);
-           Program.command.Parameters.AddWithValue("race3", checkBox_Race3.Checked ? 1 : 0);
-           Program.command.Parameters.AddWithValue("race4", checkBox_Race4.Checked ? 1 : 0);
-           Program.command.Parameters.AddWithValue("race5", checkBox_Race5.Checked ? 1 : 0);
-           Program.command.ExecuteNonQuery();
-
-           LoadRacersFromDB();
-           if (textBox_ID.Text.Length > 0)
-           {
-               SelectDGVRowByDBID(textBox_ID.Text);
-           } else
-           {
-               Program.command.CommandText = @"select last_insert_rowid()";
-               SelectDGVRowByDBID(Program.command.ExecuteScalar().ToString());
-           }
-
-       }
-   */
-
         private void SelectDGVRowByDBID(string DBRowID)
         {
             int rowIndex = -1;
@@ -219,47 +170,36 @@ namespace SportControl
         }
 
 
-        private void comboBox_PersonDataSource_SelectedValueChanged(object sender, EventArgs e)
-        {
-            LoadRacersFromDB();
-            ReaderSelectedAsSource = toolStripComboBox_PersonDataSource.SelectedIndex == 1;
-            
-        }
-
         private void LoadRacersFromDB(string where="")
         {
             dgvPerson.ClearData();
 
-            if (toolStripComboBox_PersonDataSource.SelectedIndex == 0)
+
+            Program.command.CommandText = $"SELECT * FROM Person "+ where;
+            DataTable data = new DataTable();
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(Program.command);
+            adapter.Fill(data);
+
+            foreach (DataRow rowDB in data.Rows)
             {
-                Program.command.CommandText = $"SELECT * FROM Person "+ where;
-                DataTable data = new DataTable();
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(Program.command);
-                adapter.Fill(data);
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(dgvPerson, new object[] {
+                    rowDB.Field<string>("tid1"),
+                    rowDB.Field<string>("tid2"),
+                    rowDB.IsNull("number")?"": rowDB.Field<long>("number").ToString(),
+                    rowDB.Field<string>("family"),
+                    rowDB.Field<string>("name"),
+                    rowDB.IsNull("age")?"":rowDB.Field<long>("age").ToString(),
+                    rowDB.IsNull("id")?"":rowDB.Field<long>("id").ToString(),
+                    rowDB.IsNull("race1")?false:rowDB.Field<long>("race1") > 0,
+                    rowDB.IsNull("race2")?false:rowDB.Field<long>("race2") > 0,
+                    rowDB.IsNull("race3")?false:rowDB.Field<long>("race3") > 0,
+                    rowDB.IsNull("race4")?false:rowDB.Field<long>("race4") > 0,
+                    rowDB.IsNull("race5")?false:rowDB.Field<long>("race5") > 0,
+                    rowDB.Field<string>("date_time")
+                });
 
-                foreach (DataRow rowDB in data.Rows)
-                {
-                    DataGridViewRow row = new DataGridViewRow();
-                    row.CreateCells(dgvPerson, new object[] {
-                        rowDB.Field<string>("tid1"),
-                        rowDB.Field<string>("tid2"),
-                        rowDB.IsNull("number")?"": rowDB.Field<long>("number").ToString(),
-                        rowDB.Field<string>("family"),
-                        rowDB.Field<string>("name"),
-                        rowDB.IsNull("age")?"":rowDB.Field<long>("age").ToString(),
-                        rowDB.IsNull("id")?"":rowDB.Field<long>("id").ToString(),
-                        rowDB.IsNull("race1")?false:rowDB.Field<long>("race1") > 0,
-                        rowDB.IsNull("race2")?false:rowDB.Field<long>("race2") > 0,
-                        rowDB.IsNull("race3")?false:rowDB.Field<long>("race3") > 0,
-                        rowDB.IsNull("race4")?false:rowDB.Field<long>("race4") > 0,
-                        rowDB.IsNull("race5")?false:rowDB.Field<long>("race5") > 0,
-                        rowDB.Field<string>("date_time")
-
-                    });
-
-                    dgvPerson.Rows.Add(row);
-                }
-
+                dgvPerson.Rows.Add(row);
             }
 
             isModifiedCelldgvPerson = false;
@@ -294,10 +234,7 @@ namespace SportControl
             string where = i > 0 ? $"WHERE race{i}=1" : "";
 
             LoadRacersFromDB(where);
-            
-            toolStripComboBox_PersonDataSource.SelectedIndex = 0;
-            ReaderSelectedAsSource = false;
-
+  
         }
 
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
@@ -538,7 +475,17 @@ namespace SportControl
         private void dgvPerson_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             isModifiedCelldgvPerson = true;
-            Console.WriteLine($"CellValueChanged");
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            // Устанавливаем разделитель в середину при загрузке формы
+            splitContainer1.SplitterDistance = this.ClientSize.Height / 2;
+        }
+
+        private void FormMain_Shown(object sender, EventArgs e)
+        {
+            LoadRacersFromDB();
         }
     }
 }
