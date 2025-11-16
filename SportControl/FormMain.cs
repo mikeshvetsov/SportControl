@@ -23,7 +23,8 @@ namespace SportControl
         public Race mRace;
         
         const double INTERVAL_REMOVE_OLD_RECORDS = 1000;
-       // internal System.Timers.Timer timerRemoveOldRecords;
+        // internal System.Timers.Timer timerRemoveOldRecords;
+        private bool isModifiedCelldgvPerson = false;
 
         public FormMain()
         {
@@ -160,93 +161,48 @@ namespace SportControl
             dgvPerson.RemoveOldRecords();
         }
 
-        private void dgvPerson_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            /* Двойной клик по строке имеет два смысла:
-             * Если клик по строке, которая ек содержит ID, значит значение TID1 следует
-             * перенести в своботодное поле редактирования TID1 или TID2.
-             * 
-             * Если клик по строке с заполненным ID, значит есть намерение редактирования этой
-             * строки всей - все переносим в поля редактирования
-             */
+       /*
+       private void button_SavePerson_Click(object sender, EventArgs e)
+       {
 
-            if (e.RowIndex < 0)
-                return;
 
-            DataGridViewRow dgvr = dgvPerson.Rows[e.RowIndex];
-  
-            if (dgvr.Cells["ID"].Value != null)
-            {
-                textBox_ID.Text = dgvr.Cells["ID"].Value.ToString();
-                textBox_TID1.Text = dgvr.Cells["TID1"].Value.ToString();
-                textBox_TID2.Text = dgvr.Cells["TID2"].Value.ToString();
-                textBox_Num.Text = dgvr.Cells["RacingNumber"].Value.ToString();
-                textBox_SecondName.Text = dgvr.Cells["SecondName"].Value.ToString();
-                textBox_Name.Text = dgvr.Cells["FirstName"].Value.ToString();
-                textBox_Age.Text = dgvr.Cells["age"].Value.ToString();
-                checkBox_Race1.Checked = (bool)dgvr.Cells["Race1"].Value;
-                checkBox_Race2.Checked = (bool)dgvr.Cells["Race2"].Value;
-                checkBox_Race3.Checked = (bool)dgvr.Cells["Race3"].Value;
-                checkBox_Race4.Checked = (bool)dgvr.Cells["Race4"].Value;
-                checkBox_Race5.Checked = (bool)dgvr.Cells["Race5"].Value;
-            } else
-            {
-                if (textBox_TID1.Text.Length == 0)
-                    textBox_TID1.Text = dgvr.Cells["TID1"].Value.ToString();
-                else if (textBox_TID2.Text.Length == 0)
-                    textBox_TID2.Text = dgvr.Cells["TID1"].Value.ToString();
-            }
+           if (textBox_ID.Text.Length > 0)
+           {
+               // запись в бд существует, обновляем
+               Program.command.CommandText = "UPDATE Person SET name=:name, family=:family, number=:number, tid1=:tid1, tid2=:tid2, age=:age, " +
+                   "race1=:race1, race2=:race2, race3=:race3, race4=:race4, race5=:race5, date_time=datetime('now') WHERE ID=:id";
+               Program.command.Parameters.AddWithValue("id", textBox_ID.Text);
+           } 
+           else
+           {
+               Program.command.CommandText = "INSERT INTO Person (name, family, number, tid1, tid2, age, race1, race2, race3, race4, race5, date_time) VALUES (:name, :family, :number, :tid1, :tid2, :age, " +
+                   ":race1, :race2, :race3, :race4, :race5, datetime('now'))";
+           }
+           Program.command.Parameters.AddWithValue("name", textBox_Name.Text);
+           Program.command.Parameters.AddWithValue("family", textBox_SecondName.Text);
+           Program.command.Parameters.AddWithValue("number", textBox_Num.Text);
+           Program.command.Parameters.AddWithValue("tid1", textBox_TID1.Text);
+           Program.command.Parameters.AddWithValue("tid2", textBox_TID2.Text);
+           Program.command.Parameters.AddWithValue("age", textBox_Age.Text);
+           Program.command.Parameters.AddWithValue("race1", checkBox_Race1.Checked ? 1 : 0);
+           Program.command.Parameters.AddWithValue("race2", checkBox_Race2.Checked ? 1 : 0);
+           Program.command.Parameters.AddWithValue("race3", checkBox_Race3.Checked ? 1 : 0);
+           Program.command.Parameters.AddWithValue("race4", checkBox_Race4.Checked ? 1 : 0);
+           Program.command.Parameters.AddWithValue("race5", checkBox_Race5.Checked ? 1 : 0);
+           Program.command.ExecuteNonQuery();
 
-        }
+           LoadRacersFromDB();
+           if (textBox_ID.Text.Length > 0)
+           {
+               SelectDGVRowByDBID(textBox_ID.Text);
+           } else
+           {
+               Program.command.CommandText = @"select last_insert_rowid()";
+               SelectDGVRowByDBID(Program.command.ExecuteScalar().ToString());
+           }
 
-        private void button_SavePerson_Click(object sender, EventArgs e)
-        {
-            /* Сохраняем все в БД.
-             */
-
-            /*
-
-            редактирование:
-            https://ru.stackoverflow.com/questions/932351/Модифицировать-или-добавить-запись-если-она-существует
-
-          */
-
-            if (textBox_ID.Text.Length > 0)
-            {
-                // запись в бд существует, обновляем
-                Program.command.CommandText = "UPDATE Person SET name=:name, family=:family, number=:number, tid1=:tid1, tid2=:tid2, age=:age, " +
-                    "race1=:race1, race2=:race2, race3=:race3, race4=:race4, race5=:race5, date_time=datetime('now') WHERE ID=:id";
-                Program.command.Parameters.AddWithValue("id", textBox_ID.Text);
-            } 
-            else
-            {
-                Program.command.CommandText = "INSERT INTO Person (name, family, number, tid1, tid2, age, race1, race2, race3, race4, race5, date_time) VALUES (:name, :family, :number, :tid1, :tid2, :age, " +
-                    ":race1, :race2, :race3, :race4, :race5, datetime('now'))";
-            }
-            Program.command.Parameters.AddWithValue("name", textBox_Name.Text);
-            Program.command.Parameters.AddWithValue("family", textBox_SecondName.Text);
-            Program.command.Parameters.AddWithValue("number", textBox_Num.Text);
-            Program.command.Parameters.AddWithValue("tid1", textBox_TID1.Text);
-            Program.command.Parameters.AddWithValue("tid2", textBox_TID2.Text);
-            Program.command.Parameters.AddWithValue("age", textBox_Age.Text);
-            Program.command.Parameters.AddWithValue("race1", checkBox_Race1.Checked ? 1 : 0);
-            Program.command.Parameters.AddWithValue("race2", checkBox_Race2.Checked ? 1 : 0);
-            Program.command.Parameters.AddWithValue("race3", checkBox_Race3.Checked ? 1 : 0);
-            Program.command.Parameters.AddWithValue("race4", checkBox_Race4.Checked ? 1 : 0);
-            Program.command.Parameters.AddWithValue("race5", checkBox_Race5.Checked ? 1 : 0);
-            Program.command.ExecuteNonQuery();
-
-            LoadRacersFromDB();
-            if (textBox_ID.Text.Length > 0)
-            {
-                SelectDGVRowByDBID(textBox_ID.Text);
-            } else
-            {
-                Program.command.CommandText = @"select last_insert_rowid()";
-                SelectDGVRowByDBID(Program.command.ExecuteScalar().ToString());
-            }
-
-        }
+       }
+   */
 
         private void SelectDGVRowByDBID(string DBRowID)
         {
@@ -262,18 +218,6 @@ namespace SportControl
 
         }
 
-        private void button_Clear_Click(object sender, EventArgs e)
-        {
-            foreach (TextBox txtBox in flowLayoutPanel_Edit.Controls.OfType<TextBox>())
-            {
-                txtBox.Clear();
-            }
-
-            foreach (CheckBox ChkBox in flowLayoutPanel_Edit.Controls.OfType<CheckBox>())
-            {
-                ChkBox.Checked = false;
-            }
-        }
 
         private void comboBox_PersonDataSource_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -317,6 +261,8 @@ namespace SportControl
                 }
 
             }
+
+            isModifiedCelldgvPerson = false;
         }
         private void clearAllRacesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -503,6 +449,96 @@ namespace SportControl
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvPerson_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return; // Защита от клика по заголовкам
+
+            DataGridViewCell cell = dgvPerson.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (cell is DataGridViewCheckBoxCell)
+            {
+                // Для чекбокса: переключаем значение
+                // Получаем текущую ячейку
+                DataGridViewCheckBoxCell cellCB = (DataGridViewCheckBoxCell)dgvPerson.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                // Переключаем значение чекбокса
+                if (cellCB.Value == null || cellCB.Value == DBNull.Value)
+                {
+                    cellCB.Value = true; // Если значение не задано, ставим true
+                }
+                else
+                {
+                    // Переключаем текущее значение
+                    cellCB.Value = !(bool)cell.Value;
+                }
+
+                saveRowToDB(dgvPerson.Rows[e.RowIndex]);
+            }
+
+            // Обязательный вызов для обновления отображения
+            dgvPerson.NotifyCurrentCellDirty(true);
+        }
+
+        private string getCellVal(DataGridViewRow row, string name)
+        {
+            object value = row.Cells[name].Value;
+            return (value == null || value == DBNull.Value) ? string.Empty : value.ToString();
+        }
+
+        private int saveRowToDB(DataGridViewRow row)
+        {
+            /* Сохраняем все в БД.
+                редактирование:
+                https://ru.stackoverflow.com/questions/932351/Модифицировать-или-добавить-запись-если-она-существует
+            */
+
+            string idString = getCellVal(row, "ID");
+
+            if (idString.Length > 0)
+            {
+                // запись в бд существует, обновляем
+                Program.command.CommandText = "UPDATE Person SET name=:name, family=:family, number=:number, tid1=:tid1, tid2=:tid2, age=:age, " +
+                    "race1=:race1, race2=:race2, race3=:race3, race4=:race4, race5=:race5, date_time=datetime('now') WHERE ID=:id";
+                Program.command.Parameters.AddWithValue("id", idString);
+
+                Console.WriteLine($"save to db. ID {idString}");
+            }
+            else
+            {
+                Program.command.CommandText = "INSERT INTO Person (name, family, number, tid1, tid2, age, race1, race2, race3, race4, race5, date_time) VALUES (:name, :family, :number, :tid1, :tid2, :age, " +
+                    ":race1, :race2, :race3, :race4, :race5, datetime('now'))";
+
+                Console.WriteLine($"save to db new string.");
+            }
+
+            Program.command.Parameters.AddWithValue("name", getCellVal(row, "FirstName"));
+            Program.command.Parameters.AddWithValue("family", getCellVal(row, "SecondName"));
+            Program.command.Parameters.AddWithValue("number", getCellVal(row, "RacingNumber"));
+            Program.command.Parameters.AddWithValue("tid1", getCellVal(row, "TID1"));
+            Program.command.Parameters.AddWithValue("tid2", getCellVal(row, "TID2"));
+            Program.command.Parameters.AddWithValue("age", getCellVal(row, "Age"));
+            Program.command.Parameters.AddWithValue("race1", Convert.ToBoolean(row.Cells["Race1"].Value) ? 1 : 0);
+            Program.command.Parameters.AddWithValue("race2", Convert.ToBoolean(row.Cells["Race2"].Value) ? 1 : 0);
+            Program.command.Parameters.AddWithValue("race3", Convert.ToBoolean(row.Cells["Race3"].Value) ? 1 : 0);
+            Program.command.Parameters.AddWithValue("race4", Convert.ToBoolean(row.Cells["Race4"].Value) ? 1 : 0);
+            Program.command.Parameters.AddWithValue("race5", Convert.ToBoolean(row.Cells["Race5"].Value) ? 1 : 0);
+            Program.command.ExecuteNonQuery();
+
+            isModifiedCelldgvPerson = false;
+            return 0;
+        }
+
+        private void dgvPerson_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (isModifiedCelldgvPerson)
+                saveRowToDB(dgvPerson.Rows[e.RowIndex]);
+        }
+
+        private void dgvPerson_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            isModifiedCelldgvPerson = true;
+            Console.WriteLine($"CellValueChanged");
         }
     }
 }
