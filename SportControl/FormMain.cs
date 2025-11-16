@@ -477,5 +477,27 @@ namespace SportControl
         {
             hf340.Read_EPCTID();
         }
+
+        private void addRacerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow row = new DataGridViewRow();
+            row.CreateCells(dgvPerson, new object[] {
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    ""
+                });
+
+            dgvPerson.Rows.Add(row);
+        }
     }
 }

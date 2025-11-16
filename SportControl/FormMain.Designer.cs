@@ -108,6 +108,7 @@ namespace SportControl
             this.Race5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.DT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Note = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddRacerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -154,7 +155,7 @@ namespace SportControl
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(8, 62);
+            this.splitContainer1.Location = new System.Drawing.Point(8, 67);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -165,8 +166,8 @@ namespace SportControl
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvPersonActive);
-            this.splitContainer1.Size = new System.Drawing.Size(1863, 1449);
-            this.splitContainer1.SplitterDistance = 755;
+            this.splitContainer1.Size = new System.Drawing.Size(1863, 1444);
+            this.splitContainer1.SplitterDistance = 753;
             this.splitContainer1.TabIndex = 44;
             // 
             // dgvPerson
@@ -196,7 +197,7 @@ namespace SportControl
             this.dgvPerson.Name = "dgvPerson";
             this.dgvPerson.RowHeadersWidth = 25;
             this.dgvPerson.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPerson.Size = new System.Drawing.Size(1863, 755);
+            this.dgvPerson.Size = new System.Drawing.Size(1863, 753);
             this.dgvPerson.TabIndex = 33;
             this.dgvPerson.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPerson_CellContentClick);
             this.dgvPerson.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPerson_CellEndEdit);
@@ -230,7 +231,7 @@ namespace SportControl
             this.dgvPersonActive.Name = "dgvPersonActive";
             this.dgvPersonActive.RowHeadersWidth = 25;
             this.dgvPersonActive.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvPersonActive.Size = new System.Drawing.Size(1863, 690);
+            this.dgvPersonActive.Size = new System.Drawing.Size(1863, 687);
             this.dgvPersonActive.TabIndex = 34;
             // 
             // menuStrip1
@@ -242,7 +243,7 @@ namespace SportControl
             this.menuStrip1.Location = new System.Drawing.Point(8, 7);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(16, 5, 0, 5);
-            this.menuStrip1.Size = new System.Drawing.Size(1863, 55);
+            this.menuStrip1.Size = new System.Drawing.Size(1863, 60);
             this.menuStrip1.TabIndex = 43;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -251,9 +252,10 @@ namespace SportControl
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearAllRacesToolStripMenuItem,
             this.toolStripSeparator1,
-            this.SelectRaceToolStripMenuItem});
+            this.SelectRaceToolStripMenuItem,
+            this.AddRacerToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 45);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 50);
             this.toolStripMenuItem1.Text = "Участники";
             // 
             // clearAllRacesToolStripMenuItem
@@ -940,6 +942,13 @@ namespace SportControl
             this.Note.ReadOnly = true;
             this.Note.Width = 250;
             // 
+            // AddRacerToolStripMenuItem
+            // 
+            this.AddRacerToolStripMenuItem.Name = "AddRacerToolStripMenuItem";
+            this.AddRacerToolStripMenuItem.Size = new System.Drawing.Size(574, 54);
+            this.AddRacerToolStripMenuItem.Text = "Добавить";
+            this.AddRacerToolStripMenuItem.Click += new System.EventHandler(this.addRacerToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -1056,5 +1065,6 @@ namespace SportControl
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Note;
+        private System.Windows.Forms.ToolStripMenuItem AddRacerToolStripMenuItem;
     }
 }
