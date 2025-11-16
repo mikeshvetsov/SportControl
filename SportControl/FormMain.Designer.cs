@@ -153,7 +153,7 @@ namespace SportControl
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(8, 65);
+            this.splitContainer1.Location = new System.Drawing.Point(8, 67);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -164,8 +164,8 @@ namespace SportControl
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvPersonActive);
-            this.splitContainer1.Size = new System.Drawing.Size(1863, 1446);
-            this.splitContainer1.SplitterDistance = 755;
+            this.splitContainer1.Size = new System.Drawing.Size(1863, 1444);
+            this.splitContainer1.SplitterDistance = 753;
             this.splitContainer1.TabIndex = 44;
             // 
             // menuStrip1
@@ -177,7 +177,7 @@ namespace SportControl
             this.menuStrip1.Location = new System.Drawing.Point(8, 7);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(16, 5, 0, 5);
-            this.menuStrip1.Size = new System.Drawing.Size(1863, 58);
+            this.menuStrip1.Size = new System.Drawing.Size(1863, 60);
             this.menuStrip1.TabIndex = 43;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -188,7 +188,7 @@ namespace SportControl
             this.toolStripSeparator1,
             this.SelectRaceToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 48);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 50);
             this.toolStripMenuItem1.Text = "Участники";
             // 
             // clearAllRacesToolStripMenuItem
@@ -515,6 +515,7 @@ namespace SportControl
             this.button_Read.TabIndex = 31;
             this.button_Read.Text = "Читать";
             this.button_Read.UseVisualStyleBackColor = true;
+            this.button_Read.Click += new System.EventHandler(this.button_Read_Click);
             // 
             // maskedTextBox_reader_ip
             // 
@@ -614,8 +615,9 @@ namespace SportControl
             this.dgvPerson.Name = "dgvPerson";
             this.dgvPerson.RowHeadersWidth = 25;
             this.dgvPerson.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPerson.Size = new System.Drawing.Size(1863, 755);
+            this.dgvPerson.Size = new System.Drawing.Size(1863, 753);
             this.dgvPerson.TabIndex = 33;
+            this.dgvPerson.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPerson_CellContentClick);
             this.dgvPerson.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPerson_CellEndEdit);
             this.dgvPerson.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPerson_CellValueChanged);
             // 
@@ -738,7 +740,7 @@ namespace SportControl
             this.dgvPersonActive.MultiSelect = false;
             this.dgvPersonActive.Name = "dgvPersonActive";
             this.dgvPersonActive.RowHeadersWidth = 25;
-            this.dgvPersonActive.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPersonActive.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvPersonActive.Size = new System.Drawing.Size(1863, 687);
             this.dgvPersonActive.TabIndex = 34;
             // 

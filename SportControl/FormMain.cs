@@ -152,7 +152,7 @@ namespace SportControl
 
         private void timerRemoveOldRecords_Tick(object sender, EventArgs e)
         {
-            dgvPerson.RemoveOldRecords();
+            dgvPersonActive.RemoveOldRecords();
         }
 
         private void SelectDGVRowByDBID(string DBRowID)
@@ -486,6 +486,11 @@ namespace SportControl
         private void FormMain_Shown(object sender, EventArgs e)
         {
             LoadRacersFromDB();
+        }
+
+        private void button_Read_Click(object sender, EventArgs e)
+        {
+            hf340.Read_EPCTID();
         }
     }
 }
