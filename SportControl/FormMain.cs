@@ -155,21 +155,6 @@ namespace SportControl
             dgvPersonActive.RemoveOldRecords();
         }
 
-        private void SelectDGVRowByDBID(string DBRowID)
-        {
-            int rowIndex = -1;
-
-            DataGridViewRow row = dgvPerson.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["ID"].Value.ToString().Equals(DBRowID)).FirstOrDefault();
-            if (row != null)
-            {
-                // Строка найдена — работаем с ней. Может быть не найдена, если метка уже не считывается
-                rowIndex = row.Index;
-                dgvPerson.Rows[rowIndex].Selected = true;
-            }
-
-        }
-
-
         private void LoadRacersFromDB(string where="")
         {
             dgvPerson.ClearData();
